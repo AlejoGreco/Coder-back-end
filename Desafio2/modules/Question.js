@@ -5,9 +5,11 @@ export class Question {
     }
 
     getChoiceScore(choice){
+        let score
         this.choices.forEach((c, index) => {
             if(choice === c)
-                return (this.choices.length - index)
+                score = this.choices.length - index
         });
+        return score
     }
 }
