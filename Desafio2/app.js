@@ -1,11 +1,12 @@
 import { questionsArray } from "./choices.js";
 import { Poll } from './modules/Poll.js'
+import { UI } from "./modules/UI.js";
 
 const main = () => {
     const poll = new Poll(questionsArray)
+    const ui = new UI()
 
-    console.log(poll)
-    console.log('Score ', poll.questions[0].getChoiceScore('Genial'))
+    ui.showQuestion(poll.getCurrentQuestion().quest)
 }
 
 main()
