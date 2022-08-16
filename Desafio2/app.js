@@ -4,7 +4,7 @@ import { UI } from "./modules/UI.js";
 
 const renderApp = (poll, ui) => {
     if(poll.isEnded()){
-        ui.showScore(poll.score)
+        ui.showScore(poll.calcResult())
     }
     else{
         ui.showQuestion(poll.getCurrentQuestion().quest)
