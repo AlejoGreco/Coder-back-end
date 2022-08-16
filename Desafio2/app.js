@@ -12,6 +12,7 @@ const renderApp = (poll, ui) => {
             poll.upDateScoreAndContinue(answer)
             renderApp(poll, ui)
         })
+        ui.showProgress(poll.currentIndex + 1, poll.questions.length)
     }
 }
 

@@ -19,9 +19,14 @@ export class UI {
     showScore(score){
         const quizEndHTML = `
             <h1>Professor poll result</h1>
-            <h2>Your final score is: ${score}</h2>
+            <h2>Your final score is: ${score}%</h2>
         `
         const element = document.getElementById("quiz")
         element.innerHTML = quizEndHTML
+    }
+
+    showProgress(currentIndex, total) {
+        const element = document.getElementById('progress')
+        element.innerHTML = `Question ${currentIndex} of ${total}`
     }
 }

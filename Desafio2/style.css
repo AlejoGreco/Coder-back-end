@@ -15,7 +15,8 @@ body {
 #quiz {
   background: #e3f6f5;
   width: 30rem;
-  padding: 4rem;
+  padding: 1.5rem;
+  max-height: 100vh;
 text-align: center;
 }
 
@@ -23,7 +24,7 @@ h1 {
   color: #57636e;
   font-size: 3rem;
   text-align: center;
-  padding: 2px 0px;
+  padding: 1px 0px;
   border-radius: 50px;
 }
 
@@ -39,7 +40,7 @@ h1 {
 
 .button {
   background-color: #34a3a3;
-  width: 250px;
+  width: 80%;
   font-size: 20px;
   color: #fff;
   border-radius: .3rem;
