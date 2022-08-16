@@ -10,7 +10,7 @@ export class Poll {
     }
 
     upDateScoreAndContinue(answer){
-        this.score += this.getCurrentQuestion().getChoicheScore(answer)
+        this.score += this.getCurrentQuestion().getChoiceScore(answer)
         this.currentIndex++
     }
 
