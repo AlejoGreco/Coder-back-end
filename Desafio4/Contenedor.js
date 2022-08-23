@@ -40,7 +40,17 @@ class Contenedor {
         }
     }
 
-    
+    async getAll(){
+        try {
+            if(fs.existsSync(this.fileName)){
+                return JSON.parse(await fs.promises.readFile(this.fileName))
+            }
+            return {status : 'Error', message : 'El archivo no existe'}
+        }
+        catch (e){
+            return {status : 'Error', message : e.message}
+        }
+    }
 
 }
 
