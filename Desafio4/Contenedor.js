@@ -19,13 +19,28 @@ class Contenedor {
             }
     
             await fs.promises.writeFile(this.fileName, JSON.stringify([...products, newProd], null, 2))    
-            return {status : 'success', message : newProd.id}
+            return {status : 'Success', message : newProd.id}
         }
         catch (e){
             return {status : 'Error', message : e.message}
         }
         
     }
+
+    async getById(id){
+        try {
+            if(fs.existsSync(this.fileName)){
+                const products = JSON.parse(await fs.promises.readFile(this.fileName))
+                return products.find(p => p.id === id)
+            }
+            return null
+        }
+        catch (e){
+            return {status : 'Error', message : e.message}
+        }
+    }
+
+    
 
 }
 
