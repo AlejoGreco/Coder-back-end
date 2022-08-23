@@ -1,0 +1,8 @@
+Realizar una clase que reciba el nombre de un archivo con el cual trabajar.
+
+Implementar metodos de 
+    - agregar obj al archivo (retorna id asignado)
+    - buscar ob por id
+    - listar todos los obj
+    - borra obj por id
+    - borrar todos
