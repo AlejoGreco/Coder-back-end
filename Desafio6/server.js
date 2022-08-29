@@ -12,8 +12,9 @@ app.get('/productos', (req, res) => {
     res.send({status: 'success', productos})
 })
 
-app.get('/productoRandom', () => {
-    
+app.get('/productoRandom', (req, res) => {
+    const index = Math.floor(Math.random() * productos.length)
+    res.send({status : 'success', producto : productos[index]})
 })
 
 const server = app.listen(8080, () => console.log('Server up!'))
