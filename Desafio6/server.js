@@ -3,7 +3,9 @@ const Contenedor = require('../Desafio4/Contenedor')
 
 const app = express()
 const contenedor = new Contenedor('productos.txt')
-const withfs = true
+
+// Seleccionar consigna 1 o 2 (1 : con arreglo hardcodeado - 2 : con lectura de archivo fs)
+const WITH_FS = true 
 
 let productos = [
     {title: 'Bicicleta Venzo R29', price: 80000, thumbnail: 'AAAAAAAAAAAAAA'},
@@ -12,15 +14,21 @@ let productos = [
 ]
 
 app.get('/productos', async (req, res) => {
-    if(withfs){
+    if(WITH_FS){
         productos =  await contenedor.getAll()
     }
     res.send({status: 'success', productos})
 })
 
-app.get('/productoRandom', (req, res) => {
-    const index = Math.floor(Math.random() * productos.length)
-    res.send({status : 'success', producto : productos[index]})
+app.get('/productoRandom', async (req, res) => {
+    const index = Math.floor(Math.random() * productos.length) + 1
+    if(WITH_FS){
+        const producto = await contenedor.getById(index)
+        res.send({status : 'success', producto})
+    }
+    else{
+        res.send({status : 'success', producto : productos[index]})
+    }
 })
 
 const server = app.listen(8080, () => console.log('Server up!'))
