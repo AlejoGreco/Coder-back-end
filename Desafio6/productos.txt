@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "title": "Bicicleta Venzo R29",
+        "price": 80000, 
+        "thumbnail": "AAAAAAAAAAAAAA"
+    },
+    {
+        "id": 2,
+        "title": "Buzo BS",
+        "price": 5000, 
+        "thumbnail": "BBBBBBBBBBBBBBBB"
+    },
+    {
+        "id": 3,
+        "title": "Gafas", 
+        "price": 12000, 
+        "thumbnail": "CCCCCCCCCCCCCCCC"
+    }
+]

@@ -1,14 +1,20 @@
 const express = require('express')
+const Contenedor = require('../Desafio4/Contenedor')
 
 const app = express()
+const contenedor = new Contenedor('productos.txt')
+const withfs = true
 
-const productos = [
+let productos = [
     {title: 'Bicicleta Venzo R29', price: 80000, thumbnail: 'AAAAAAAAAAAAAA'},
     {title: 'Buzo BS', price: 5000, thumbnail: 'BBBBBBBBBBBBBBBB'},
     {title: 'Gafas ', price: 12000, thumbnail: 'CCCCCCCCCCCCCCCC'}
 ]
 
-app.get('/productos', (req, res) => {
+app.get('/productos', async (req, res) => {
+    if(withfs){
+        productos =  await contenedor.getAll()
+    }
     res.send({status: 'success', productos})
 })
 
