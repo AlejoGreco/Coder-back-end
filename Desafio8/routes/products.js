@@ -41,8 +41,11 @@ route.post('/', (req, res) => {
     res.send({nuevoProducto : producto, message : 'Producto creado'})
 })
 
-route.put('/:id', (req, res) => {
-    
+route.put('/:id', findById, (req, res) => {
+    const index = productos.findIndex(p => p.id === req.producto.id)
+    productos[index].title = req.body.title
+    productos[index].price = req.body.price
+    res.send({productoEditado : productos[index], message : 'Producto modificado'})
 })
 
 route.delete('/:id', (req, res) => {
