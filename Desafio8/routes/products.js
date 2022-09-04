@@ -48,8 +48,10 @@ route.put('/:id', findById, (req, res) => {
     res.send({productoEditado : productos[index], message : 'Producto modificado'})
 })
 
-route.delete('/:id', (req, res) => {
-    
+route.delete('/:id', findById,(req, res) => {
+    const index = productos.findIndex(p => p.id === req.producto.id)
+    productos.splice(index, 1)
+    res.send({productoEliminado : req.producto, message : 'Producto eliminado'})
 })
 
 module.exports = route
