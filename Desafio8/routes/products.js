@@ -1,7 +1,7 @@
 const express = require('express')
 const route = express.Router()
 
-let productos = [{id : 1, name: 'alejo'}, {id : 3, name: 'Diego'}]
+let productos = []
 
 route.get('/', (req, res) => {
     res.send({productos})
@@ -17,7 +17,16 @@ route.get('/:id', (req, res) => {
 })
 
 route.post('/', (req, res) => {
-    
+    const pData = req.body
+    let producto = {}
+
+    if(productos.length)
+        producto = {id : (productos[productos.length - 1].id + 1), ...pData}
+    else
+        producto = {id : 1, ...pData}
+
+    productos.push(producto)
+    res.send({nuevoProducto : producto, message : 'Producto creado'})
 })
 
 route.put('/:id', (req, res) => {
