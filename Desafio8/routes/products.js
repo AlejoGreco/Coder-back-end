@@ -45,6 +45,7 @@ route.put('/:id', findById, (req, res) => {
     const index = productos.findIndex(p => p.id === req.producto.id)
     productos[index].title = req.body.title
     productos[index].price = req.body.price
+    productos[index].thumbnail = req.body.thumbnail
     res.send({productoEditado : productos[index], message : 'Producto modificado'})
 })
 

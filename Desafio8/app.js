@@ -8,4 +8,5 @@ const server = app.listen(8080, () => console.log('Server up!'))
 server.on('error', e => console.log(e))
 
 app.use(express.json())
+app.use(express.static('public'))
 app.use('/api/productos', productsRoute)
