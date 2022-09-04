@@ -3,17 +3,29 @@ const route = express.Router()
 
 let productos = []
 
+const findById = (req, res, next) => {
+
+    const id = parseInt(req.params.id)
+    if(isNaN(id)){
+        res.send({error: `El id del producto no es numerico`})
+        return
+    }    
+
+    const producto = productos.find(p => p.id === id)
+    if(producto){
+        req.producto = producto
+        next()
+    }
+    else
+        res.send({error: `Producto de id ${id} no encontrado`})
+}
+
 route.get('/', (req, res) => {
     res.send({productos})
 })
 
-route.get('/:id', (req, res) => {
-    const id = parseInt(req.params.id)
-    const producto = productos.find(p => p.id === id)
-    if(producto)
-        res.send({foundProduct : producto})
-    else
-        res.send({error: `Producto de id ${id} no encontrado`})
+route.get('/:id', findById,(req, res) => {
+        res.send({productoEncontrado : req.producto})
 })
 
 route.post('/', (req, res) => {
