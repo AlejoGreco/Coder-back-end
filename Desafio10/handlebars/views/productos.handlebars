@@ -1,16 +1,25 @@
-<div>
+<div class="container pt-3">
     {{#if productos}}
-        <ul>
+        <table class="table table-light table-striped table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Imagen</th>
+                </tr>
+            </thead>
+            <tbody>
             {{#each productos}}
-                <li>
-                    <p>{{this.title}}</p>
-                    <p>{{this.price}}</p>
-                    <img src={{this.thumbnail}}>
-                </li>
+                <tr>
+                    <td>{{this.title}}</th>
+                    <td>{{this.price}}</td>
+                    <td><img src={{this.thumbnail}} class="img-thumbnail rounded"></td>
+                </tr>
             {{/each}}
-        </ul>
+            </tbody>
+        </table>
         {{else}}
-        <p>No hay productos creados</p>
+        <div class="alert alert-info" role="alert">No hay productos creados</div>
     {{/if}}
     <a href="/">Volver a formulario</a>
 </div>
