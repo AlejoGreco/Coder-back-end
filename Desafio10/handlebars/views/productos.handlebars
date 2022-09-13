@@ -1,0 +1,16 @@
+<div>
+    {{#if productos}}
+        <ul>
+            {{#each productos}}
+                <li>
+                    <p>{{this.title}}</p>
+                    <p>{{this.price}}</p>
+                    <img src={{this.thumbnail}}>
+                </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>No hay productos creados</p>
+    {{/if}}
+    <a href="/">Volver a formulario</a>
+</div>
