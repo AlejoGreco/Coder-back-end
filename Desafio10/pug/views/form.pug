@@ -1,0 +1,22 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous')
+  title Practica con Handlebars
+main.container.mt-3
+  h2 Crea un producto
+  form.mb-2(method='POST' action='/productos')
+    .mb-3
+      label.form-label(for='title') Title
+      input#title.form-control(type='text' placeholder='Ingresar titulo' name='title')
+    .mb-3
+      label.form-label(for='price') Precio
+      input#price.form-control(type='text' placeholder='Ingresar precio' name='price')
+    .mb-3
+      label.form-label(for='thumbnail') Url de la miniatura
+      input#thumbnail.form-control(type='text' placeholder='Ingresar url' name='thumbnail')
+    button.btn.btn-primary(type='submit') Crear producto
+  a(href='/productos') Ver productos
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous')
