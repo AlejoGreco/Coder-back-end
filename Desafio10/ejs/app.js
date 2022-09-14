@@ -12,5 +12,5 @@ app.set('view engine', 'ejs')
 app.use('/productos', productosRoute)
 
 app.get('/', (req, res) => {
-    res.render('form')
+    res.render('home')
 })
