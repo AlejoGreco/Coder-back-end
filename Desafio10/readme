@@ -1,0 +1,6 @@
+Servir html con datos dinamicos a traves de motores de plantillas
+
+Se desarollo el mismo ejemplo con 3 motores.
+Handlebars - Pug - Ejs
+
+se cargan datos desde un formulario en la ruta raiz y se obserban en una tabla en la ruta /productos
