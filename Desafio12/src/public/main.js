@@ -1,4 +1,5 @@
 const socket = io.connect()
+const form = document.getElementById('form')
 
 const renderProducts = data => {
     const prodContainer = document.getElementById('productos')
@@ -29,5 +30,13 @@ const renderProducts = data => {
         prodContainer.innerHTML = '<div class="alert alert-info" role="alert">No hay productos dados de alta</div>'
     }
 }
+
+form.addEventListener('submit', e => {
+    e.preventDefault()
+    let obj = {}
+    const formData = new FormData(e.target)
+    formData.forEach((value, key) => obj[key]=value)
+    socket.emit('newProduct', obj)
+})
 
 socket.on('productos', productos => { renderProducts(productos) })
