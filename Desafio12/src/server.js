@@ -14,6 +14,6 @@ let productos = []
 
 io.on('connection', socket => {
     console.log(`Nuevo cliente conectado`)
-    //socket.emit('productos', productos)
+    socket.emit('productos', productos)
 
 })
