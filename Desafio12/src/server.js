@@ -8,8 +8,19 @@ const server = app.listen(PORT, () => console.log(`Server up! It's running in po
 
 const io = new Server(server)   // Creamos servidor tcp para sockets
 
+// Config del motor de plantillas EJS
+app.use(express.urlencoded())
 app.use(express.static('./src/public'))
+app.set('views', './src/views')
+app.set('view engine', 'ejs')
 
+// Rutas http
+app.get('/', (req, res) => {
+    res.render('home')
+})
+
+
+// Servidor websocket
 let productos = []
 
 io.on('connection', socket => {
