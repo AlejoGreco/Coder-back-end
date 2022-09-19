@@ -26,5 +26,9 @@ let productos = []
 io.on('connection', socket => {
     console.log(`Nuevo cliente conectado`)
     socket.emit('productos', productos)
-
+    
+    socket.on('newProduct', p => {
+        productos.push(p)
+        io.sockets.emit('productos',productos)
+    })
 })

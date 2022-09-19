@@ -19,7 +19,7 @@ const renderProducts = data => {
                     <th scope="col">Titulo</th>
                     <th scope="col">Precio</th>
                     <th scope="col">Imagen</th>
-                </tr>productos
+                </tr>
             </thead>
             <tbody>
                 ${bodyTable}
