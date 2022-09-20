@@ -22,13 +22,20 @@ app.get('/', (req, res) => {
 
 // Servidor websocket
 let productos = []
+let messages = []
 
 io.on('connection', socket => {
     console.log(`Nuevo cliente conectado`)
     socket.emit('productos', productos)
+    socket.emit('messages', messages)
     
     socket.on('newProduct', p => {
         productos.push(p)
         io.sockets.emit('productos',productos)
+    })
+
+    socket.on('newMsg', m => {
+        messages.push(m)
+        io.sockets.emit('messages', messages)
     })
 })
