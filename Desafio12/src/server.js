@@ -1,5 +1,6 @@
 const express = require('express')
 const { Server } = require('socket.io')
+const fs = require('fs')
 
 const PORT = process.env.PORT || 3000
 
@@ -19,14 +20,39 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+const readChatMsg = async path => {
+    try{
+        if(fs.existsSync(path)){
+            const messages= JSON.parse(await fs.promises.readFile(path))
+            return messages            
+        }
+        else { return [] }
+    }
+    catch (e){
+        throw {error : e.code, msg : 'Error leyendo archivo de hisorial de chat'}
+    }
+}
+
+const writeChatMsg = async (path, messages) => {
+    try{
+        await fs.promises.writeFile(path, JSON.stringify(messages, null, 2))
+    }
+    catch (e){
+        throw {error : e.code, msg : 'Error escribiendo archivo de hisorial de chat'}
+    }
+
+}
+
 
 // Servidor websocket
 let productos = []
-let messages = []
+const msgFilePath = './messagesFile.json'
 
-io.on('connection', socket => {
+io.on('connection', async socket => {
     console.log(`Nuevo cliente conectado`)
     socket.emit('productos', productos)
+
+    const messages = await readChatMsg(msgFilePath)
     socket.emit('messages', messages)
     
     socket.on('newProduct', p => {
@@ -34,8 +60,11 @@ io.on('connection', socket => {
         io.sockets.emit('productos',productos)
     })
 
-    socket.on('newMsg', m => {
+    socket.on('newMsg', async m => {
+        const messages = await readChatMsg(msgFilePath)
+        console.log(messages)
         messages.push(m)
         io.sockets.emit('messages', messages)
+        writeChatMsg(msgFilePath, messages)
     })
 })
