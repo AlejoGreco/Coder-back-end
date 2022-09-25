@@ -1,12 +1,17 @@
 const express = require('express')
 const route = express.Router()
+const ProductManager = require('../controllers/ProductManager')
 
-route.get('/', (req, res) => {
-    res.send({msg: 'Get a productos'})
+const pm = new ProductManager('src/data/products.json')
+
+route.get('/', async (req, res) => {
+    const products = await pm.getProducts()
+    res.send(products)
 })
 
-route.get('/:id', (req, res) => {
-    res.send(`Get a productos con id ${req.params.id}`)
+route.get('/:id', async (req, res) => {
+    const product = await pm.getProduct(req.params.id)
+    res.send(product)
 })
 
 route.post('/', (req, res) => {
