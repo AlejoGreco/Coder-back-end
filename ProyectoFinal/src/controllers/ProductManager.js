@@ -29,6 +29,27 @@ class ProductManager {
             return { error : -3, descripcion : 'El archivo de productos existe' }
         }
     }
+
+    async createProduct(p){
+        let products = []
+        let newProd
+
+        try {
+            if(fs.existsSync(this.path)){
+                products = await this.getProducts()
+                newProd = { id : (products[products.length - 1].id + 1), timestamp : Date.now(), ...p}
+            }
+            else{
+                newProd = { id : 1, timestamp : Date.now(), ...p }
+            }
+    
+            await fs.promises.writeFile(this.path, JSON.stringify([...products, newProd], null, 2))    
+            return newProd
+        }
+        catch (e){
+            return {error : -100, message : 'No se pudo crear el producto'}
+        }
+    }
 }
 
 module.exports = ProductManager

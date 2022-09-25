@@ -10,12 +10,13 @@ route.get('/', async (req, res) => {
 })
 
 route.get('/:id', async (req, res) => {
-    const product = await pm.getProduct(req.params.id)
+    const product = await pm.getProduct(parseInt(req.params.id))
     res.send(product)
 })
 
-route.post('/', (req, res) => {
-    res.send(`Post a productos`)
+route.post('/', async (req, res) => {
+    const product = await pm.createProduct(req.body)
+    res.send(product)
 })
 
 route.put('/:id', (req, res) => {
