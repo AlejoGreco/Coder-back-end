@@ -36,7 +36,13 @@ class ProductManager {
         if(fs.existsSync(this.path)){
             products = await this.getProducts()
                 
-            newProd = { id : (products[products.length - 1].id + 1), timestamp : Date.now(), ...p}
+            if(products.length > 0)
+            {
+                newProd = { id : (products[products.length - 1].id + 1), timestamp : Date.now(), ...p}
+            }
+            else {
+                newProd = { id : 1, timestamp : Date.now(), ...p }
+            }
         }
         else{
             newProd = { id : 1, timestamp : Date.now(), ...p }

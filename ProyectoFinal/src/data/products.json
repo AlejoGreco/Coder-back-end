@@ -1,12 +1,12 @@
 [
   {
-    "id": 2,
-    "timestamp": 1664160929225,
-    "nombre": "Soda",
-    "descripcion": "Cero calorias - 1.5 litros",
-    "codigo": 20,
+    "id": 1,
+    "timestamp": 1664164867879,
+    "nombre": "Coca Cola Zero",
+    "descripcion": "Cero calorias - 3 litros",
+    "codigo": 22,
     "url": "www.saraza/com/coca.jpeg",
-    "precio": 90.6,
-    "stock": 15
+    "precio": 105.6,
+    "stock": 50
   }
 ]
