@@ -3,6 +3,17 @@ const route = express.Router()
 const ProductManager = require('../controllers/ProductManager')
 
 const pm = new ProductManager('src/data/products.json')
+const ADMIN = false
+
+const isAdmin = (req, res, next) => {
+    if(ADMIN)
+    {
+        next()
+    }
+    else{
+        res.send({error: -1, descripcion: `Ruta ${req.baseUrl}${req.url} metodo ${req.method} no autorizada`})
+    }
+}
 
 const idValidate = (req, res, next) => {
     const id = parseInt(req.params.id)
@@ -50,7 +61,6 @@ const pDataValidate = (req, res, next) => {
         res.send({error: 22, descripcion: 'El precio de producto es obligatorio y debe ser numerico'})
         return
     }
-    console.log(body)
     next()
 }
 
@@ -72,7 +82,7 @@ route.get('/:id', idValidate, async (req, res) => {
     }
 })
 
-route.post('/', pDataValidate, async (req, res) => {
+route.post('/', isAdmin, pDataValidate, async (req, res) => {
     try{
         res.send(await pm.createProduct(req.body))
     }
@@ -81,7 +91,7 @@ route.post('/', pDataValidate, async (req, res) => {
     }
 })
 
-route.put('/:id', idValidate, pDataValidate, async (req, res) => {
+route.put('/:id', isAdmin, idValidate, pDataValidate, async (req, res) => {
     try{
         res.send(await pm.updateProduct(req.id, req.body))
     }
@@ -90,7 +100,7 @@ route.put('/:id', idValidate, pDataValidate, async (req, res) => {
     }
 })
 
-route.delete('/:id', idValidate, async (req, res) => {
+route.delete('/:id', isAdmin, idValidate, async (req, res) => {
     try{
         res.send(await pm.deleteProduct(req.id))
     }
