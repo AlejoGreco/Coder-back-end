@@ -81,6 +81,27 @@ class ProductManager {
             return {error : -100, message : 'No se pudo modificar el producto'}
         }
     }
+
+    async deleteProduct(id){
+        try {
+            const products = await this.getProducts()
+            if(products.error){
+                return {...products}
+            }
+
+            const index = products.findIndex(p => p.id === id)
+            if(index !== -1){
+                await fs.promises.writeFile(this.path, JSON.stringify(products.filter(p => p.id !== id), null, 2))    
+                return products[index]
+            }
+            else{
+                return { error : -4, descripcion : `No existe el producto de id ${id}` }
+            }
+
+        } catch (e) {
+            return {error : -100, descripcion : 'No se pudo borrar el producto'}
+        }
+    }
 }
 
 module.exports = ProductManager

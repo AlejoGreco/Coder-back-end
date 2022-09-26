@@ -1,15 +1,5 @@
 [
   {
-    "id": 1,
-    "timestamp": 1664147414665,
-    "nombre": "Coca Cola",
-    "descripcion": "Cero calorias - 3 litros",
-    "codigo": 10,
-    "url": "www.saraza/com/coca.jpeg",
-    "precio": 120.6,
-    "stock": 30
-  },
-  {
     "id": 2,
     "timestamp": 1664148031355,
     "nombre": "Coca Cola estevia",
@@ -18,5 +8,15 @@
     "url": "www.saraza/com/coca.jpeg",
     "precio": 120.6,
     "stock": 100
+  },
+  {
+    "id": 3,
+    "timestamp": 1664152634034,
+    "nombre": "Coca Cola Zero",
+    "descripcion": "Cero calorias - 3 litros",
+    "codigo": 22,
+    "url": "www.saraza/com/coca.jpeg",
+    "precio": 105.6,
+    "stock": 50
   }
 ]
