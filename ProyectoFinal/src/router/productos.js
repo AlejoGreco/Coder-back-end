@@ -19,8 +19,9 @@ route.post('/', async (req, res) => {
     res.send(product)
 })
 
-route.put('/:id', (req, res) => {
-    res.send(`Put a productos con id ${req.params.id}`)
+route.put('/:id', async (req, res) => {
+    const product = await pm.updateProduct(parseInt(req.params.id), req.body)
+    res.send(product)
 })
 
 route.delete('/:id', (req, res) => {

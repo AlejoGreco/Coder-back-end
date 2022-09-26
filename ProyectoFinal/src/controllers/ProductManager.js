@@ -7,26 +7,31 @@ class ProductManager {
 
     async getProducts(){
         try {
-            return JSON.parse(await fs.promises.readFile(this.path, 'utf-8'))
-        } catch (e) {
+            if(fs.existsSync(this.path)){
+                return JSON.parse(await fs.promises.readFile(this.path, 'utf-8'))
+            }
             return { error : -3, descripcion : 'El archivo de productos no existe' }
+        } catch (e) {
+            return { error : -99, descripcion : 'Error al leer el archivo de productos' }
         }
     }
 
     async getProduct(id){
         try {
-            const products = JSON.parse(await fs.promises.readFile(this.path, 'utf-8'))
+            const products = await this.getProducts()
+            if(products.error){
+                return {...products}
+            }
+
             const product = products.find(p => p.id === id)
             if(product){
                 return product
             }
-            throw new Error(`No existe el producto de id ${id}`)
+
+            return { error : -4, descripcion : `No existe el producto de id ${id}` }
 
         } catch (e) {
-            if(e.message.startsWith('No existe el producto de id')){
-                return { error : -4, descripcion : e.message}
-            }
-            return { error : -3, descripcion : 'El archivo de productos existe' }
+            return { error : -100, descripcion : e.message}
         }
     }
 
@@ -37,6 +42,9 @@ class ProductManager {
         try {
             if(fs.existsSync(this.path)){
                 products = await this.getProducts()
+                if(products.error){
+                    return {...products}
+                }    
                 newProd = { id : (products[products.length - 1].id + 1), timestamp : Date.now(), ...p}
             }
             else{
@@ -48,6 +56,29 @@ class ProductManager {
         }
         catch (e){
             return {error : -100, message : 'No se pudo crear el producto'}
+        }
+    }
+
+    async updateProduct(id, p){
+
+        try{
+            const products = await this.getProducts()
+            if(products.error){
+                return {...products}
+            }
+
+            const index = products.findIndex(p => p.id === id)
+            if(index !== -1){
+                products[index] = {...products[index], ...p}
+                await fs.promises.writeFile(this.path, JSON.stringify([...products], null, 2))    
+                return products[index]
+            }
+            else{
+                return { error : -4, descripcion : `No existe el producto de id ${id}` }
+            }
+        }
+        catch (e){
+            return {error : -100, message : 'No se pudo modificar el producto'}
         }
     }
 }

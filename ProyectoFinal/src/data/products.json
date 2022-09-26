@@ -12,11 +12,11 @@
   {
     "id": 2,
     "timestamp": 1664148031355,
-    "nombre": "Coca Cola",
+    "nombre": "Coca Cola estevia",
     "descripcion": "Cero calorias - 3 litros",
-    "codigo": 10,
+    "codigo": 22,
     "url": "www.saraza/com/coca.jpeg",
     "precio": 120.6,
-    "stock": 30
+    "stock": 100
   }
 ]
