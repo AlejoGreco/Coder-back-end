@@ -37,6 +37,16 @@
         "stock": 120,
         "id": 4,
         "timestamp": 1664323528273
+      },
+      {
+        "nombre": "Prueba producto",
+        "descripcion": "",
+        "codigo": 50,
+        "url": "www.saraza/com/soda.jpeg",
+        "precio": 70,
+        "stock": 120,
+        "id": 5,
+        "timestamp": 1664324230759
       }
     ]
   },

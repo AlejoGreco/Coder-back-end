@@ -3,7 +3,7 @@ const route = express.Router()
 const ProductManager = require('../controllers/ProductManager')
 
 const pm = new ProductManager('src/data/products.json')
-const ADMIN = false
+const ADMIN = true
 
 const isAdmin = (req, res, next) => {
     if(ADMIN)
@@ -33,7 +33,7 @@ const pDataValidate = (req, res, next) => {
     const { body } = req
 
     if(!body.nombre || body.nombre === '' || (typeof body.nombre !== 'string')){
-        res.send({error: 22, descripcion: 'El nombre del producto es obligatorio'})
+        res.send({error: 22, descripcion: 'El nombre del producto es obligatorio y debe ser texto'})
         return
     }
 
@@ -43,7 +43,7 @@ const pDataValidate = (req, res, next) => {
     }
 
     if(!body.url || body.url === '' || (typeof body.url !== 'string')){
-        res.send({error: 22, descripcion: 'La url del producto es obligatorio'})
+        res.send({error: 22, descripcion: 'La url del producto es obligatorio y debe ser texto'})
         return
     }
 
