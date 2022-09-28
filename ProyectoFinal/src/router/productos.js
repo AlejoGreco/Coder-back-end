@@ -32,17 +32,17 @@ const idValidate = (req, res, next) => {
 const pDataValidate = (req, res, next) => {
     const { body } = req
 
-    if(!body.nombre || body.nombre === ''){
+    if(!body.nombre || body.nombre === '' || (typeof body.nombre !== 'string')){
         res.send({error: 22, descripcion: 'El nombre del producto es obligatorio'})
         return
     }
 
-    if(!body.descripcion){
-        req.descripcion = ''
+    if(!body.descripcion || (typeof body.descripcion !== 'string')){
+        req.body.descripcion = ''
         return
     }
 
-    if(!body.url || body.url === ''){
+    if(!body.url || body.url === '' || (typeof body.url !== 'string')){
         res.send({error: 22, descripcion: 'La url del producto es obligatorio'})
         return
     }
@@ -57,7 +57,7 @@ const pDataValidate = (req, res, next) => {
         return
     }
 
-    if(!body.precio || body.precio < 0){
+    if(!body.precio || body.precio < 0 || (typeof body.precio === 'string')){
         res.send({error: 22, descripcion: 'El precio de producto es obligatorio y debe ser numerico'})
         return
     }
