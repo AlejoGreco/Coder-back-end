@@ -1,0 +1,44 @@
+{
+  "nombre": "Coca cola",
+  "descripcion": "Cero calorias - 1.5 litros",
+  "codigo": 20,
+  "url":"www.saraza/com/coca.jpeg",
+  "precio": 105,
+  "stock": 15
+}
+
+{
+  "nombre": "Coca cola Zero",
+  "descripcion": "Menos de Cero calorias - 1.5 litros",
+  "codigo": 21,
+  "url":"www.saraza/com/coca2.jpeg",
+  "precio": 120.60,
+  "stock": 33
+}
+
+{
+  "nombre": "Soda",
+  "descripcion": "Mil calorias - 1 litro",
+  "codigo": 25,
+  "url":"www.saraza/com/Soda.jpeg",
+  "precio": 90.60,
+  "stock": 40
+}
+
+{
+  "nombre": "Cerveza",
+  "descripcion": "Lupulo - 1 litro",
+  "codigo": 30,
+  "url":"www.saraza/com/cbz.jpeg",
+  "precio": 140.60,
+  "stock": 35
+}
+
+{
+  "nombre": "Cerveza Andes",
+  "descripcion": "Roja - 1 litro",
+  "codigo": 32,
+  "url":"www.saraza/com/cbzAnd.jpeg",
+  "precio": 160.8,
+  "stock": 28
+}
