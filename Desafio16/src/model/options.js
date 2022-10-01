@@ -8,7 +8,7 @@ const optionsMySQL = {
     }
 }
 
-const optionsSqLite3 = {
+const optionsSqLite = {
     client: 'sqlite3',
     connection: {
         filename: './DB/ecommerce.sqlite'
@@ -18,5 +18,5 @@ const optionsSqLite3 = {
 
 module.exports = {
     optionsMySQL,
-    optionsSqLite3
+    optionsSqLite
 }
