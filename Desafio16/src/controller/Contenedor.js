@@ -1,40 +1,33 @@
 const knex = require('knex')
 
 class Contenedor {
-    constructor(config, table){
-        this.db = knex(config)
+    constructor(options, table){
+        this.db = knex(options)
         this.table = table
     }
 
     async save(obj){
-        let newProd
-        let products = []
-    
         try {
-            if(fs.existsSync(this.fileName)){
-                products = JSON.parse(await fs.promises.readFile(this.fileName))
-                newProd = { id : (products[products.length - 1].id + 1), ...obj}
-            }
-            else{
-                newProd = { id : 1, ...obj }
-            }
-    
-            await fs.promises.writeFile(this.fileName, JSON.stringify([...products, newProd], null, 2))    
-            return {status : 'Success', message : newProd.id}
+            await this.db(this.table).insert(obj)
+            return {status : 'Success', message : 'Producto agregado con exito'}
         }
         catch (e){
             return {status : 'Error', message : e.message}
-        }
-        
+        }        
     }
 
     async getById(id){
         try {
-            if(fs.existsSync(this.fileName)){
-                const products = JSON.parse(await fs.promises.readFile(this.fileName))
-                return products.find(p => p.id === id)
+            const producto = JSON.parse(JSON.stringify(await this.db
+                .from(this.table)
+                .select('*')
+                .where({ id })
+            ))
+
+            if(!producto){
+                return {status : 'Error', message : `El producto de id: ${id} no existe`}
             }
-            return {status : 'Error', message : 'El archivo no existe'}
+            return {status : 'Success', producto}
         }
         catch (e){
             return {status : 'Error', message : e.message}
@@ -43,10 +36,12 @@ class Contenedor {
 
     async getAll(){
         try {
-            if(fs.existsSync(this.fileName)){
-                return JSON.parse(await fs.promises.readFile(this.fileName))
+            const productos = JSON.parse(JSON.stringify(await this.db.from(this.table).select('*')))
+
+            if(!productos){
+                return {status : 'Error', message : `No hay productos creados`}
             }
-            return {status : 'Error', message : 'El archivo no existe'}
+            return {status : 'Success', productos}
         }
         catch (e){
             return {status : 'Error', message : e.message}
@@ -55,19 +50,8 @@ class Contenedor {
 
     async deleteById(id){
         try {
-            if(fs.existsSync(this.fileName)){
-                const products = JSON.parse(await fs.promises.readFile(this.fileName))
-                
-                if(!products.find(p => p.id === id))
-                    return {status : 'Error', message : 'El producto no existe'}
-
-                const newProducts = products.filter(p => p.id !== id)
-
-                await fs.promises.writeFile(this.fileName, JSON.stringify(newProducts, null, 2))    
-                return {status : 'Success', message : id}
-                
-            }
-            return {status : 'Error', message : 'El archivo no existe'}
+            await this.db.from(this.table).where({id}).del() 
+            return {status : 'Success', message : id}
         }
         catch (e){
             return {status : 'Error', message : e.message}
@@ -76,10 +60,8 @@ class Contenedor {
 
     async deleteAll(){
         try {
-            if(fs.existsSync(this.fileName)){
-                await fs.promises.unlink(this.fileName)
-            }
-            return {status : 'Error', message : 'El archivo no existe'}
+            await this.db.from(this.table).del() 
+            return {status : 'Success', message : 'Se borraron todos los productos con exito'}
         }
         catch (e){
             return {status : 'Error', message : e.message}
