@@ -4,27 +4,35 @@ const { optionsMySQL, optionsSqLite } = require('./options')
 const mysqlDB = knex(optionsMySQL)
 const sqliteDB = knex(optionsSqLite)
 
-const createTables = (mysqlTable, sqliteTable) => {
-    if(!mysqlDB.schema.hasTable(mysqlTable)){
-        mysqlDB.schema.createTable(mysqlTable, table => {
-            table.increments('id')
-            table.string('title')
-            table.float('price')
-            table.string('thumbnail')
-        })
-        .then(() => ({status: 'success', message: `Tabla ${mysqlTable} creada con exito`}))
-        .catch(e => ({status: 'Error', message: e.message}))
-        .finally(() => mysqlDB.destroy())
-    }
+const createTables = async (mysqlTable, sqliteTable) => {
+    try{
+        let message = ''
+        if(!await mysqlDB.schema.hasTable(mysqlTable)){
+            await mysqlDB.schema.createTable(mysqlTable, table => {
+                table.increments('id')
+                table.string('title')
+                table.float('price')
+                table.string('thumbnail')
+            })
+            message = `Tabla ${mysqlTable} creada - `
+        }
 
-    if(!sqliteDB.schema.hasTable(sqliteTable)){
-        sqliteDB.schema.createTable(sqliteTable, table => {
-            table.increments('id')
-            table.string('message')
-        })
-        .then(() => ({status: 'success', message: `Tabla ${sqliteTable} creada con exito`}))
-        .catch(e => ({status: 'Error', message: e.message}))
-        .finally(() => sqliteDB.destroy())
+        if(!await sqliteDB.schema.hasTable(sqliteTable)){
+            await sqliteDB.schema.createTable(sqliteTable, table => {
+                table.increments('id')
+                table.string('message')
+            })
+            message += `Tabla ${sqliteTable} creada`
+            console.log(message)
+        }
+        return {status: 'success', message}
+    }
+    catch (e){
+        return {status: 'Error', message: e.message}
+    }
+    finally{
+        mysqlDB.destroy()
+        sqliteDB.destroy()
     }
 }
 

@@ -9,10 +9,10 @@ class Contenedor {
     async save(obj){
         try {
             await this.db(this.table).insert(obj)
-            return {status : 'Success', message : 'Producto agregado con exito'}
+            return {status : 'Success', result : 'Item agregado con exito'}
         }
         catch (e){
-            return {status : 'Error', message : e.message}
+            return {status : 'Error', result : e.message}
         }        
     }
 
@@ -25,12 +25,12 @@ class Contenedor {
             ))
 
             if(!producto){
-                return {status : 'Error', message : `El producto de id: ${id} no existe`}
+                return {status : 'Error', result : `El item de id: ${id} no existe`}
             }
-            return {status : 'Success', producto}
+            return {status : 'Success', result: producto}
         }
         catch (e){
-            return {status : 'Error', message : e.message}
+            return {status : 'Error', result : e.message}
         }
     }
 
@@ -39,32 +39,32 @@ class Contenedor {
             const productos = JSON.parse(JSON.stringify(await this.db.from(this.table).select('*')))
 
             if(!productos){
-                return {status : 'Error', message : `No hay productos creados`}
+                return {status : 'Error', result : `No hay items creados`}
             }
-            return {status : 'Success', productos}
+            return {status : 'Success', result: productos}
         }
         catch (e){
-            return {status : 'Error', message : e.message}
+            return {status : 'Error', result : e.message}
         }
     }
 
     async deleteById(id){
         try {
             await this.db.from(this.table).where({id}).del() 
-            return {status : 'Success', message : id}
+            return {status : 'Success', result : id}
         }
         catch (e){
-            return {status : 'Error', message : e.message}
+            return {status : 'Error', result : e.message}
         }
     }
 
     async deleteAll(){
         try {
             await this.db.from(this.table).del() 
-            return {status : 'Success', message : 'Se borraron todos los productos con exito'}
+            return {status : 'Success', result : 'Se borraron todos los items con exito'}
         }
         catch (e){
-            return {status : 'Error', message : e.message}
+            return {status : 'Error', result : e.message}
         }
     }
 
