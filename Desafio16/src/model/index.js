@@ -20,7 +20,9 @@ const createTables = async (mysqlTable, sqliteTable) => {
         if(!await sqliteDB.schema.hasTable(sqliteTable)){
             await sqliteDB.schema.createTable(sqliteTable, table => {
                 table.increments('id')
-                table.string('message')
+                table.string('email')
+                table.string('msg')
+                table.time('date')
             })
             message += `Tabla ${sqliteTable} creada`
             console.log(message)
