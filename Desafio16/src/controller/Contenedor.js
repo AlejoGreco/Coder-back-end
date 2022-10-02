@@ -12,7 +12,7 @@ class Contenedor {
             return {status : 'Success', result : 'Item agregado con exito'}
         }
         catch (e){
-            return {status : 'Error', result : e.message}
+            throw {status : 'Error', result : {msg : e.message, code : e.code}}
         }        
     }
 
@@ -24,27 +24,23 @@ class Contenedor {
                 .where({ id })
             ))
 
-            if(!producto){
-                return {status : 'Error', result : `El item de id: ${id} no existe`}
+            if(producto === []){
+                throw {status : 'Error', message : `El item de id: ${id} no existe`, code : 404}
             }
             return {status : 'Success', result: producto}
         }
         catch (e){
-            return {status : 'Error', result : e.message}
+            throw {status : e.status, result : {msg : e.message, code : e.code}}
         }
     }
 
     async getAll(){
         try {
             const productos = JSON.parse(JSON.stringify(await this.db.from(this.table).select('*')))
-
-            if(!productos){
-                return {status : 'Error', result : `No hay items creados`}
-            }
             return {status : 'Success', result: productos}
         }
         catch (e){
-            return {status : 'Error', result : e.message}
+            throw {status : 'Error', result : {msg : e.message, code : e.code}}
         }
     }
 
@@ -54,7 +50,7 @@ class Contenedor {
             return {status : 'Success', result : id}
         }
         catch (e){
-            return {status : 'Error', result : e.message}
+            throw {status : 'Error', result : {msg : e.message, code : e.code}}
         }
     }
 
@@ -64,7 +60,7 @@ class Contenedor {
             return {status : 'Success', result : 'Se borraron todos los items con exito'}
         }
         catch (e){
-            return {status : 'Error', result : e.message}
+            throw {status : 'Error', result : {msg : e.message, code : e.code}}
         }
     }
 

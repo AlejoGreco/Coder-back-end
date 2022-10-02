@@ -44,21 +44,28 @@ app.get('/', (req, res) => {
 // Servidor websocket
 io.on('connection', async socket => {
     console.log(`Nuevo cliente conectado`)
-    const productos = await pManager.getAll()
-    socket.emit('productos', productos)
-
-    const messages = await cManager.getAll()
-    socket.emit('messages', messages)
-    
-    socket.on('newProduct', async p => {
-        await pManager.save(p)
+    try{
         const productos = await pManager.getAll()
-        io.sockets.emit('productos', productos)
-    })
+        socket.emit('productos', productos)
 
-    socket.on('newMsg', async m => {
-        await cManager.save(m)
         const messages = await cManager.getAll()
-        io.sockets.emit('messages', messages)
-    })
+        socket.emit('messages', messages)
+        
+        socket.on('newProduct', async p => {
+            await pManager.save(p)
+            const productos = await pManager.getAll()
+            io.sockets.emit('productos', productos)
+        })
+
+        socket.on('newMsg', async m => {
+            await cManager.save(m)
+            const messages = await cManager.getAll()
+            io.sockets.emit('messages', messages)
+        })
+    }
+    catch (e){
+        console.log(e)
+        pManager.db.destroy()
+        cManager.db.destroy()
+    }    
 })

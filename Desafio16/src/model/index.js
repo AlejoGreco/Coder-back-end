@@ -25,12 +25,11 @@ const createTables = async (mysqlTable, sqliteTable) => {
                 table.time('date')
             })
             message += `Tabla ${sqliteTable} creada`
-            console.log(message)
         }
-        return {status: 'success', message}
+        return {status: 'success', result: message}
     }
     catch (e){
-        return {status: 'Error', message: e.message}
+        throw {status : 'Error', result : {msg : e.message, code : e.code}}
     }
     finally{
         mysqlDB.destroy()
