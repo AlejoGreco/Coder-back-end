@@ -1,0 +1,10 @@
+{"_id":{"$oid":"6344bb3f55066c722c9a1f17"},"title":"Oversize","price":4000.0,"thumbnail":"www.dummy-url.com/image","stock":100.0}
+{"_id":{"$oid":"6344bb3f55066c722c9a1f18"},"title":"Pantalon oversize","price":2400.0,"thumbnail":"www.dummy-url.com/image","stock":100.0}
+{"_id":{"$oid":"6344bb3f55066c722c9a1f1a"},"title":"Bermuda jean","price":2350.0,"thumbnail":"www.dummy-url.com/image","stock":100.0}
+{"_id":{"$oid":"6344bb3f55066c722c9a1f1b"},"title":"Lentes polarizados","price":3000.0,"thumbnail":"www.dummy-url.com/image","stock":100.0}
+{"_id":{"$oid":"6344bb3f55066c722c9a1f1c"},"title":"Vestido noche","price":5000.0,"thumbnail":"www.dummy-url.com/image","stock":0.0}
+{"_id":{"$oid":"6344bb3f55066c722c9a1f1d"},"title":"Pollera mini","price":4380.0,"thumbnail":"www.dummy-url.com/image","stock":0.0}
+{"_id":{"$oid":"6344bb3f55066c722c9a1f1e"},"title":"Top encaje","price":4800.0,"thumbnail":"www.dummy-url.com/image","stock":0.0}
+{"_id":{"$oid":"6344bb3f55066c722c9a1f1f"},"title":"Medias blancas","price":3200.0,"thumbnail":"www.dummy-url.com/image","stock":100.0}
+{"_id":{"$oid":"6344becc55066c722c9a1f20"},"title":"Gorra plana","price":3100.0,"stock":100.0}
+{"_id":{"$oid":"6344ea602c671b3dcf0006f9"},"title":"Prueba","price":2222.0}
