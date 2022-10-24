@@ -1,8 +1,9 @@
 const express = require('express')
 const route = express.Router()
-const ProductManager = require('../controllers/ProductManager')
+const { productDao } = require('../daos')
+//const ProductManager = require('../controllers/ProductManager')
 
-const pm = new ProductManager('src/data/products.json')
+//const pm = new ProductManager('src/data/products.json')
 const ADMIN = true
 
 const isAdmin = (req, res, next) => {
@@ -64,49 +65,57 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.get('/', async (req, res) => {
+route.get('/', productDao.getProducts)
+/*route.get('/', async (req, res) => {
     try{
         res.send(await pm.getProducts())
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
-route.get('/:id', idValidate, async (req, res) => {
+route.get('/:id', idValidate, productDao.getProduct)
+
+/*route.get('/:id', idValidate, async (req, res) => {
     try{
         res.send(await pm.getProduct(req.id))
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
-route.post('/', isAdmin, pDataValidate, async (req, res) => {
+route.post('/', isAdmin, pDataValidate, productDao.createProduct)
+/*route.post('/', isAdmin, pDataValidate, async (req, res) => {
     try{
         res.send(await pm.createProduct(req.body))
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
-route.put('/:id', isAdmin, idValidate, pDataValidate, async (req, res) => {
+route.put('/:id', isAdmin, idValidate, pDataValidate, productDao.updateProduct)
+
+/*route.put('/:id', isAdmin, idValidate, pDataValidate, async (req, res) => {
     try{
         res.send(await pm.updateProduct(req.id, req.body))
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
-route.delete('/:id', isAdmin, idValidate, async (req, res) => {
+route.delete('/:id', isAdmin, idValidate, productDao.deleteProduct)
+
+/*route.delete('/:id', isAdmin, idValidate, async (req, res) => {
     try{
         res.send(await pm.deleteProduct(req.id))
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
 module.exports = route

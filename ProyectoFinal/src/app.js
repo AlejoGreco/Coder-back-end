@@ -1,7 +1,9 @@
 const express = require('express')
 const productosRoute = require('./router/productos')
 const carritosRoute = require('./router/carritos')
+const Loaders = require('./loaders')
 
+Loaders.start('MONGO_DB')
 const app = express()
 
 const PORT = process.env.PORT || 8080

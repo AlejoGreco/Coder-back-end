@@ -1,17 +1,17 @@
 const ProductMongoDao = require('./products/ProductMongoDao')
 
 const SELECT_DAO = 'MONGO_DB'
-let exports
+let daos
 
 switch (SELECT_DAO){
     case 'MONGO_DB':
-        exports = {
+        daos = {
             productDao: new ProductMongoDao(),
             cartDao: null
         }
         break;
     default:
-        exports = {
+        daos = {
             productDao: new ProductMongoDao(),
             cartDao: null
         }
@@ -19,4 +19,4 @@ switch (SELECT_DAO){
 
 }
 
-module.exports = exports
+module.exports = daos

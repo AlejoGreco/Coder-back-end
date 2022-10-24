@@ -10,6 +10,7 @@ class MongoDbContainer {
     }
     
     async readAll() {
+        console.log(this.model)
         const docs = await this.model.find()
         console.log(docs)
         return docs
@@ -34,3 +35,4 @@ class MongoDbContainer {
     }
 }
 
+module.exports = MongoDbContainer
