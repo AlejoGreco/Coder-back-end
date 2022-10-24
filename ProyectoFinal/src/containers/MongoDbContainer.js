@@ -22,9 +22,9 @@ class MongoDbContainer {
     }
 
     async update(id) {
-            const doc = await this.model.findByIdAndUpdate(id, req.body)
-            console.log(doc)
-            return doc.json()
+        const doc = await this.model.findByIdAndUpdate(id, req.body)
+        console.log(doc)
+        return doc.json()
     }
 
     async destroy(id) {
