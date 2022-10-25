@@ -1,4 +1,4 @@
-const startMongo = require('./mongodb')
+import startMongo from './mongodb.js'
 
 class Loaders {
     start(target) {
@@ -13,4 +13,4 @@ class Loaders {
     }
 }
 
-module.exports = new Loaders()
+export default new Loaders()

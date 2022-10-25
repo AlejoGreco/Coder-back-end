@@ -1,6 +1,7 @@
-const express = require('express')
+import express  from 'express'
+import CartManager from '../controllers/CartManager.js'
+
 const route = express.Router()
-const CartManager = require('../controllers/CartManager')
 
 const cm = new CartManager('src/data/carts.json')
 
@@ -112,4 +113,4 @@ route.delete('/:id/productos/:id_prod', cartIdValidate, prodIdValidate, async (r
 })
 
 
-module.exports = route
+export default route

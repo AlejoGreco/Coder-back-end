@@ -1,6 +1,9 @@
-const express = require('express')
-const route = express.Router()
-const { productDao } = require('../daos')
+import { Router } from 'express'
+import dao from '../daos/index.js'
+
+const route = Router()
+const productDao = dao.productDao
+
 //const ProductManager = require('../controllers/ProductManager')
 
 //const pm = new ProductManager('src/data/products.json')
@@ -118,4 +121,4 @@ route.delete('/:id', isAdmin, idValidate, productDao.deleteProduct)
     }
 })*/
 
-module.exports = route
+export default route

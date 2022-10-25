@@ -1,13 +1,12 @@
-const express = require('express')
-const productosRoute = require('./router/productos')
-const carritosRoute = require('./router/carritos')
-const Loaders = require('./loaders')
+import express from 'express'
+import productosRoute from './router/productos.js'
+import carritosRoute from './router/carritos.js'
+import Loaders from './loaders/index.js'
 
 Loaders.start('MONGO_DB')
 const app = express()
 
 const PORT = process.env.PORT || 8080
-const server = app.listen(PORT, () => console.log(`Server up! Listening at port ${PORT}`))
 
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
@@ -22,4 +21,5 @@ app.use((req, res) => {
     })
 })
 
+const server = app.listen(PORT, () => console.log(`Server up! Listening at port ${PORT}`))
 server.on('error', e => console.log(e))

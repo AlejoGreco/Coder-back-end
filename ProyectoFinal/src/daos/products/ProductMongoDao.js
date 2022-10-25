@@ -1,5 +1,5 @@
-const ProductModel = require('../../models/productModel')
-const MongoDbContainer = require('../../containers/MongoDbContainer')
+import ProductModel from '../../models/productModel.js'
+import MongoDbContainer from '../../containers/MongoDbContainer.js'
 
 class ProductMongoDao extends MongoDbContainer {
     constructor(){
@@ -13,7 +13,7 @@ class ProductMongoDao extends MongoDbContainer {
             return res.status(200).json(products.toArray())        
         } 
         catch (e){
-            res.status(404).send('hola')
+            res.status(404).json({ message: e.message, code: e.code })
         }
     }
 
@@ -66,4 +66,4 @@ class ProductMongoDao extends MongoDbContainer {
     }
 }
 
-module.exports = ProductMongoDao
+export default new ProductMongoDao()
