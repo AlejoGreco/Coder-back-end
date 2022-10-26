@@ -1,12 +1,9 @@
 import express from 'express'
 import productosRoute from './router/productos.js'
 import carritosRoute from './router/carritos.js'
-import Loaders from './loaders/index.js'
+import { PORT } from './config.js'
 
-Loaders.start('MONGO_DB')
 const app = express()
-
-const PORT = process.env.PORT || 8080
 
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))

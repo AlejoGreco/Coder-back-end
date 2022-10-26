@@ -1,16 +1,16 @@
-import ProductModel from '../../models/productModel.js'
 import MongoDbContainer from '../../containers/MongoDbContainer.js'
+import ProductSchema from '../../models/productModel.js'
 
 class ProductMongoDao extends MongoDbContainer {
-    constructor(){
-        super(ProductModel)
+    constructor(collectionName){
+        super(ProductSchema, collectionName)   
     }
 
     async getProducts(req, res){
         try {
             const products = await super.readAll()
             console.log(products)
-            return res.status(200).json(products.toArray())        
+            return res.status(200).json(products)      
         } 
         catch (e){
             res.status(404).json({ message: e.message, code: e.code })
@@ -66,4 +66,4 @@ class ProductMongoDao extends MongoDbContainer {
     }
 }
 
-export default new ProductMongoDao()
+export default new ProductMongoDao('products')

@@ -1,12 +1,10 @@
 import { Router } from 'express'
-import dao from '../daos/index.js'
+import { productDao } from '../daos/index.js'
 
 const route = Router()
-const productDao = dao.productDao
-
 //const ProductManager = require('../controllers/ProductManager')
-
 //const pm = new ProductManager('src/data/products.json')
+
 const ADMIN = true
 
 const isAdmin = (req, res, next) => {
@@ -68,7 +66,7 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.get('/', productDao.getProducts)
+route.get('/', async (req, res) => await productDao.getProducts(req, res))
 /*route.get('/', async (req, res) => {
     try{
         res.send(await pm.getProducts())
@@ -78,7 +76,7 @@ route.get('/', productDao.getProducts)
     }
 })*/
 
-route.get('/:id', idValidate, productDao.getProduct)
+route.get('/:id', idValidate, async (req, res) => await productDao.getProduct(req,res))
 
 /*route.get('/:id', idValidate, async (req, res) => {
     try{
@@ -89,7 +87,7 @@ route.get('/:id', idValidate, productDao.getProduct)
     }
 })*/
 
-route.post('/', isAdmin, pDataValidate, productDao.createProduct)
+route.post('/', isAdmin, pDataValidate, async (req, res) => await productDao.createProduct(req, res))
 /*route.post('/', isAdmin, pDataValidate, async (req, res) => {
     try{
         res.send(await pm.createProduct(req.body))
@@ -99,7 +97,7 @@ route.post('/', isAdmin, pDataValidate, productDao.createProduct)
     }
 })*/
 
-route.put('/:id', isAdmin, idValidate, pDataValidate, productDao.updateProduct)
+route.put('/:id', isAdmin, idValidate, pDataValidate, async (req, res) => await productDao.updateProduct(req, res))
 
 /*route.put('/:id', isAdmin, idValidate, pDataValidate, async (req, res) => {
     try{
@@ -110,7 +108,7 @@ route.put('/:id', isAdmin, idValidate, pDataValidate, productDao.updateProduct)
     }
 })*/
 
-route.delete('/:id', isAdmin, idValidate, productDao.deleteProduct)
+route.delete('/:id', isAdmin, idValidate, async (req, res) => await productDao.deleteProduct(req, res))
 
 /*route.delete('/:id', isAdmin, idValidate, async (req, res) => {
     try{

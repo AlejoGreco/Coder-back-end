@@ -1,22 +1,21 @@
 import ProductMongoDao from './products/ProductMongoDao.js'
+import { PERSISTENCE } from '../config.js'
 
-const SELECT_DAO = 'MONGO_DB'
-let daos
+const daosExports = () => {
+    let productDao
+    let cartDao
 
-switch (SELECT_DAO){
-    case 'MONGO_DB':
-        daos = {
-            productDao: ProductMongoDao,
-            cartDao: null
-        }
-        break;
-    default:
-        daos = {
-            productDao: new ProductMongoDao(),
-            cartDao: null
-        }
-        break;
+    switch (PERSISTENCE){
+        case 'MONGO_DB':
+                productDao = ProductMongoDao,
+                cartDao = null
+            break;
+        default:
+                productDao = ProductMongoDao,
+                cartDao = null
+            break;
+    }
 
+    return {productDao, cartDao}
 }
-
-export default daos
+export const { productDao, cartDao } = daosExports()
