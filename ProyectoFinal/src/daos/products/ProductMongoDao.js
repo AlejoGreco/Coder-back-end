@@ -1,5 +1,5 @@
 import MongoDbContainer from '../../containers/MongoDbContainer.js'
-import ProductSchema from '../../models/productModel.js'
+import ProductSchema from '../../schemas/productSchema.js'
 
 class ProductMongoDao extends MongoDbContainer {
     constructor(collectionName){
