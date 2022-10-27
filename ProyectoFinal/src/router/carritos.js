@@ -78,6 +78,8 @@ route.post('/', async (req, res) => await cartDao.createCart(req, res))
     }
 })*/
 
+route.delete('/:id', async (req, res) => await cartDao.deleteCart(req, res))
+
 /*route.delete('/:id', cartIdValidate, async (req, res) => {
     try{
         res.send(await cm.deleteCart(req.cartId))

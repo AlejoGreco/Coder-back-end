@@ -30,7 +30,15 @@ class CartMongoDao extends MongoDbContainer {
     }
 
     async deleteCart(req, res){
-              
+        try {
+            const { id } = req.params
+            const cartDeleted = await super.destroy(id)
+            console.log(cartDeleted)
+            return res.status(200).json({ message: 'Cart deleted!', cartDeleted})
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
     }
 
     async getCartProducts(req, res){
