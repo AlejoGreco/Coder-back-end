@@ -1,9 +1,9 @@
-import express  from 'express'
-import CartManager from '../controllers/CartManager.js'
+import { Router }  from 'express'
+import { cartDao } from '../daos/index.js'
 
-const route = express.Router()
+const route = Router()
 
-const cm = new CartManager('src/data/carts.json')
+//const cm = new CartManager('src/data/carts.json')
 
 const cartIdValidate = (req, res, next) => {
     const id = parseInt(req.params.id)
@@ -67,50 +67,52 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.post('/', async (req, res) => {
+route.post('/', async (req, res) => await cartDao.createCart(req, res))
+
+/*route.post('/', async (req, res) => {
     try{
         res.send(await cm.createCart())
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
-route.delete('/:id', cartIdValidate, async (req, res) => {
+/*route.delete('/:id', cartIdValidate, async (req, res) => {
     try{
         res.send(await cm.deleteCart(req.cartId))
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
-route.get('/:id/productos', cartIdValidate, async (req, res) => {
+/*route.get('/:id/productos', cartIdValidate, async (req, res) => {
     try{
         res.send(await cm.getCartProducts(req.cartId))
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
-route.post('/:id/productos', cartIdValidate, pDataValidate, async (req, res) => {
+/*route.post('/:id/productos', cartIdValidate, pDataValidate, async (req, res) => {
     try{
         res.send(await cm.addProductToCart(req.cartId, req.body))
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
-route.delete('/:id/productos/:id_prod', cartIdValidate, prodIdValidate, async (req, res) => {
+/*route.delete('/:id/productos/:id_prod', cartIdValidate, prodIdValidate, async (req, res) => {
     try{
         res.send(await cm.deleteProductFromCart(req.cartId, req.prodId))
     }
     catch (e){
         res.send(e)
     }
-})
+})*/
 
 
 export default route

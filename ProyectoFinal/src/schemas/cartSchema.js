@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import ProductSchema from './productSchema'
+import ProductSchema from './productSchema.js'
 
 const Schema = mongoose.Schema;
 
