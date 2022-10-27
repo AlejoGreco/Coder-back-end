@@ -89,6 +89,8 @@ route.delete('/:id', async (req, res) => await cartDao.deleteCart(req, res))
     }
 })*/
 
+route.get('/:id/productos', async (req, res) => await cartDao.getCartProducts(req,res))
+
 /*route.get('/:id/productos', cartIdValidate, async (req, res) => {
     try{
         res.send(await cm.getCartProducts(req.cartId))
