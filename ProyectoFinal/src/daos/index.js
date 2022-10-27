@@ -1,4 +1,5 @@
 import ProductMongoDao from './products/ProductMongoDao.js'
+import CartMongoDao from './carts/CartMongoDao.js'
 import { PERSISTENCE } from '../config.js'
 
 const daosExports = () => {
@@ -8,11 +9,11 @@ const daosExports = () => {
     switch (PERSISTENCE){
         case 'MONGO_DB':
                 productDao = ProductMongoDao,
-                cartDao = null
+                cartDao = CartMongoDao
             break;
         default:
                 productDao = ProductMongoDao,
-                cartDao = null
+                cartDao = CartMongoDao
             break;
     }
 
