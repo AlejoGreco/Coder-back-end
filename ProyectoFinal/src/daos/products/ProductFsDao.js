@@ -1,5 +1,5 @@
 import fs from 'fs'
-import FsContainer from '../../containers/FsContainer'
+import FsContainer from '../../containers/FsContainer.js'
 
 class ProductFsDao extends FsContainer {
     constructor(path){
@@ -10,10 +10,10 @@ class ProductFsDao extends FsContainer {
         try {
             const products = await super.readAll()
             console.log(products)
-            res.status(200).json(products)
+            return res.status(200).json(products)
         } 
         catch (e){
-            res.status(404).json({ message: e.message, code: e.code })
+            return res.status(404).json({ message: e.message, code: e.code })
         }
     }
 
@@ -22,10 +22,10 @@ class ProductFsDao extends FsContainer {
             const { id } = req.params
             const product = await super.readById(id)
             console.log(product)
-            res.status(200).json(product)
+            return res.status(200).json(product.found)
         }
         catch (e){
-            res.status(404).json({ message: e.message, code: e.code })
+            return res.status(404).json({ message: e.message, code: e.code })
         }
     }
 
@@ -42,45 +42,32 @@ class ProductFsDao extends FsContainer {
                 }
             }
         
-            res.status(200).json(await super.create(products.push(newProd)))  
+            return res.status(200).json(await super.create(products.push(newProd)))  
         }
         catch (e){
-            res.status(404).json({code: e.code, message : e.message})
+            return res.status(404).json({code: e.code, message : e.message})
         }
     }
 
-    async updateProduct(id, p){
-        const products = await this.getProducts()
-        const index = products.findIndex(p => p.id === id)
-
-        if(index === -1){
-            throw { error : -4, descripcion : `No existe el producto de id ${id}` }
+    async updateProduct(req, res){
+        try {
+            const { id } = req.params
+            const updated = await super.update(id, req.body)
+            return res.status(200).json({ message: 'Product updated!', productUpdated: updated})
         }
-
-        products[index] = {...products[index], ...p}
-        try{
-            await fs.promises.writeFile(this.path, JSON.stringify([...products], null, 2))    
-            return products[index]
-        }
-        catch {
-            throw {error : -99, descripcion : 'No se pudo modificar el archivo de productos'}
+        catch (e){
+            return res.status(404).json({code: e.code, message : e.message})
         }
     }
 
-    async deleteProduct(id){
-        const products = await this.getProducts()
-
-        const index = products.findIndex(p => p.id === id)
-        if(index === -1){
-            throw { error : -4, descripcion : `No existe el producto de id ${id}` }
-        }
-
+    async deleteProduct(req, res){
         try{
-            await fs.promises.writeFile(this.path, JSON.stringify(products.filter(p => p.id !== id), null, 2))    
-            return products[index]
+            const { id } = req.params
+            const deleted = await super.destroy(id)
+            return res.status(200).json({ message: 'Product deleted!', productDeleted: deleted})
         }
-        catch {
-            throw {error : -99, descripcion : 'No se pudo modificar el archivo de productos'}
+        catch (e){
+            return res.status(404).json({code: e.code, message : e.message})
         }
     }
 }

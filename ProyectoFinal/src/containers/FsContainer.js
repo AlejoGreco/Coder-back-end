@@ -24,19 +24,29 @@ class FsContainer {
 
     async readById(id) {
         const items = await this.readAll()
-        const found =  items.find(item => item.id === id)
-        if(found)
-            return found
+        const index =  items.findIndex(item => item.id === id)
+        if(index !== -1)
+            return {found: items[index], index}
         
         throw { code : -4, message : `No existe el item de id ${id}` }
     }
 
     async update(id, body) {
-        return await this.model.findByIdAndUpdate(id, body)
+        let {found, index} = await this.readById(id)
+        found = {...found, ...body}
+
+        const updatedItems = await this.readAll()
+        updatedItems[index] = found
+
+        await this.create(updatedItems)
+        return found
     }
 
     async destroy(id) {
-        return await this.model.findByIdAndDelete(id)
+        const deleted = await this.readById(id).found
+        const newItems = await this.readAll().filter(item => item.id !== id)
+        await this.create(newItems)
+        return deleted
     }
 }
 
