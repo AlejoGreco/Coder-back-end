@@ -54,7 +54,16 @@ class CartMongoDao extends MongoDbContainer {
     }
 
     async addProductToCart(req, res){
-        
+        try {
+            const { id } = req.params
+            const { products } = await super.readById(id)
+            products.push(req.body)
+            const result = await super.update(id, { products })
+            return res.status(200).json(products)
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }        
     }
 
     async deleteProductFromCart(req, res){

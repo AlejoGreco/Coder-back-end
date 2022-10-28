@@ -100,6 +100,9 @@ route.get('/:id/productos', async (req, res) => await cartDao.getCartProducts(re
     }
 })*/
 
+route.post('/:id/productos', pDataValidate, async (req, res) => await cartDao.addProductToCart(req,res))
+
+
 /*route.post('/:id/productos', cartIdValidate, pDataValidate, async (req, res) => {
     try{
         res.send(await cm.addProductToCart(req.cartId, req.body))
