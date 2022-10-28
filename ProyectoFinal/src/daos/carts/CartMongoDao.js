@@ -58,7 +58,7 @@ class CartMongoDao extends MongoDbContainer {
             const { id } = req.params
             const { products } = await super.readById(id)
             products.push(req.body)
-            const result = await super.update(id, { products })
+            await super.update(id, { products })
             return res.status(200).json(products)
         }
         catch (e){
@@ -67,7 +67,16 @@ class CartMongoDao extends MongoDbContainer {
     }
 
     async deleteProductFromCart(req, res){
-        
+        try {
+            const { id, id_prod } = req.params
+            const { products } = await super.readById(id)
+            products.id(id_prod).remove()
+            await super.update(id, { products })
+            return res.status(200).json(products)
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }    
     }
 
 }

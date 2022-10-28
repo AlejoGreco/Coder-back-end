@@ -112,6 +112,8 @@ route.post('/:id/productos', pDataValidate, async (req, res) => await cartDao.ad
     }
 })*/
 
+route.delete('/:id/productos/:id_prod', async (req, res) => await cartDao.deleteProductFromCart(req, res))
+
 /*route.delete('/:id/productos/:id_prod', cartIdValidate, prodIdValidate, async (req, res) => {
     try{
         res.send(await cm.deleteProductFromCart(req.cartId, req.prodId))
