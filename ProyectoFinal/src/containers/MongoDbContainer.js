@@ -1,14 +1,14 @@
 import mongoose from "mongoose"
-import { URI_DATABASE } from '../config.js'
+import { CONNECTION_STR } from '../config.js'
 
 class MongoDbContainer {
     constructor(schema, collName){
         this.model = mongoose.model(collName, schema)
-        mongoose.connect(URI_DATABASE, {
+        mongoose.connect(CONNECTION_STR, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        console.log(`Conectado a Mongo Db uri: ${URI_DATABASE}`)
+        console.log(`Conectado a Mongo Db uri: ${CONNECTION_STR}`)
     }
 
     async create(body) {

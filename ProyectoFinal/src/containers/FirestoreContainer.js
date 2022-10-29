@@ -1,11 +1,13 @@
 import mongoose from "mongoose"
 import admin from "firebase-admin"
 import fs from 'fs'
+import { CONNECTION_STR } from '../config.js'
+// './src/credentials/firestore-serv-account.json'
 
 class FirestoreContainer {
     constructor(schema, collName){
         this.model = mongoose.model(collName, schema)
-        const serviceAccount = JSON.parse(fs.readFileSync('./src/credentials/firestore-serv-account.json', 'utf8'))
+        const serviceAccount = JSON.parse(fs.readFileSync(CONNECTION_STR, 'utf8'))
 
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount)

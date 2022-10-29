@@ -66,4 +66,4 @@ class ProductMongoDao extends MongoDbContainer {
     }
 }
 
-export default new ProductMongoDao('products')
+export default ProductMongoDao

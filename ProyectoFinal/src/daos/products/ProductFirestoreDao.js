@@ -66,4 +66,4 @@ class ProductFirestoreDao extends FirestoreContainer {
     }
 }
 
-export default new ProductFirestoreDao('products')
+export default ProductFirestoreDao

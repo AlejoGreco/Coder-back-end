@@ -11,20 +11,20 @@ const daosExports = () => {
 
     switch (PERSISTENCE){
         case 'MONGO_DB':
-                productDao = ProductMongoDao,
-                cartDao = CartMongoDao
+                productDao = new ProductMongoDao('products'),
+                cartDao = new CartMongoDao('carts')
             break;
         case 'FIRESTORE':
-                productDao = ProductFirestoreDao,
+                productDao = new ProductFirestoreDao('products'),
                 cartDao = null
             break;
         case 'FS':
-                productDao = ProductFsDao,
-                cartDao = CartFsDao
+                productDao = new ProductFsDao(),
+                cartDao = new CartFsDao()
             break;
         default:
-                productDao = ProductMongoDao,
-                cartDao = CartMongoDao
+                productDao = new ProductFsDao(),
+                cartDao = new CartFsDao()
             break;
     }
 

@@ -70,4 +70,4 @@ class CartMongoDao extends MongoDbContainer {
 
 }
 
-export default new CartMongoDao('carts')
+export default CartMongoDao

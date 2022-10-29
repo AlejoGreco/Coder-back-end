@@ -1,9 +1,11 @@
 import FsContainer from '../../containers/FsContainer.js'
+import { FS_FILES_DEST_PATH } from '../../config.js'
 
 class CartFsDao extends FsContainer {
-    constructor(path){
-        super(path)
+    constructor(){
+        super(`${FS_FILES_DEST_PATH}carts.json`)
     }
+    // 'src/data/carts.json'
 
     async createCart(req, res){
         try {
@@ -96,4 +98,4 @@ class CartFsDao extends FsContainer {
 
 }
 
-export default new CartFsDao('src/data/products.json')
+export default CartFsDao

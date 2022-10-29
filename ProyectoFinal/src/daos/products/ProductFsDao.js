@@ -1,10 +1,11 @@
-import fs from 'fs'
 import FsContainer from '../../containers/FsContainer.js'
+import { FS_FILES_DEST_PATH } from '../../config.js'
 
 class ProductFsDao extends FsContainer {
-    constructor(path){
-        super(path)
+    constructor(){
+        super(`${FS_FILES_DEST_PATH}products.json`)
     }
+    //'src/data/products.json'
 
     async getProducts(req, res){
         try {
@@ -72,4 +73,4 @@ class ProductFsDao extends FsContainer {
     }
 }
 
-export default new ProductFsDao('src/data/products.json')
+export default ProductFsDao
