@@ -1,5 +1,6 @@
 import ProductMongoDao from './products/ProductMongoDao.js'
 import ProductFsDao from './products/ProductFsDao.js'
+import ProductFirestoreDao from './products/ProductFirestoreDao.js'
 import CartMongoDao from './carts/CartMongoDao.js'
 import CartFsDao from './carts/CartFsDao.js'
 import { PERSISTENCE } from '../config.js'
@@ -12,6 +13,10 @@ const daosExports = () => {
         case 'MONGO_DB':
                 productDao = ProductMongoDao,
                 cartDao = CartMongoDao
+            break;
+        case 'FIRESTORE':
+                productDao = ProductFirestoreDao,
+                cartDao = null
             break;
         case 'FS':
                 productDao = ProductFsDao,
