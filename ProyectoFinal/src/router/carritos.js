@@ -3,8 +3,6 @@ import { cartDao } from '../daos/index.js'
 
 const route = Router()
 
-//const cm = new CartManager('src/data/carts.json')
-
 const cartIdValidate = (req, res, next) => {
     const id = parseInt(req.params.id)
     if(isNaN(id)){
@@ -68,6 +66,13 @@ const pDataValidate = (req, res, next) => {
 }
 
 route.post('/', async (req, res) => await cartDao.createCart(req, res))
+route.delete('/:id', async (req, res) => await cartDao.deleteCart(req, res))
+route.get('/:id/productos', async (req, res) => await cartDao.getCartProducts(req,res))
+route.post('/:id/productos', pDataValidate, async (req, res) => await cartDao.addProductToCart(req,res))
+route.delete('/:id/productos/:id_prod', async (req, res) => await cartDao.deleteProductFromCart(req, res))
+
+export default route
+
 
 /*route.post('/', async (req, res) => {
     try{
@@ -78,8 +83,6 @@ route.post('/', async (req, res) => await cartDao.createCart(req, res))
     }
 })*/
 
-route.delete('/:id', async (req, res) => await cartDao.deleteCart(req, res))
-
 /*route.delete('/:id', cartIdValidate, async (req, res) => {
     try{
         res.send(await cm.deleteCart(req.cartId))
@@ -88,8 +91,6 @@ route.delete('/:id', async (req, res) => await cartDao.deleteCart(req, res))
         res.send(e)
     }
 })*/
-
-route.get('/:id/productos', async (req, res) => await cartDao.getCartProducts(req,res))
 
 /*route.get('/:id/productos', cartIdValidate, async (req, res) => {
     try{
@@ -100,9 +101,6 @@ route.get('/:id/productos', async (req, res) => await cartDao.getCartProducts(re
     }
 })*/
 
-route.post('/:id/productos', pDataValidate, async (req, res) => await cartDao.addProductToCart(req,res))
-
-
 /*route.post('/:id/productos', cartIdValidate, pDataValidate, async (req, res) => {
     try{
         res.send(await cm.addProductToCart(req.cartId, req.body))
@@ -112,8 +110,6 @@ route.post('/:id/productos', pDataValidate, async (req, res) => await cartDao.ad
     }
 })*/
 
-route.delete('/:id/productos/:id_prod', async (req, res) => await cartDao.deleteProductFromCart(req, res))
-
 /*route.delete('/:id/productos/:id_prod', cartIdValidate, prodIdValidate, async (req, res) => {
     try{
         res.send(await cm.deleteProductFromCart(req.cartId, req.prodId))
@@ -122,6 +118,3 @@ route.delete('/:id/productos/:id_prod', async (req, res) => await cartDao.delete
         res.send(e)
     }
 })*/
-
-
-export default route

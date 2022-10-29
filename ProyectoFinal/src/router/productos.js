@@ -2,9 +2,6 @@ import { Router } from 'express'
 import { productDao } from '../daos/index.js'
 
 const route = Router()
-//const ProductManager = require('../controllers/ProductManager')
-//const pm = new ProductManager('src/data/products.json')
-
 const ADMIN = true
 
 const isAdmin = (req, res, next) => {
@@ -67,6 +64,13 @@ const pDataValidate = (req, res, next) => {
 }
 
 route.get('/', async (req, res) => await productDao.getProducts(req, res))
+route.get('/:id', async (req, res) => await productDao.getProduct(req,res))
+route.post('/', isAdmin, pDataValidate, async (req, res) => await productDao.createProduct(req, res))
+route.put('/:id', isAdmin, pDataValidate, async (req, res) => await productDao.updateProduct(req, res))
+route.delete('/:id', isAdmin, async (req, res) => await productDao.deleteProduct(req, res))
+
+export default route
+
 /*route.get('/', async (req, res) => {
     try{
         res.send(await pm.getProducts())
@@ -75,8 +79,6 @@ route.get('/', async (req, res) => await productDao.getProducts(req, res))
         res.send(e)
     }
 })*/
-
-route.get('/:id', idValidate, async (req, res) => await productDao.getProduct(req,res))
 
 /*route.get('/:id', idValidate, async (req, res) => {
     try{
@@ -87,7 +89,6 @@ route.get('/:id', idValidate, async (req, res) => await productDao.getProduct(re
     }
 })*/
 
-route.post('/', isAdmin, pDataValidate, async (req, res) => await productDao.createProduct(req, res))
 /*route.post('/', isAdmin, pDataValidate, async (req, res) => {
     try{
         res.send(await pm.createProduct(req.body))
@@ -96,8 +97,6 @@ route.post('/', isAdmin, pDataValidate, async (req, res) => await productDao.cre
         res.send(e)
     }
 })*/
-
-route.put('/:id', isAdmin, idValidate, pDataValidate, async (req, res) => await productDao.updateProduct(req, res))
 
 /*route.put('/:id', isAdmin, idValidate, pDataValidate, async (req, res) => {
     try{
@@ -108,8 +107,6 @@ route.put('/:id', isAdmin, idValidate, pDataValidate, async (req, res) => await 
     }
 })*/
 
-route.delete('/:id', isAdmin, idValidate, async (req, res) => await productDao.deleteProduct(req, res))
-
 /*route.delete('/:id', isAdmin, idValidate, async (req, res) => {
     try{
         res.send(await pm.deleteProduct(req.id))
@@ -118,5 +115,3 @@ route.delete('/:id', isAdmin, idValidate, async (req, res) => await productDao.d
         res.send(e)
     }
 })*/
-
-export default route

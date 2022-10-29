@@ -13,7 +13,7 @@ class ProductMongoDao extends MongoDbContainer {
             return res.status(200).json(products)      
         } 
         catch (e){
-            res.status(404).json({ message: e.message, code: e.code })
+            return res.status(404).json({ message: e.message, code: e.code })
         }
     }
 

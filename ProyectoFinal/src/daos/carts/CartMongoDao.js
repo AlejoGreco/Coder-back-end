@@ -6,17 +6,6 @@ class CartMongoDao extends MongoDbContainer {
         super(CartSchema, collectionName)   
     }
 
-    /*async getCarts(req, res){
-        try {
-            const carts = await super.readAll()
-            console.log(carts)
-            return res.status(200).json(carts)      
-        } 
-        catch (e){
-            res.status(404).json({ message: e.message, code: e.code })
-        }
-    }*/
-
     async createCart(req, res){
         try {
             const body = { timestamp: Date.now() }
