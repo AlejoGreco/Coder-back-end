@@ -16,7 +16,7 @@ const daosExports = () => {
                 cartDao = new CartMongoDao('carts')
             break;
         case 'FIRESTORE':
-                productDao = null/*new ProductFirestoreDao('products')*/,
+                productDao = new ProductFirestoreDao('products'),
                 cartDao = new CartFirestoreDao('carts')
             break;
         case 'FS':

@@ -8,11 +8,13 @@ class FirestoreContainer {
     constructor(schema, collName){
         this.model = mongoose.model(collName, schema)
         const serviceAccount = JSON.parse(fs.readFileSync(CONNECTION_STR, 'utf8'))
-
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount)
-        })
-
+        
+        if(admin.apps.length === 0){
+            admin.initializeApp({
+                credential: admin.credential.cert(serviceAccount)
+            })
+        }
+        
         this.coll = admin.firestore().collection(collName)         
         console.log(`Conectado a Firestore`)
     }
