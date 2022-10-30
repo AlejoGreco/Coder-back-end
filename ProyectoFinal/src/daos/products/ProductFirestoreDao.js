@@ -9,7 +9,6 @@ class ProductFirestoreDao extends FirestoreContainer {
     async getProducts(req, res){
         try {
             const products = await super.readAll()
-            console.log(products)
             return res.status(200).json(products)      
         } 
         catch (e){
@@ -21,7 +20,6 @@ class ProductFirestoreDao extends FirestoreContainer {
         try {
             const { id } = req.params
             const product = await super.readById(id)
-            console.log(product)
             return res.status(200).json(product)
         }
         catch (e){
@@ -32,9 +30,8 @@ class ProductFirestoreDao extends FirestoreContainer {
     async createProduct(req, res){
         try {
             const newProd = { timestamp: Date.now(), ...req.body }
-            const result = await super.create(newProd)
-            console.log(result)
-            return res.status(200).json(result)
+            await super.create(newProd)
+            return res.status(200).json({ message: 'Product created!' })
         }
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })
@@ -44,9 +41,8 @@ class ProductFirestoreDao extends FirestoreContainer {
     async updateProduct(req, res){
         try {
             const { id } = req.params
-            const result = await super.update(id, req.body)
-            console.log(result)
-            return res.status(200).json({ message: 'Product updated!', productUpdated: result})
+            await super.update(id, req.body)
+            return res.status(200).json({ message: 'Product updated!'})
         } 
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })
@@ -56,9 +52,8 @@ class ProductFirestoreDao extends FirestoreContainer {
     async deleteProduct(req, res){
         try {
             const { id } = req.params
-            const productDeleted = await super.destroy(id)
-            console.log(productDeleted)
-            return res.status(200).json({ message: 'Product deleted!', productDeleted})
+            await super.destroy(id)
+            return res.status(200).json({ message: 'Product deleted!'})
         }
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })

@@ -34,7 +34,7 @@ class ProductMongoDao extends MongoDbContainer {
             const newProd = { timestamp: Date.now(), ...req.body }
             const result = await super.create(newProd)
             console.log(result)
-            return res.status(200).json(result)
+            return res.status(200).json({ message: 'Product created!', product: result })
         }
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })
