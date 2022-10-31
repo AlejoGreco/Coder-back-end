@@ -6,7 +6,8 @@ class MongoDbContainer {
         this.model = mongoose.model(collName, schema)
         mongoose.connect(CONNECTION_STR, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            dbName: 'ecommerce'
         })
         console.log(`Conectado a Mongo Db uri: ${CONNECTION_STR}`)
     }
