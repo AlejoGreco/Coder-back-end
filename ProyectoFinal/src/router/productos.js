@@ -63,11 +63,11 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.get('/', async (req, res) => await productDao.getProducts(req, res))
-route.get('/:id', async (req, res) => await productDao.getProduct(req,res))
-route.post('/', isAdmin, pDataValidate, async (req, res) => await productDao.createProduct(req, res))
-route.put('/:id', isAdmin, pDataValidate, async (req, res) => await productDao.updateProduct(req, res))
-route.delete('/:id', isAdmin, async (req, res) => await productDao.deleteProduct(req, res))
+route.get('/', async (req, res) => await productDao.readAll(req, res))
+route.get('/:id', async (req, res) => await productDao.readById(req,res))
+route.post('/', isAdmin, pDataValidate, async (req, res) => await productDao.create(req, res))
+route.put('/:id', isAdmin, pDataValidate, async (req, res) => await productDao.update(req, res))
+route.delete('/:id', isAdmin, async (req, res) => await productDao.destroy(req, res))
 
 export default route
 

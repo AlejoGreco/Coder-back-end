@@ -2,34 +2,73 @@ import mongoose from "mongoose"
 import { CONNECTION_STR } from '../config.js'
 
 class MongoDbContainer {
-    constructor(schema, collName){
+    constructor(schema, collName, dbName){
         this.model = mongoose.model(collName, schema)
         mongoose.connect(CONNECTION_STR, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            dbName: 'ecommerce'
+            dbName: dbName
         })
         console.log(`Conectado a Mongo Db uri: ${CONNECTION_STR}`)
     }
 
-    async create(body) {
-        return await this.model.create(body)
+    async create(req, res) {
+        try {
+            const newItem = { timestamp: Date.now(), ...req.body }
+            const result = await this.model.create(newItem)
+            console.log(result)
+            return res.status(200).json({ message: 'Item created!', newItem: result })
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
     }
     
-    async readAll() {
-        return await this.model.find()
+    async readAll(req, res) {
+        try {
+            const items = await this.model.find()
+            console.log(items)
+            return res.status(200).json(items)      
+        } 
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
     }
 
-    async readById(id) {
-        return await this.model.findById(id)
+    async readById(req, res) {
+        try {
+            const { id } = req.params
+            const item = await this.model.findById(id)
+            console.log(item)
+            return res.status(200).json(item)
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }     
     }
 
-    async update(id, body) {
-        return await this.model.findByIdAndUpdate(id, body)
+    async update(req, res) {
+        try {
+            const { id } = req.params
+            const result = await this.model.findByIdAndUpdate(id, req.body)
+            console.log(result)
+            return res.status(200).json({ message: 'Item updated!', itemUpdated: result})
+        } 
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
     }
 
-    async destroy(id) {
-        return await this.model.findByIdAndDelete(id)
+    async destroy(req, res) {
+        try {
+            const { id } = req.params
+            const itemDeleted = await this.model.findByIdAndDelete(id)
+            console.log(itemDeleted)
+            return res.status(200).json({ message: 'Item deleted!', itemDeleted})
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }   
     }
 }
 
