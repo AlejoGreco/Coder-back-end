@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
 import admin from "firebase-admin"
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import fs from 'fs'
 import { CONNECTION_STR } from '../config.js'
 // './src/credentials/firestore-serv-account.json'
@@ -89,13 +88,17 @@ class FirestoreContainer {
 
     async addSubItem(req, res, prop) {
         try{
-            const item = { timestamp: Date.now(), ...req.body }
+            const newItem = { timestamp: Date.now(), ...req.body }
             const parent = new this.model({timestamp: Date.now()})
-            parent[prop].push(item)
+            parent[prop].push(newItem)
             const { _id, ...child } = parent[prop][0].toObject()
-            
-            
-            return res.status(200).json({ message: 'Item added!', result})
+
+            const snap = await this.coll.doc(req.params.id).get()
+            const items = {...snap.data()}
+            items[prop].push(child)
+
+            await this.coll.doc(req.params.id).update({[prop]: items[prop]})
+            return res.status(200).json({ message: 'Item added!', newItem})
         }
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })
