@@ -65,11 +65,11 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.post('/', async (req, res) => await cartDao.createCart(req, res))
-route.delete('/:id', async (req, res) => await cartDao.deleteCart(req, res))
-route.get('/:id/productos', async (req, res) => await cartDao.getCartProducts(req,res))
-route.post('/:id/productos', pDataValidate, async (req, res) => await cartDao.addProductToCart(req,res))
-route.delete('/:id/productos/:id_prod', async (req, res) => await cartDao.deleteProductFromCart(req, res))
+route.post('/', async (req, res) => await cartDao.create(req, res))
+route.delete('/:id', async (req, res) => await cartDao.destroy(req, res))
+route.get('/:id/productos', async (req, res) => await cartDao.readSubitems(req, res, 'products'))
+route.post('/:id/productos', pDataValidate, async (req, res) => await cartDao.addSubItem(req, res, 'products'))
+route.delete('/:id/productos/:id_prod', async (req, res) => await cartDao.destroySubItem(req, res, 'products'))
 
 export default route
 

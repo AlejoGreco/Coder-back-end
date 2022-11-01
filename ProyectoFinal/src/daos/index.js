@@ -13,7 +13,7 @@ const daosExports = () => {
     switch (PERSISTENCE){
         case 'MONGO_DB':
                 productDao = new ProductMongoDao('products', 'ecommerce'),
-                cartDao = new CartMongoDao('carts')
+                cartDao = new CartMongoDao('carts', 'ecommerce')
             break;
         case 'FIRESTORE':
                 productDao = new ProductFirestoreDao('products'),

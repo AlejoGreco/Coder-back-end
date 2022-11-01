@@ -70,6 +70,43 @@ class MongoDbContainer {
             return res.status(404).json({ message: e.message, code: e.code })
         }   
     }
+
+    async readSubitems(req, res, prop) {
+        try {
+            const { id } = req.params
+            const item = await this.model.findById(id)
+            console.log(item)
+            return res.status(200).json(item[prop])
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }  
+    }
+
+    async addSubItem(req, res, prop) {
+        try{
+            const items = await this.model.findById(req.params.id)
+            items[prop].push(req.body)
+            const result = await items.save()
+            return res.status(200).json({ message: 'Item added!', result})
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
+    }
+
+    async destroySubItem(req, res, prop) {
+        try {
+            const { id, id_prod } = req.params
+            const items = await this.model.findById(id)
+            items[prop].id(id_prod).remove()
+            const result = await items.save()
+            return res.status(200).json({ message: 'Subitem destroy!', result })
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }    
+    }
 }
 
 export default MongoDbContainer
