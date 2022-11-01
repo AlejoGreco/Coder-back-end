@@ -19,33 +19,63 @@ class FirestoreContainer {
         console.log(`Conectado a Firestore`)
     }
 
-    async create(body) {
-        const {_id, ...obj} = new this.model(body).toObject()
-        return await this.coll.add(obj)
+    async create(req, res) {
+        try {
+            const item = { timestamp: Date.now(), ...req.body }
+            const { _id, ...obj } = new this.model(item).toObject()
+            await this.coll.add(obj)
+            return res.status(200).json({ message: 'Product created!' })
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
+        
+        
     }
     
-    async readAll() {
-        const { docs } = await this.coll.get()
-        const result = docs.map(doc => (
-            {
+    async readAll(req, res) {
+        try {
+            const { docs } = await this.coll.get()
+            const items = docs.map(doc => ({
                 _id: doc.id,
                 ...doc.data()
-            }
-        ))
-        return result
+            }))
+            return res.status(200).json(items)      
+        } 
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
     }
 
-    async readById(id) {
-        const snap = await this.coll.doc(id).get()
-        return {_id: snap.id, ...snap.data()}
+    async readById(req, res) {
+        try {
+            const snap = await this.coll.doc(req.params.id).get()
+            const item = { _id: snap.id, ...snap.data() }
+            return res.status(200).json(item)
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }     
     }
 
-    async update(id, body) {
-        return await this.coll.doc(id).update(body)
+    async update(req, res) {
+        try {
+            await this.coll.doc(req.params.id,).update(req.body)
+            return res.status(200).json({ message: 'Product updated!'})
+        } 
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
     }
 
-    async destroy(id) {
-        return await this.coll.doc(id).delete()
+    async destroy(req, res) {
+        try {
+            await this.coll.doc(req.params.id).delete()
+            return res.status(200).json({ message: 'Product deleted!'})
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }        
     }
 }
 
