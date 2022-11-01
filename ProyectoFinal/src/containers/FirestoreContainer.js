@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import admin from "firebase-admin"
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import fs from 'fs'
 import { CONNECTION_STR } from '../config.js'
 // './src/credentials/firestore-serv-account.json'
@@ -24,13 +25,11 @@ class FirestoreContainer {
             const item = { timestamp: Date.now(), ...req.body }
             const { _id, ...obj } = new this.model(item).toObject()
             await this.coll.add(obj)
-            return res.status(200).json({ message: 'Product created!' })
+            return res.status(200).json({ message: 'Item created!' })
         }
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })
         }
-        
-        
     }
     
     async readAll(req, res) {
@@ -60,8 +59,8 @@ class FirestoreContainer {
 
     async update(req, res) {
         try {
-            await this.coll.doc(req.params.id,).update(req.body)
-            return res.status(200).json({ message: 'Product updated!'})
+            await this.coll.doc(req.params.id).update(req.body)
+            return res.status(200).json({ message: 'Item updated!'})
         } 
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })
@@ -71,12 +70,38 @@ class FirestoreContainer {
     async destroy(req, res) {
         try {
             await this.coll.doc(req.params.id).delete()
-            return res.status(200).json({ message: 'Product deleted!'})
+            return res.status(200).json({ message: 'Item deleted!'})
         }
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })
         }        
     }
+
+    async readSubitems(req, res, prop) {
+        try {
+            const snap = await this.coll.doc(req.params.id).get()
+            return res.status(200).json(snap.data()[prop])
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }  
+    }
+
+    async addSubItem(req, res, prop) {
+        try{
+            const item = { timestamp: Date.now(), ...req.body }
+            const parent = new this.model({timestamp: Date.now()})
+            parent[prop].push(item)
+            const { _id, ...child } = parent[prop][0].toObject()
+            
+            
+            return res.status(200).json({ message: 'Item added!', result})
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
+    }
+
 }
 
 export default FirestoreContainer
