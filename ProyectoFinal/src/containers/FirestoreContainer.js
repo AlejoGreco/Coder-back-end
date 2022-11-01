@@ -92,17 +92,32 @@ class FirestoreContainer {
             const parent = new this.model({timestamp: Date.now()})
             parent[prop].push(newItem)
             const { _id, ...child } = parent[prop][0].toObject()
+            const str_id = _id.toString()
+            console.log(str_id)
+            child._id = str_id
 
             const snap = await this.coll.doc(req.params.id).get()
             const items = {...snap.data()}
             items[prop].push(child)
 
             await this.coll.doc(req.params.id).update({[prop]: items[prop]})
-            return res.status(200).json({ message: 'Item added!', newItem})
+            return res.status(200).json({ message: 'Item added!', child})
         }
         catch (e){
             return res.status(404).json({ message: e.message, code: e.code })
         }
+    }
+
+    async destroySubItem(req, res, prop) {
+        try {
+            const snap = await this.coll.doc(req.params.id).get()
+            const newitems = snap.data()[prop].filter(item => item._id !== req.params.id_prod)
+            await this.coll.doc(req.params.id).update({[prop]: newitems})
+            return res.status(200).json({ message: 'Subitem destroy!' })
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }    
     }
 
 }
