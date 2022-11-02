@@ -21,7 +21,7 @@ const daosExports = () => {
             break;
         case 'FS':
                 productDao = new ProductFsDao(),
-                cartDao = new CartFsDao()
+                cartDao = null
             break;
         default:
                 productDao = new ProductFsDao(),

@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "_id": "6361b86cee7c72cd146555de",
+    "nombre": "Coca Cola Zero zzz",
+    "descripcion": "Nos vamo a buzios",
+    "url": "www.saraza/com/coca.jpeg",
+    "codigo": 22,
+    "stock": 50,
+    "precio": 105.6
+  }
+]
