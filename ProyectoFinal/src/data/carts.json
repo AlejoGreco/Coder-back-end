@@ -1,58 +1,22 @@
 [
   {
-    "id": 1,
-    "timestamp": 1664319907904,
-    "productos": []
-  },
-  {
-    "id": 3,
-    "timestamp": 1664319947263,
-    "productos": [
+    "timestamp": 1667357210689,
+    "_id": "6361da1ab8ce95ebe56c5dce",
+    "products": [
       {
-        "nombre": "Coca cola",
-        "descripcion": "Cero calorias - 1.5 litros",
-        "codigo": 20,
-        "url": "www.saraza/com/coca.jpeg",
-        "precio": 150.6,
+        "nombre": "Prueba 10",
+        "descripcion": "3 litros",
+        "url": "www.saraza/com/cbz.jpeg",
+        "codigo": 1200,
         "stock": 15,
-        "id": 1,
-        "timestamp": 1664320153646
-      },
-      {
-        "nombre": "Soda",
-        "descripcion": "1 litro",
-        "codigo": 50,
-        "url": "www.saraza/com/soda.jpeg",
-        "precio": 70,
-        "stock": 120,
-        "id": 3,
-        "timestamp": 1664320369105
-      },
-      {
-        "nombre": "Prueba producto",
-        "descripcion": "1 litro",
-        "codigo": 50,
-        "url": "www.saraza/com/soda.jpeg",
-        "precio": 70,
-        "stock": 120,
-        "id": 4,
-        "timestamp": 1664323528273
-      },
-      {
-        "nombre": "Prueba producto",
-        "descripcion": "",
-        "codigo": 50,
-        "url": "www.saraza/com/soda.jpeg",
-        "precio": 70,
-        "stock": 120,
-        "id": 5,
-        "timestamp": 1664324230759
+        "precio": 200,
+        "_id": "6361da550df54d425c8f33a0"
       }
     ]
   },
   {
-    "id": 4,
-    "timestamp": 1664319988625,
-    "productos": []
+    "timestamp": 1667358454819,
+    "_id": "6361def6e5e97ff5c7bbfb89",
+    "products": []
   }
 ]

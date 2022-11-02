@@ -99,6 +99,73 @@ class FsContainer {
             return res.status(404).json({code: e.code, message : e.message})
         }
     }
+
+    async readSubitems(req, res, prop) {
+        try {
+            if(!fs.existsSync(this.path)){
+                throw { code : -3, message : `El archivo ${this.path} no existe` }
+            }
+            const items = JSON.parse(await fs.promises.readFile(this.path, 'utf-8'))
+            
+            const index =  items.findIndex(item => item._id === req.params.id)
+            if(index === -1)
+                throw { code : -4, message : `No existe el item de id ${re.params.id}` }
+                
+            return res.status(200).json(items[index][prop])
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
+    }
+
+    async addSubItem(req, res, prop) {
+        try{
+            //nuevo obj
+            const newItem = { timestamp: Date.now(), ...req.body }
+            const children = new this.model({timestamp: Date.now()})[prop]
+            children.push(newItem)
+            const child  = children[0].toObject()
+
+            //lectura
+            if(!fs.existsSync(this.path)){
+                throw { code : -3, message : `El archivo ${this.path} no existe` }
+            }
+            const items = JSON.parse(await fs.promises.readFile(this.path, 'utf-8'))
+            
+            const index =  items.findIndex(item => item._id === req.params.id)
+            if(index === -1)
+                throw { code : -4, message : `No existe el item de id ${re.params.id}` }
+                
+            items[index][prop].push(child)
+
+            await fs.promises.writeFile(this.path, JSON.stringify(items, null, 2))    
+            return res.status(200).json({ message: 'Item added!', child})
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }
+    }
+
+    async destroySubItem(req, res, prop) {
+        try {
+            if(!fs.existsSync(this.path)){
+                throw { code : -3, message : `El archivo ${this.path} no existe` }
+            }
+            const items = JSON.parse(await fs.promises.readFile(this.path, 'utf-8'))
+            
+            const index =  items.findIndex(item => item._id === req.params.id)
+            if(index === -1)
+                throw { code : -4, message : `No existe el item de id ${re.params.id}` }
+              
+            items[index][prop] = items[index][prop].filter(item => item._id !== req.params.id_prod)
+
+            await fs.promises.writeFile(this.path, JSON.stringify(items, null, 2))    
+            return res.status(200).json({ message: 'SubItem destoy!'})
+        }
+        catch (e){
+            return res.status(404).json({ message: e.message, code: e.code })
+        }    
+    }
 }
 
 export default FsContainer
