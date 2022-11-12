@@ -1,6 +1,8 @@
 import express  from "express"
 import session from "express-session"
 import cookieParser from "cookie-parser"
+import authRouter from "./routes/authRoutes.js"
+import dashRouter from "./routes/dashRoutes.js"
 
 const app = express()
 
@@ -12,5 +14,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+app.use('/', authRouter)
+app.use('/dashboard', dashRouter)
 
 export default app
