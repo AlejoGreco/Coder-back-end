@@ -10,11 +10,8 @@ route.get('/', (req, res) => {
 })
 
 route.get('/login', (req, res) => {
-    res.send({form: 'LOGIN'})
-})
-
-route.get('/signup', (req, res) => {
-    res.send({form: 'SIGNUP'})
+    // responder con formulario de login
+    res.render('login')
 })
 
 route.get('/logout', (req, res) => {
