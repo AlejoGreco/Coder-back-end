@@ -7,8 +7,9 @@ import dashRouter from "./routes/dashRoutes.js"
 
 const app = express()
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 app.use(cookieParser())
+app.use(express.static('./src/public'))
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
 
@@ -21,5 +22,6 @@ app.use(session({
 
 app.use('/', authRouter)
 app.use('/dashboard', dashRouter)
+
 
 export default app
