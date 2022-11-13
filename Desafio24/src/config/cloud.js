@@ -1,2 +1,5 @@
-export const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://ukigreco:ukigreco@codercluster.8ewdywk.mongodb.net/?retryWrites=true&w=majority'
+import dotenv  from 'dotenv'
+dotenv.config()
+
+export const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/sesiones'
 export const advOptions = {useNewUrlParser: true}
