@@ -16,8 +16,20 @@ route.post('/login', (req, res) => {
     res.redirect('/dashboard')
 })
 
-route.get('/logout', sessionChecker, (req, res) => {
-    res.send({form: 'LOGOUT'})
+route.get('/logout', (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.render('logout', {user: req.session.user.name})
+    } else {
+        res.redirect('/login')
+    }
+})
+
+route.post('/logout', (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        req.session.destroy()
+        //res.clearCookie('user_sid')
+    }
+    res.redirect('/login')
 })
 
 export default route

@@ -7,7 +7,7 @@
     <main class="container mt-3">
         <div class="p-3 mt-4 bg-light bg-gradient">
             <h2>Login</h2>
-            <form id="formLogin">        
+            <form id="formLogin" action="/login" method="post">        
                 <div class="mb-2 w-50">
                     <label for="name" class="form-label">User name</label>
                     <input type="text" class="form-control" id="name" placeholder="Tu nombre" name="name">
@@ -17,7 +17,7 @@
                     <input type="email" class="form-control" id="email" placeholder="tuCorreo@mail.com" name="email">
                 </div>
                 <div class="py-2 w-50">
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="submit"><a>Submit</a></button>
                 </div>
                 <div class="d-none w-50">
                     <p class="text-danger" id="feedback"></p>
@@ -25,6 +25,5 @@
             </form>
         </div>
     </main>
-    <script src="login.js" ></script>
 </body>
 </html>
