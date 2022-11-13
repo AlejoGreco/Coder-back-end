@@ -16,7 +16,7 @@ formlogin.addEventListener('submit', e => {
         body: JSON.stringify(obj),
         headers: {'Content-Type': 'application/json'}
     })
-    .then(() => e.target.value = '')
+    .then(() => location.href = '/dashboard')   // Quick fix || Revisar como renderizar o 
     .catch(e => {
         feedback.innerHTML = `Code ${e} | Error ${e.message}`
         feedback.parentElement.classList.replace('d-none', 'd-block')

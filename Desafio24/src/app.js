@@ -1,7 +1,6 @@
 import express  from "express"
 import session from "express-session"
 import cookieParser from "cookie-parser"
-import ejs from "ejs"
 import authRouter from "./routes/authRoutes.js"
 import dashRouter from "./routes/dashRoutes.js"
 
@@ -22,6 +21,6 @@ app.use(session({
 
 app.use('/', authRouter)
 app.use('/dashboard', dashRouter)
-
+app.use((req, res) => res.redirect('/login'))
 
 export default app
