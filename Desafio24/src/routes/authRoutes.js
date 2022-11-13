@@ -13,6 +13,7 @@ route.get('/login', sessionChecker, (req, res) => {
 
 route.post('/login', (req, res) => {
     req.session.user = req.body
+    req.session.save(err => err && console.log(err))
     res.redirect('/dashboard')
 })
 
@@ -24,7 +25,7 @@ route.get('/logout', (req, res) => {
     }
 })
 
-route.post('/logout', (req, res) => {
+route.delete('/logout', (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
         req.session.destroy()
         //res.clearCookie('user_sid')
