@@ -1,13 +1,11 @@
 import { Router } from "express"
-import { sessionChecker } from "../middlewares/sessionChecker.js"
-
 const route = Router()
 
-route.get('/', sessionChecker, (req, res) => {
+route.get('/', (req, res) => {
     res.redirect('/login')
 })
 
-route.get('/login', sessionChecker, (req, res) => {
+route.get('/login', (req, res) => {
     res.render('login')
 })
 
