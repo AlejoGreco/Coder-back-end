@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %> 
+</head>
+<body>
+    <main class="container mt-3">
+        <div class="p-3 mt-4 bg-light bg-gradient">
+            <h2>Login</h2>
+            <form id="formLogin" action="/login" method="post">        
+                <div class="mb-2 w-50">
+                    <label for="name" class="form-label">User name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Tu nombre" name="name">
+                </div>
+                <div class="mb-2 w-50">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="tuCorreo@mail.com" name="email">
+                </div>
+                <div class="py-2 w-50">
+                    <button class="btn btn-primary" type="submit"><a>Submit</a></button>
+                </div>
+                <div class="d-none w-50">
+                    <p class="text-danger" id="feedback"></p>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
