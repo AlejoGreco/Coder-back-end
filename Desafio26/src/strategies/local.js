@@ -1,4 +1,5 @@
 import LocalStrategy from 'passport-local'
+import passport from 'passport'
 import { userModel } from '../model/users.js'
 
 export const registerStrategy = new LocalStrategy(async (username, password, cb) => {
@@ -6,7 +7,7 @@ export const registerStrategy = new LocalStrategy(async (username, password, cb)
         const user = await userModel.findOne({username})
         if(user){ return cb(null, false, {message: 'User allready exist'})}
 
-        // Encripatar pass
+        // Encripatar pass sss
 
         const newUser = await userModel.create({username, password})
         console.log(newUser)
@@ -14,4 +15,12 @@ export const registerStrategy = new LocalStrategy(async (username, password, cb)
     } catch (error) {
         return cb(error)
     }
+})
+
+passport.serializeUser((user, cb) => {
+    cb(null, user._id)
+})
+
+passport.deserializeUser((id, cb) => {
+    userModel.findById(id, cb)
 })
