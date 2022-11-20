@@ -3,6 +3,8 @@ import session from "express-session"
 import cookieParser from "cookie-parser"
 import mongoose from "mongoose"
 import MongoStore from "connect-mongo"
+import passport from "passport"
+import { registerStrategy } from "./strategies/local.js"
 import authRouter from "./routes/authRoutes.js"
 import dashRouter from "./routes/dashRoutes.js"
 import { MONGO_URL } from "./config/cloud.js"
@@ -35,6 +37,11 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+passport.use('register', registerStrategy)
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', authRouter) 
 app.use('/dashboard', dashRouter)

@@ -1,9 +1,20 @@
 import { Router } from "express"
+import passport from "passport"
 const route = Router()
 
 route.get('/', (req, res) => {
     res.redirect('/login')
 })
+
+route.get('/register', (req, res) => {
+    res.render('register')
+})
+
+route.post('/register', passport.authenticate('register', {
+        failureRedirect: '/fail-register', failureMessage: 'Error en el registro'
+    },
+    (req, res) => res.redirect('/login')
+))
 
 route.get('/login', (req, res) => {
     res.render('login')
@@ -26,7 +37,6 @@ route.get('/logout', (req, res) => {
 route.delete('/logout', (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
         req.session.destroy()
-        //res.clearCookie('user_sid')
     }
     res.redirect('/login')
 })
