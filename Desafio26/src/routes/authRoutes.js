@@ -13,7 +13,12 @@ route.get('/', (req, res) => {
 
 route.get('/register', (req, res) => {
     if (!req.isAuthenticated()) {
-        res.render('register')
+        res.render('authForm', {
+            title: 'Register',
+            action: '/register',
+            href: '/login',
+            linkMsg: 'Go to log in!'
+        })
     }
     else {
         res.redirect('/dasboard')
@@ -33,7 +38,12 @@ route.post('/register', passport.authenticate('register', {
 
 route.get('/login', (req, res) => {
     if (!req.isAuthenticated()) {
-        res.render('login')
+        res.render('authForm', {
+            title: 'Login',
+            action: 'login',
+            href: '/register',
+            linkMsg: 'Go to sign up!'
+        })
     }
     else {
         res.redirect('/dashboard')
