@@ -11,9 +11,10 @@ route.get('/register', (req, res) => {
 })
 
 route.post('/register', passport.authenticate('register', {
-        failureRedirect: '/fail-register', failureMessage: 'Error en el registro'
+        failureRedirect: '/fail-auth', failureMessage: 'Error en el registro'
     }),
     (req, res) => {
+        req.logOut()
         res.redirect('/login')
     }
 )
@@ -22,11 +23,13 @@ route.get('/login', (req, res) => {
     res.render('login')
 })
 
-route.post('/login', (req, res) => {
-    /*req.session.user = req.body
-    req.session.save(err => err && console.log(err))
-    res.redirect('/dashboard')*/
-})
+route.post('/login', passport.authenticate('login', {
+    failureRedirect: '/fail-auth', failureMessage: 'Error en el login'
+    }),
+    (req, res) => {
+        res.redirect('/dashboard')
+    }
+)
 
 route.get('/logout', (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
@@ -43,6 +46,6 @@ route.delete('/logout', (req, res) => {
     res.redirect('/login')
 })
 
-route.get('/fail-register', (req, res) => res.send(req))
+route.get('/fail-auth', (req, res) => res.send(req))
 
 export default route

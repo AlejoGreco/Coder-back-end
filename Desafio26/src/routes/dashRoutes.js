@@ -3,10 +3,10 @@ import { Router } from "express"
 const route = Router()
 
 route.get('/', (req, res) => {
-    if(req.session.user && req.cookies.user_sid){
+    if(req.isAuthenticated()){
         res.render('dashboard', {
-            user: req.session.user.name, 
-            email: req.session.user.name
+            user: req.user.username, 
+            email: req.user.username
         })
     }
     else{

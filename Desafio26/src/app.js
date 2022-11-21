@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser"
 import mongoose from "mongoose"
 import MongoStore from "connect-mongo"
 import passport from "passport"
-import { registerStrategy } from "./strategies/local.js"
+import { registerStrategy, loginStrategy } from "./strategies/local.js"
 import authRouter from "./routes/authRoutes.js"
 import dashRouter from "./routes/dashRoutes.js"
 import { MONGO_URL } from "./config/cloud.js"
@@ -39,6 +39,7 @@ app.use(session({
 }))
 
 passport.use('register', registerStrategy)
+passport.use('login', loginStrategy)
 
 app.use(passport.initialize())
 app.use(passport.session())
