@@ -3,24 +3,41 @@ import passport from "passport"
 const route = Router()
 
 route.get('/', (req, res) => {
-    res.redirect('/login')
+    if (!req.isAuthenticated()) {
+        res.redirect('/login')
+    }
+    else{
+        res.redirect('/dashboard')
+    }
 })
 
 route.get('/register', (req, res) => {
-    res.render('register')
+    if (!req.isAuthenticated()) {
+        res.render('register')
+    }
+    else {
+        res.redirect('/dasboard')
+    }
 })
 
 route.post('/register', passport.authenticate('register', {
         failureRedirect: '/fail-auth', failureMessage: 'Error en el registro'
     }),
     (req, res) => {
-        req.logOut()
-        res.redirect('/login')
+        req.logOut(err => {
+            if(err){ return res.redirect('/fail-auth') }
+            res.redirect('/login')
+        })
     }
 )
 
 route.get('/login', (req, res) => {
-    res.render('login')
+    if (!req.isAuthenticated()) {
+        res.render('login')
+    }
+    else {
+        res.redirect('/dashboard')
+    }
 })
 
 route.post('/login', passport.authenticate('login', {
@@ -32,18 +49,23 @@ route.post('/login', passport.authenticate('login', {
 )
 
 route.get('/logout', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.render('logout', {user: req.session.user.name})
+    if (req.isAuthenticated()) {
+        res.render('logout', {user: req.user.username})
     } else {
         res.redirect('/login')
     }
 })
 
 route.delete('/logout', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        req.session.destroy()
+    if (req.isAuthenticated()) {
+        req.logout(err => {
+            if(err) { return res.redirect('/fail-auth') }
+            return res.redirect('/login')
+        })
     }
-    res.redirect('/login')
+    else{
+        return res.redirect('/login')
+    }
 })
 
 route.get('/fail-auth', (req, res) => res.send(req))
