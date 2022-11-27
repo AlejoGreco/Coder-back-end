@@ -7,6 +7,7 @@ import passport from "passport"
 import { registerStrategy, loginStrategy } from "./strategies/local.js"
 import authRouter from "./routes/authRoutes.js"
 import dashRouter from "./routes/dashRoutes.js"
+import processRouter from "./routes/processRoutes.js"
 import { MONGO_URL } from "./config/cloud.js"
 
 const app = express()
@@ -46,6 +47,7 @@ app.use(passport.session())
 
 app.use('/', authRouter) 
 app.use('/dashboard', dashRouter)
+app.use('/api', processRouter)
 app.use((req, res) => res.redirect('/login'))
 
 export default app
