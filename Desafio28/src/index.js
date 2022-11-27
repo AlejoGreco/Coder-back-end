@@ -1,6 +1,9 @@
 import app from "./app.js"
+import yargs from "yargs"
 import { Server } from "socket.io"
 import { readChatMsg, writeChatMsg } from "./utils/sockets.js"
+
+const { PORT } = yargs(process.argv.slice(2)).default({PORT: 8080}).argv
 
 const server = app.listen(PORT, () => {
     console.log('Server up!')
