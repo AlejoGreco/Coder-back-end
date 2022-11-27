@@ -1,4 +1,5 @@
 import { Router } from "express"
+import { fork } from "child_process"
 
 const route = Router()
 
@@ -21,7 +22,18 @@ route.get('/info', (req, res) => {
 })
 
 route.get('/randoms', (req, res) => {
-    
+    const amount = req.query.amount ? parseInt(req.query.amount) : 200000
+    const child = fork('./src/random.js')
+
+    child.on('message', msg => {
+        if(msg === 'ready'){
+            console.log('Iniciando proceso hijo')
+            child.send({amount})
+        }
+        else {
+            res.render('random', msg)
+        }
+    })
 })
 
 export default route
