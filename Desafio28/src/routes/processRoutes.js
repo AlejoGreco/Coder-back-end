@@ -22,7 +22,7 @@ route.get('/info', (req, res) => {
 })
 
 route.get('/randoms', (req, res) => {
-    const amount = req.query.amount ? parseInt(req.query.amount) : 200000
+    const amount = req.query.amount ? parseInt(req.query.amount) : 100000000
     const child = fork('./src/random.js')
 
     child.on('message', msg => {
@@ -31,7 +31,9 @@ route.get('/randoms', (req, res) => {
             child.send({amount})
         }
         else {
-            res.render('random', msg)
+            console.log('Proceso finalizado', msg)
+            res.send(msg)
+            //res.render('random', msg)
         }
     })
 })

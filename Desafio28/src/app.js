@@ -13,6 +13,7 @@ import { MONGO_URL } from "./config/cloud.js"
 const app = express()
 
 app.use(express.urlencoded({extended: true}))
+app.use(express.query({extended: true}))
 app.use(cookieParser())
 app.use(express.static('./src/public'))
 app.set('views', './src/views')
