@@ -31,9 +31,11 @@ route.get('/randoms', (req, res) => {
             child.send({amount})
         }
         else {
-            console.log('Proceso finalizado', msg)
-            res.send(msg)
-            //res.render('random', msg)
+            console.log('Proceso finalizado')
+            res.render('random', {
+                result: msg.result,
+                length: 1000
+            })
         }
     })
 })
