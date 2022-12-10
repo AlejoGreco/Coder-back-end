@@ -1,0 +1,17 @@
+- Usando Modulo Cluster
+    > nodemon src/index (Modo Fork)
+    > nodemon src/index --mode CLUSTER (Modo Cluster)
+
+    Testeo la creacion automatica de hijos (Para ambos modos)
+    > tasklist /fi "imagename eq node.exe"
+    > taskkill /pid <PID> /f'
+    > tasklist /fi "imagename eq node.exe"
+
+- Usando PM2
+    > pm2 start src/index_pm2.js --watch -- 8080 (Modo Fork)
+    > pm2 start src/index_pm2.js --watch -i max -- 8080 (Modo Cluster)
+
+    Testeo la creacion automatica de hijos (Para ambos modos)
+    > pm2 list (obtengo pid del proceso a eliminar)
+    > pm2 delete <ID>
+    > pm2 list (reviso que se creo el nuevo hijo (solo modo cluster) y que no figura el que borre)
