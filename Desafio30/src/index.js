@@ -18,6 +18,11 @@ if(cluster.isPrimary){
     else {
         cluster.fork()
     }
+
+    cluster.on('exit', () => {
+        cluster.fork()
+        console.log(`Nuevo hijo`)
+    })
 }
 else {
     const server = app.listen(PORT, () => {
