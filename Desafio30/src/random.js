@@ -1,6 +1,6 @@
-process.on('message', msg => {
+export const random = amount => {
     const result = {}
-    for(let i = 0; i < msg.amount; i++){
+    for(let i = 0; i < amount; i++){
         const num = Math.round(Math.random() * 1000)
         if(result[num]){
             result[num] = result[num] + 1
@@ -9,8 +9,5 @@ process.on('message', msg => {
             result[num] = 1
         }
     }
-    process.send({result})
-    process.exit()
-})
-
-process.send('ready')
+    return Promise.resolve(result)
+}

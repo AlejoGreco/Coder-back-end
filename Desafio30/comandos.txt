@@ -15,3 +15,12 @@
     > pm2 list (obtengo pid del proceso a eliminar)
     > pm2 delete <ID>
     > pm2 list (reviso que se creo el nuevo hijo (solo modo cluster) y que no figura el que borre)
+
+--------------------------------------------------------------------------------------------------------
+
+Usando NGINX
+
+    - Cluster con modulo cluster
+    > node src/index --PORT 8080 --mode FORK    (levanto los servidores node)
+    > node src/index --PORT 8081 --mode CLUSTER
+    > nginx -s reload o nginx (si no fue iniciado)

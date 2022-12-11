@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { fork } from "child_process"
 import { cpus } from "os"
+import { random } from "../random.js"
 
 const route = Router()
 
@@ -23,22 +23,13 @@ route.get('/info', (req, res) => {
     })
 })
 
-route.get('/randoms', (req, res) => {
+route.get('/randoms', async (req, res) => {
     const amount = req.query.amount ? parseInt(req.query.amount) : 100000000
-    const child = fork('./src/random.js')
-
-    child.on('message', msg => {
-        if(msg === 'ready'){
-            console.log('Iniciando proceso hijo')
-            child.send({amount})
-        }
-        else {
-            console.log('Proceso finalizado')
-            res.render('random', {
-                result: msg.result,
-                length: 1000
-            })
-        }
+    const result = await random(amount)
+    console.log(`Process Id: ${process.pid}`)
+    res.render('random', {
+        result,
+        length: 1000
     })
 })
 
