@@ -24,3 +24,11 @@ Usando NGINX
     > node src/index --PORT 8080 --mode FORK    (levanto los servidores node)
     > node src/index --PORT 8081 --mode CLUSTER
     > nginx -s reload o nginx (si no fue iniciado)
+
+    - Cluster con nginx
+    > node src/index --PORT 8080 --mode FORK    (levanto los servidores node)
+    > node src/index --PORT 8082 --mode FORK
+    > node src/index --PORT 8083 --mode FORK
+    > node src/index --PORT 8084 --mode FORK
+    > node src/index --PORT 8085 --mode FORK
+    > nginx -s reload o nginx (luego de cambiar de archivo de config)
