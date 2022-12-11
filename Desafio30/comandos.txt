@@ -1,3 +1,11 @@
+/*
+** Aclaracion
+** Hay dos index. El index_pm2 se quito todo el codigo de modulo cluster
+** para creacion de hijos y reposicion en caso que se caigan.
+** Esto se hizo dado que la creacion de los hijos queda a cargo de pm2 fuera del codigo
+**
+** */
+
 - Usando Modulo Cluster
     > nodemon src/index (Modo Fork)
     > nodemon src/index --mode CLUSTER (Modo Cluster)
@@ -14,7 +22,7 @@
     Testeo la creacion automatica de hijos (Para ambos modos)
     > pm2 list (obtengo pid del proceso a eliminar)
     > pm2 delete <ID>
-    > pm2 list (reviso que se creo el nuevo hijo (solo modo cluster) y que no figura el que borre)
+    > pm2 list (reviso que no figura el que borre)
 
 --------------------------------------------------------------------------------------------------------
 
