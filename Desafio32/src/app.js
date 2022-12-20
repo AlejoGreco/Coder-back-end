@@ -10,6 +10,8 @@ import authRouter from "./routes/authRoutes.js"
 import dashRouter from "./routes/dashRoutes.js"
 import processRouter from "./routes/processRoutes.js"
 import { MONGO_URL } from "./config/cloud.js"
+import logger from "./config/loggers.js"
+import { logInfo } from "./middlewares/index.js"
 
 const app = express()
 
@@ -26,7 +28,7 @@ mongoose.connect(MONGO_URL, {
         useUnifiedTopology: true,
         dbName: 'passport-auth'
     },
-    () => console.log('Conectado a Mongo db')
+    () => logger.info('Conectado a Mongo db')
 )
 
 app.use(session({
@@ -48,10 +50,11 @@ passport.use('login', loginStrategy)
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', authRouter) 
+app.use('/', logInfo, authRouter) 
 app.use('/dashboard', dashRouter)
 app.use('/api', processRouter)
 app.use((req, res) => {
+    logger.warn(`Peticon a ruta no encontrada -> url: ${req.url} | method: ${req.method}`)
     res.redirect('/login')
 })
 

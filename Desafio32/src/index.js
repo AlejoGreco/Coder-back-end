@@ -10,7 +10,7 @@ const { PORT } = yargs(process.argv.slice(2)).default({PORT: 8080}).argv
 const { mode } = yargs(process.argv.slice(2)).default({mode: 'FORK'}).argv
 
 if(cluster.isPrimary){
-    console.log(`Father | Process Id: ${process.pid}`)
+    logger.info(`Father | Process Id: ${process.pid}`)
     if(mode === 'CLUSTER'){
         for(let i = 0; i < cpus().length; i++){
             cluster.fork()
@@ -20,9 +20,10 @@ if(cluster.isPrimary){
         cluster.fork()
     }
 
-    cluster.on('exit', () => {
+    cluster.on('exit', worker => {
         cluster.fork()
-        console.log(`Nuevo hijo`)
+        logger.warn(`Worker Pid: ${worker.process.pid}  finalizo.`)
+        logger.info(`Nuevo worker creado`)
     })
 }
 else {
@@ -35,7 +36,7 @@ else {
     const io = new Server(server)
     
     io.on('connection', async socket => {
-        console.log(`Nuevo cliente conectado`)
+        logger.info(`Nuevo cliente conectado`)
         socket.emit('productos', productos)
     
         const messages = await readChatMsg(msgFilePath)
@@ -48,7 +49,6 @@ else {
     
         socket.on('newMsg', async m => {
             const messages = await readChatMsg(msgFilePath)
-            console.log(messages)
             messages.push(m)
             io.sockets.emit('messages', messages)
             writeChatMsg(msgFilePath, messages)
