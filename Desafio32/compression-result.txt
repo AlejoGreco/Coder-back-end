@@ -1,0 +1,4 @@
+Ruta api/info :
+
+SIN COMPRESSION => 2.8 kB
+COMPRESSION LEVEL 6 => 1.1 kB
