@@ -3,6 +3,7 @@ import yargs from "yargs"
 import cluster from "cluster"
 import { Server } from "socket.io"
 import { cpus } from "os"
+import logger from "./config/loggers.js"
 import { readChatMsg, writeChatMsg } from "./utils/sockets.js"
 
 const { PORT } = yargs(process.argv.slice(2)).default({PORT: 8080}).argv
@@ -26,7 +27,7 @@ if(cluster.isPrimary){
 }
 else {
     const server = app.listen(PORT, () => {
-        console.log(`Process Id: ${process.pid} - Server up!`)
+        logger.info(`Process Id: ${process.pid} - Server up!`)
     })
     
     let productos = []

@@ -51,6 +51,8 @@ app.use(passport.session())
 app.use('/', authRouter) 
 app.use('/dashboard', dashRouter)
 app.use('/api', processRouter)
-app.use((req, res) => res.redirect('/login'))
+app.use((req, res) => {
+    res.redirect('/login')
+})
 
 export default app
