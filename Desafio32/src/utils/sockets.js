@@ -9,7 +9,7 @@ export const readChatMsg = async path => {
         else { return [] }
     }
     catch (e){
-        throw {error : e.code, msg : 'Error leyendo archivo de hisorial de chat'}
+        throw {message: 'Error leyendo archivo de historial de chat'}
     }
 }
 
@@ -18,7 +18,7 @@ export const writeChatMsg = async (path, messages) => {
         await fs.promises.writeFile(path, JSON.stringify(messages, null, 2))
     }
     catch (e){
-        throw {error : e.code, msg : 'Error escribiendo archivo de hisorial de chat'}
+        throw {message : 'Error escribiendo archivo de historial de chat'}
     }
 
 }

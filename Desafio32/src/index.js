@@ -37,21 +37,40 @@ else {
     
     io.on('connection', async socket => {
         logger.info(`Nuevo cliente conectado`)
-        socket.emit('productos', productos)
+        try{
+            socket.emit('productos', productos)
     
-        const messages = await readChatMsg(msgFilePath)
-        socket.emit('messages', messages)
-        
+            const messages = await readChatMsg(msgFilePath)
+            socket.emit('messages', messages)
+        }
+        catch (e){
+            logger.error(e)
+        }
+
         socket.on('newProduct', p => {
-            productos.push(p)
-            io.sockets.emit('productos',productos)
+            try{
+                // Descomentar para generar logs de error
+                //throw { message : 'Error falso para probar logs' }
+                productos.push(p)
+                io.sockets.emit('productos',productos)
+            }
+            catch (e){
+                logger.error({error: 'NEW_PROD', msg: e.message})
+            }
         })
     
         socket.on('newMsg', async m => {
-            const messages = await readChatMsg(msgFilePath)
-            messages.push(m)
-            io.sockets.emit('messages', messages)
-            writeChatMsg(msgFilePath, messages)
+            try{
+                // Descomentar para generar logs de error
+                //throw { message : 'Error falso para probar logs' }
+                const messages = await readChatMsg(msgFilePath)
+                messages.push(m)
+                io.sockets.emit('messages', messages)
+                writeChatMsg(msgFilePath, messages)
+            }
+            catch (e){
+                logger.error({error: 'NEW_MSG', msg: e.message})
+            }
         })
     })
 }

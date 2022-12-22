@@ -3,3 +3,6 @@
 [2022-12-20T20:39:33.573] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
 [2022-12-20T20:43:22.246] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
 [2022-12-20T20:43:33.695] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-21T20:57:14.060] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-21T20:57:25.951] [ERROR] all - { error: -1, msg: 'Error en la creacion de nuevo producto' }
+[2022-12-21T20:58:47.607] [ERROR] all - { error: 'NEW_MSG', msg: 'Error falso para probar logs' }
