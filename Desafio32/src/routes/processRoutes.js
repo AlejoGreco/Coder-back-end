@@ -18,6 +18,8 @@ route.get('/info', (req, res) => {
         cpus: cpus().length
     }
 
+    //console.log(processData)
+
     res.render('info', {
         ...processData
     })

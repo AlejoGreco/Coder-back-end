@@ -1,0 +1,33 @@
+Prueba path: /info | CON console.log() + modo FORK
+
+    > node --prof src/index
+    > artillery quick --count 20 -n 50 "http://localhost:8080/api/info" > result_console_log.txt
+    > node --prof-process cl-info-v8.log > result_prof_cl.txt
+
+Prueba path: /info | SIN console.log() + modo FORK
+
+    > node --prof src/index
+    > artillery quick --count 20 -n 50 "http://localhost:8080/api/info" > result_without_console_log.txt
+    > node --prof-process wcl-info-v8.log > result_prof_wcl.txt
+
+Analisis de resultados =>
+    Artillery:
+    http.request_rate: 574/sec sin console.log vs http.request_rate: 383/sec con console.log
+    
+     - Esto quiere decir que puede responder mucho mas rapido sin console.log dado que es un proceso sincrono
+
+    response time promedio: 18ms sin console log vs response time promedio: 32.1ms con conso log
+
+    - En este caso la latencia promedio es menor sin el console log, por lo que se confirma que 
+    es mas performante el codigo sin console.log
+
+    Profiling:
+
+    Vemos en el archivo procesado del profilling menos ticks en en codigo sin console log
+    Por lo que se confirma lo que obtuvimos de artillery.
+
+    [Summary] SIN console.log:                  [Summary] CON console.log:
+    ticks  total  nonlib   name
+    146    5.4%   98.6%  JavaScript             222    6.3%   99.6%  JavaScript
+    202    7.5%  136.5%  GC                     255    7.2%  114.3%  GC
+    2543   94.5%          Shared libraries      3316   93.7%          Shared libraries

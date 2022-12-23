@@ -1,0 +1,514 @@
+Statistical profiling result from wcl-info-v8.log, (2691 ticks, 2 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   2110   78.4%          /home/uki/.nvm/versions/node/v16.13.2/bin/node
+    385   14.3%          /usr/lib/x86_64-linux-gnu/libc-2.31.so
+     30    1.1%          /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+     15    0.6%          /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+      3    0.1%          [vdso]
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+     32    1.2%   21.6%  RegExp: [ \t]*<%_
+     12    0.4%    8.1%  LazyCompile: *resolve node:path:1091:10
+     10    0.4%    6.8%  LazyCompile: *normalizeString node:path:66:25
+      6    0.2%    4.1%  LazyCompile: *next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:177:16
+      3    0.1%    2.0%  LazyCompile: *scanLine /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:815:22
+      3    0.1%    2.0%  Function: ^popAsyncContext node:internal/async_hooks:543:25
+      2    0.1%    1.4%  RegExp: [&<>'"]
+      2    0.1%    1.4%  LazyCompile: *toString node:buffer:782:46
+      2    0.1%    1.4%  LazyCompile: *parseTemplateText /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:761:31
+      2    0.1%    1.4%  Function: ^parseFileMode node:internal/validators:58:23
+      2    0.1%    1.4%  Function: ^deserializeObject /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/bson/lib/parser/deserializer.js:65:27
+      2    0.1%    1.4%  Function: ^basename node:path:1306:11
+      1    0.0%    0.7%  RegExp: ^\/dashboard\/?(?=\/|$)
+      1    0.0%    0.7%  RegExp: ^.*[\.\/\\]
+      1    0.0%    0.7%  RegExp: =+$
+      1    0.0%    0.7%  RegExp: (<%%|%%>|<%=|<%-|<%_|<%#|<%|%>|-%>|_%>)
+      1    0.0%    0.7%  LazyCompile: *validateString node:internal/validators:117:24
+      1    0.0%    0.7%  LazyCompile: *trim_prefix /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:293:23
+      1    0.0%    0.7%  LazyCompile: *stat node:internal/modules/cjs/loader:151:14
+      1    0.0%    0.7%  LazyCompile: *realpathSync node:fs:2408:22
+      1    0.0%    0.7%  LazyCompile: *nextTick node:internal/process/task_queues:104:18
+      1    0.0%    0.7%  LazyCompile: *getValidatedString /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/bson/lib/parser/deserializer.js:650:28
+      1    0.0%    0.7%  LazyCompile: *extname node:path:1385:10
+      1    0.0%    0.7%  LazyCompile: *exports.shallowCopy /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/utils.js:117:32
+      1    0.0%    0.7%  LazyCompile: *dirname node:path:1275:10
+      1    0.0%    0.7%  LazyCompile: *compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+      1    0.0%    0.7%  LazyCompile: *basename node:path:1306:11
+      1    0.0%    0.7%  LazyCompile: *Module._nodeModulePaths node:internal/modules/cjs/loader:629:37
+      1    0.0%    0.7%  Function: ^write_ node:_http_outgoing:730:16
+      1    0.0%    0.7%  Function: ^writeHead node:_http_server:269:19
+      1    0.0%    0.7%  Function: ^tryFile node:internal/modules/cjs/loader:384:17
+      1    0.0%    0.7%  Function: ^trim_prefix /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:293:23
+      1    0.0%    0.7%  Function: ^toPathIfFileURL node:internal/url:1496:25
+      1    0.0%    0.7%  Function: ^toJSON /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express-session/session/cookie.js:147:19
+      1    0.0%    0.7%  Function: ^target._send node:internal/child_process:730:26
+      1    0.0%    0.7%  Function: ^setStreamTimeout node:internal/stream_base_commons:254:26
+      1    0.0%    0.7%  Function: ^setHeader node:_http_outgoing:574:57
+      1    0.0%    0.7%  Function: ^resolvePackageTarget node:internal/modules/esm/resolve:528:30
+      1    0.0%    0.7%  Function: ^resetBuffer node:internal/streams/writable:202:21
+      1    0.0%    0.7%  Function: ^replace /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/flatted/cjs/index.js:79:19
+      1    0.0%    0.7%  Function: ^process.cwd /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/graceful-fs/polyfills.js:8:23
+      1    0.0%    0.7%  Function: ^parserOnHeadersComplete node:_http_common:77:33
+      1    0.0%    0.7%  Function: ^onstat /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/send/index.js:717:33
+      1    0.0%    0.7%  Function: ^onResponseHeaders /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/compression/index.js:140:47
+      1    0.0%    0.7%  Function: ^normalizeParseOptions /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/qs/lib/parse.js:204:59
+      1    0.0%    0.7%  Function: ^noop node:internal/util/debuglog:47:14
+      1    0.0%    0.7%  Function: ^markAsUntransferable node:internal/buffer:1048:30
+      1    0.0%    0.7%  Function: ^listenerCount node:events:722:23
+      1    0.0%    0.7%  Function: ^isEncoding node:buffer:529:40
+      1    0.0%    0.7%  Function: ^initialize /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/passport/lib/middleware/initialize.js:51:29
+      1    0.0%    0.7%  Function: ^initAsyncResource node:internal/timers:157:27
+      1    0.0%    0.7%  Function: ^hash /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express-session/index.js:596:14
+      1    0.0%    0.7%  Function: ^hasbody /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/type-is/index.js:92:18
+      1    0.0%    0.7%  Function: ^hasHooks node:internal/async_hooks:460:18
+      1    0.0%    0.7%  Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:136:31
+      1    0.0%    0.7%  Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/application.js:165:29
+      1    0.0%    0.7%  Function: ^getTimerDuration node:internal/timers:383:26
+      1    0.0%    0.7%  Function: ^get node:_http_incoming:108:16
+      1    0.0%    0.7%  Function: ^fromStringFast node:buffer:412:24
+      1    0.0%    0.7%  Function: ^findLongestRegisteredExtension node:internal/modules/cjs/loader:413:40
+      1    0.0%    0.7%  Function: ^fileLoader /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:292:20
+      1    0.0%    0.7%  Function: ^extname node:path:1385:10
+      1    0.0%    0.7%  Function: ^exports.escapeXML /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/utils.js:96:30
+      1    0.0%    0.7%  Function: ^emitCloseNT node:_http_server:843:21
+      1    0.0%    0.7%  Function: ^decode /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/send/index.js:997:17
+      1    0.0%    0.7%  Function: ^clearIncoming node:_http_server:749:23
+      1    0.0%    0.7%  Function: ^anonymous /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:695:59
+      1    0.0%    0.7%  Function: ^__append :8:20
+      1    0.0%    0.7%  Function: ^View /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/view.js:52:14
+      1    0.0%    0.7%  Function: ^Template /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:509:18
+      1    0.0%    0.7%  Function: ^Readable.removeAllListeners node:internal/streams/readable:923:49
+      1    0.0%    0.7%  Function: ^Readable.read node:internal/streams/readable:394:35
+      1    0.0%    0.7%  Function: ^Negotiator /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/negotiator/index.js:30:20
+      1    0.0%    0.7%  Function: ^Module._resolveLookupPaths node:internal/modules/cjs/loader:667:38
+      1    0.0%    0.7%  Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      1    0.0%    0.7%  Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1    0.0%    0.7%  Function: ^<anonymous> node:internal/fs/utils:686:40
+      1    0.0%    0.7%  Function: ^<anonymous> node:internal/fs/utils:357:35
+      1    0.0%    0.7%  Function: ^<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/src/routes/processRoutes.js:7:20
+      1    0.0%    0.7%  Function: ^<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/LoggingEvent.js:94:36
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+    146    5.4%   98.6%  JavaScript
+      0    0.0%    0.0%  C++
+    202    7.5%  136.5%  GC
+   2543   94.5%          Shared libraries
+      2    0.1%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   2110   78.4%  /home/uki/.nvm/versions/node/v16.13.2/bin/node
+   1302   61.7%    /home/uki/.nvm/versions/node/v16.13.2/bin/node
+    260   20.0%      Function: ^compileFunction node:vm:308:25
+    259   99.6%        Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+    258   99.6%          Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+    248   96.1%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+     10    3.9%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1110:37
+    111    8.5%      Function: ^memoryUsage node:internal/process/per_thread:165:23
+    111  100.0%        Function: ^<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/src/routes/processRoutes.js:7:20
+    111  100.0%          Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/layer.js:86:49
+    110   99.1%            Function: ^next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/route.js:116:16
+     72    5.5%      /home/uki/.nvm/versions/node/v16.13.2/bin/node
+     16   22.2%        LazyCompile: *scanLine /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:815:22
+     10   62.5%          Function: ^<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:742:32
+      5   50.0%            LazyCompile: *compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+      5   50.0%            /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      6   37.5%          LazyCompile: *<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:742:32
+      3   50.0%            LazyCompile: *compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+      3   50.0%            /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      5    6.9%        Function: ^createRegex /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:560:25
+      5  100.0%          Function: ^Template /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:509:18
+      5  100.0%            Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:381:35
+      4    5.6%        Function: ^readPackage node:internal/modules/cjs/loader:290:21
+      2   50.0%          Function: ^resolveExports node:internal/modules/cjs/loader:472:24
+      2  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      2   50.0%          Function: ^readPackageScope node:internal/modules/cjs/loader:321:26
+      2  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      4    5.6%        Function: ^exports.escapeXML /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/utils.js:96:30
+      4  100.0%          Function: ^<anonymous> :1:20
+      4  100.0%            Function: ^anonymous /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:695:59
+      4    5.6%        Function: ^exports.escapeRegExpChars /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/utils.js:41:38
+      4  100.0%          Function: ^createRegex /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:560:25
+      4  100.0%            Function: ^Template /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:509:18
+      3    4.2%        Function: ^stripSemi /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:364:19
+      3  100.0%          LazyCompile: *scanLine /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:815:22
+      2   66.7%            Function: ^<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:742:32
+      1   33.3%            LazyCompile: *<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:742:32
+      3    4.2%        Function: ^FastBuffer node:internal/buffer:958:14
+      3  100.0%          Function: ^createUnsafeBuffer node:internal/buffer:1059:28
+      2   66.7%            Function: ^allocate node:buffer:397:18
+      1   33.3%            Function: ^createPool node:buffer:150:20
+      2    2.8%        LazyCompile: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/connect.js:78:43
+      1   50.0%          LazyCompile: ~prepareHandshakeDocument /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/connect.js:151:34
+      1  100.0%            LazyCompile: ~performInitialHandshake /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/connect.js:62:33
+      1   50.0%          LazyCompile: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/auth/scram.js:25:32
+      1  100.0%            LazyCompile: ~<anonymous> node:internal/crypto/random:104:43
+      2    2.8%        LazyCompile: *stringify /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/flatted/cjs/index.js:65:19
+      2  100.0%          Function: ^serialise /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/LoggingEvent.js:93:12
+      2  100.0%            Function: ^send /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/clustering.js:89:9
+      2    2.8%        Function: ^format /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/content-type/index.js:65:17
+      2  100.0%          Function: ^setCharset /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/utils.js:248:41
+      2  100.0%            Function: ^send /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/response.js:111:25
+      2    2.8%        Function: ^checkInvalidHeaderChar node:_http_common:232:32
+      2  100.0%          Function: ^<anonymous> node:_http_outgoing:564:45
+      2  100.0%            Function: ^setHeader node:_http_outgoing:574:57
+      1    1.4%        LazyCompile: ~trimLeadingDashes node:internal/process/per_thread:300:5
+      1  100.0%          /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      1  100.0%            Function: ^buildAllowedFlags node:internal/process/per_thread:260:27
+      1    1.4%        LazyCompile: ~resolveAuthMechanism /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/auth/mongo_credentials.js:76:25
+      1  100.0%          LazyCompile: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/connect.js:88:85
+      1  100.0%            LazyCompile: ~onMessage /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/connection.js:156:14
+      1    1.4%        LazyCompile: ~populateMaps /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mime-types/index.js:154:23
+      1  100.0%          Function: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mime-types/index.js:1:1
+      1  100.0%            Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1    1.4%        LazyCompile: ~parseCommand file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs/build/lib/parse-command.js:1:29
+      1  100.0%          LazyCompile: ~parseArgs file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs/build/lib/argsert.js:5:23
+      1  100.0%            LazyCompile: ~argsert file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs/build/lib/argsert.js:4:24
+      1    1.4%        LazyCompile: ~parse /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/semver/functions/parse.js:6:15
+      1  100.0%          LazyCompile: ~module.exports.evaluate /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/@mapbox/node-pre-gyp/lib/util/versioning.js:277:35
+      1  100.0%            LazyCompile: ~exports.find /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/@mapbox/node-pre-gyp/lib/pre-binding.js:17:24
+      1    1.4%        LazyCompile: ~isIPv6 node:internal/net:35:16
+      1  100.0%          LazyCompile: ~isIP node:internal/net:39:14
+      1  100.0%            LazyCompile: ~lookupAndConnect node:net:995:26
+      1    1.4%        LazyCompile: ~applyDefaultsAndAliases file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs-parser/build/lib/yargs-parser.js:721:41
+      1  100.0%          LazyCompile: ~setConfig file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs-parser/build/lib/yargs-parser.js:600:27
+      1  100.0%            LazyCompile: ~parse file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs-parser/build/lib/yargs-parser.js:14:10
+      1    1.4%        LazyCompile: ~_addOutput /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:788:24
+      1  100.0%          LazyCompile: ~scanLine /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:815:22
+      1  100.0%            LazyCompile: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:742:32
+      1    1.4%        LazyCompile: ~URLStateMachine /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/whatwg-url/lib/url-state-machine.js:481:25
+      1  100.0%          LazyCompile: ~module.exports.basicURLParse /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/whatwg-url/lib/url-state-machine.js:1206:41
+      1  100.0%            LazyCompile: ~URLImpl /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/whatwg-url/lib/URL-impl.js:7:14
+      1    1.4%        LazyCompile: ~MongoStore /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/connect-mongo/build/main/lib/MongoStore.js:75:16
+      1  100.0%          LazyCompile: ~create /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/connect-mongo/build/main/lib/MongoStore.js:135:18
+      1  100.0%            Script: ~<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/src/app.js:1:1
+      1    1.4%        LazyCompile: ~<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs/build/lib/yargs-factory.js:1035:21
+      1  100.0%          LazyCompile: ~YargsInstance file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs/build/lib/yargs-factory.js:76:16
+      1  100.0%            LazyCompile: ~<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/yargs/build/lib/yargs-factory.js:27:12
+      1    1.4%        LazyCompile: *realpathSync node:fs:2408:22
+      1  100.0%          LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      1  100.0%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      1    1.4%        Function: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongoose/lib/browserDocument.js:1:1
+      1  100.0%          Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1    1.4%        Function: ^toString /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/uid-safe/index.js:102:19
+      1  100.0%          Function: ^uidSync /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/uid-safe/index.js:75:18
+      1  100.0%            Function: ^generateSessionId /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express-session/index.js:518:27
+      1    1.4%        Function: ^stringify /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/flatted/cjs/index.js:65:19
+      1  100.0%          Function: ^serialise /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/LoggingEvent.js:93:12
+      1  100.0%            Function: ^send /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/clustering.js:89:9
+      1    1.4%        Function: ^stat node:internal/modules/cjs/loader:151:14
+      1  100.0%          Function: ^tryFile node:internal/modules/cjs/loader:384:17
+      1  100.0%            Function: ^tryExtensions node:internal/modules/cjs/loader:400:23
+      1    1.4%        Function: ^setCharset /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/utils.js:248:41
+      1  100.0%          Function: ^send /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/response.js:111:25
+      1  100.0%            Function: ^done /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/response.js:1033:27
+      1    1.4%        Function: ^set /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/flatted/cjs/index.js:48:13
+      1  100.0%          Function: ^replace /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/flatted/cjs/index.js:79:19
+      1  100.0%            /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      1    1.4%        Function: ^nameFunc /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/http-errors/index.js:244:19
+      1  100.0%          LazyCompile: ~createClientErrorConstructor /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/http-errors/index.js:127:39
+      1  100.0%            Function: ^forEachCode /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/http-errors/index.js:259:38
+      1    1.4%        Function: ^fromString /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/utils.js:314:22
+      1  100.0%          Function: ^ns /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/utils.js:292:12
+      1  100.0%            Function: ^measureRoundTripTime /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/sdam/monitor.js:288:30
+      1    1.4%        Function: ^expressInit /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/middleware/init.js:29:30
+      1  100.0%          LazyCompile: *trim_prefix /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:293:23
+      1  100.0%            LazyCompile: *next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:177:16
+      1    1.4%        Function: ^compileFunction node:vm:308:25
+      1  100.0%          Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+      1  100.0%            Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1    1.4%        Function: ^Module._findPath node:internal/modules/cjs/loader:494:28
+      1  100.0%          Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      1  100.0%            Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      1    1.4%        Function: ^Module node:internal/modules/cjs/loader:172:16
+      1  100.0%          Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      1  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:997:36
+      1    1.4%        /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      1  100.0%          Function: ^stringify /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/flatted/cjs/index.js:65:19
+      1  100.0%            Function: ^serialise /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/LoggingEvent.js:93:12
+     47    3.6%      Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+     40   85.1%        Function: ^nativeModuleRequire node:internal/bootstrap/loaders:332:29
+      5   12.5%          Function: ~<anonymous> node:crypto:1:1
+      5  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      4   10.0%          Function: ~<anonymous> node:http2:1:1
+      4  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      3    7.5%          Function: ~<anonymous> node:tls:1:1
+      3  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      3    7.5%          Function: ~<anonymous> node:http:1:1
+      3  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      2    5.0%          LazyCompile: ~initializeCJSLoader node:internal/bootstrap/pre_execution:421:29
+      2  100.0%            LazyCompile: ~prepareMainThreadExecution node:internal/bootstrap/pre_execution:22:36
+      2    5.0%          Function: ~<anonymous> node:internal/modules/esm/loader:1:1
+      2  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          LazyCompile: ~setupChannel node:internal/child_process:569:22
+      1  100.0%            LazyCompile: ~_forkChild node:child_process:170:20
+      1    2.5%          LazyCompile: ~lazyRequire node:internal/crypto/util:67:21
+      1  100.0%            LazyCompile: ~get node:crypto:287:8
+      1    2.5%          LazyCompile: ~lazyLoadStreams node:fs:2841:25
+      1  100.0%            LazyCompile: ~get ReadStream node:fs:2984:17
+      1    2.5%          LazyCompile: ~initCJSParse node:internal/modules/esm/translators:63:28
+      1  100.0%            LazyCompile: ~commonjsStrategy node:internal/modules/esm/translators:168:60
+      1    2.5%          LazyCompile: ~get node:dns:334:8
+      1  100.0%            /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      1    2.5%          Function: ~<anonymous> node:internal/source_map/source_map_cache:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/process/esm_loader:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/modules/esm/get_source:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/modules/cjs/loader:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/http2/core:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/http2/compat:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/fs/promises:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/crypto/pbkdf2:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/crypto/hkdf:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:internal/blocklist:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:cluster:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:assert:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:_tls_wrap:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:_http_outgoing:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:_http_common:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      1    2.5%          Function: ~<anonymous> node:_http_client:1:1
+      1  100.0%            Function: ^compileForInternalLoader node:internal/bootstrap/loaders:299:27
+      4    8.5%        Function: ^compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      4  100.0%          Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      4  100.0%            Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      3    6.4%        LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:246:25
+      2   66.7%          LazyCompile: ~loadNativeModule node:internal/modules/cjs/helpers:44:26
+      2  100.0%            LazyCompile: ~builtinStrategy node:internal/modules/esm/translators:270:58
+      1   33.3%          Function: ^loadNativeModule node:internal/modules/cjs/helpers:44:26
+      1  100.0%            LazyCompile: ~Module._load node:internal/modules/cjs/loader:757:24
+     44    3.4%      Function: ^cpus node:os:133:14
+     43   97.7%        Function: ^<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/src/routes/processRoutes.js:7:20
+     43  100.0%          Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/layer.js:86:49
+     42   97.7%            Function: ^next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/route.js:116:16
+      1    2.3%            LazyCompile: ~next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/route.js:116:16
+      1    2.3%        LazyCompile: ~<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/src/routes/processRoutes.js:7:20
+      1  100.0%          Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%            LazyCompile: ~next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/route.js:116:16
+     30    2.3%      Function: ^writevGeneric node:internal/stream_base_commons:126:23
+     30  100.0%        Function: ^Socket._writeGeneric node:net:769:42
+     29   96.7%          Function: ^Socket._writev node:net:801:36
+     29  100.0%            Function: ^doWrite node:internal/streams/writable:398:17
+      1    3.3%          LazyCompile: ~Socket._writev node:net:801:36
+      1  100.0%            LazyCompile: ~doWrite node:internal/streams/writable:398:17
+     23    1.8%      Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+     23  100.0%        Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:381:35
+     23  100.0%          Function: ^handleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:210:21
+     16   69.6%            Function: ^tryHandleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:254:24
+      6   26.1%            Function: ^includeFile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:309:21
+      1    4.3%            LazyCompile: ~tryHandleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:254:24
+     22    1.7%      Function: ^Hash node:internal/crypto/hash:58:14
+     22  100.0%        Function: ^createHash node:crypto:129:20
+     12   54.5%          Function: ^entitytag /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/etag/index.js:39:20
+     12  100.0%            Function: ^etag /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/etag/index.js:70:15
+     10   45.5%          Function: ^hash /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express-session/index.js:596:14
+      6   60.0%            Function: ^generate /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express-session/index.js:363:22
+      4   40.0%            Function: ^isModified /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express-session/index.js:425:24
+     20    1.5%      Function: ^initialize /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/passport/lib/middleware/initialize.js:51:29
+     10   50.0%        LazyCompile: *trim_prefix /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:293:23
+     10  100.0%          LazyCompile: *next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:177:16
+     10  100.0%            Function: ^session /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express-session/index.js:179:26
+     10   50.0%        Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/layer.js:86:49
+     10  100.0%          Function: ^trim_prefix /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:293:23
+      9   90.0%            LazyCompile: *next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:177:16
+      1   10.0%            Function: ^<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:280:64
+     18    1.4%      LazyCompile: *compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+     18  100.0%        Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:381:35
+     18  100.0%          Function: ^handleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:210:21
+     14   77.8%            Function: ^tryHandleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:254:24
+      4   22.2%            Function: ^includeFile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:309:21
+     14    1.1%      LazyCompile: *next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:177:16
+      8   57.1%        Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:136:31
+      8  100.0%          Function: ^router /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:46:18
+      7   87.5%            Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/layer.js:86:49
+      1   12.5%            LazyCompile: *trim_prefix /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:293:23
+      4   28.6%        LazyCompile: *handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:136:31
+      4  100.0%          Function: ^router /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:46:18
+      4  100.0%            LazyCompile: *trim_prefix /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/index.js:293:23
+      2   14.3%        Function: ^error /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/serve-static/index.js:115:39
+      1   50.0%          LazyCompile: *emit node:events:340:44
+      1  100.0%            Function: ^error /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/send/index.js:267:45
+      1   50.0%          Function: ^emit node:events:340:44
+      1  100.0%            Function: ^error /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/send/index.js:267:45
+     14    1.1%      Function: ^randomFillSync node:internal/crypto/random:110:24
+     14  100.0%        Function: ^randomBytes node:internal/crypto/random:90:21
+     14  100.0%          Function: ^randomBytesSync /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/random-bytes/index.js:72:25
+     14  100.0%            Function: ^uidSync /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/uid-safe/index.js:75:18
+     14    1.1%      Function: ^openSync node:fs:576:18
+     14  100.0%        Function: ^readFileSync node:fs:450:22
+      8   57.1%          Function: ^fileLoader /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:292:20
+      8  100.0%            Function: ^handleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:210:21
+      6   42.9%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      6  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+
+    385   14.3%  /usr/lib/x86_64-linux-gnu/libc-2.31.so
+    118   30.6%    /home/uki/.nvm/versions/node/v16.13.2/bin/node
+     21   17.8%      /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      4   19.0%        LazyCompile: *scanLine /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:815:22
+      2   50.0%          LazyCompile: *<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:742:32
+      1   50.0%            LazyCompile: *compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+      1   50.0%            /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      2   50.0%          Function: ^<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:742:32
+      2  100.0%            /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      2    9.5%        Function: ^getOwn node:internal/bootstrap/loaders:180:16
+      2  100.0%          Function: ^syncExports node:internal/bootstrap/loaders:287:14
+      2  100.0%            Function: ^<anonymous> node:internal/bootstrap/loaders:273:15
+      2    9.5%        Function: ^FastBuffer node:internal/buffer:958:14
+      1   50.0%          Function: ^randomBytes node:internal/crypto/random:90:21
+      1  100.0%            Function: ^randomBytesSync /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/random-bytes/index.js:72:25
+      1   50.0%          Function: ^createUnsafeBuffer node:internal/buffer:1059:28
+      1  100.0%            Function: ^createPool node:buffer:150:20
+      2    9.5%        /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      1   50.0%          LazyCompile: *stringify /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/flatted/cjs/index.js:65:19
+      1  100.0%            Function: ^serialise /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/LoggingEvent.js:93:12
+      1   50.0%          Function: ^stringify /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/flatted/cjs/index.js:65:19
+      1  100.0%            Function: ^serialise /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/LoggingEvent.js:93:12
+      1    4.8%        LazyCompile: ~translatePeerCertificate node:_tls_common:125:34
+      1  100.0%          LazyCompile: ~translatePeerCertificate node:_tls_common:125:34
+      1  100.0%            LazyCompile: ~TLSSocket.getPeerCertificate node:_tls_wrap:984:50
+      1    4.8%        LazyCompile: ~qstring /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/content-type/index.js:200:18
+      1  100.0%          LazyCompile: ~format /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/content-type/index.js:65:17
+      1  100.0%            LazyCompile: ~setCharset /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/utils.js:248:41
+      1    4.8%        LazyCompile: ~formatProperty node:internal/util/inspect:1672:24
+      1  100.0%          LazyCompile: ~formatRaw node:internal/util/inspect:796:19
+      1  100.0%            LazyCompile: ~formatValue node:internal/util/inspect:726:21
+      1    4.8%        LazyCompile: ~clone /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/graceful-fs/clone.js:9:16
+      1  100.0%          Function: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/graceful-fs/graceful-fs.js:1:1
+      1  100.0%            Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1    4.8%        LazyCompile: *compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+      1  100.0%          Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:381:35
+      1  100.0%            Function: ^handleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:210:21
+      1    4.8%        Function: ^readPackage node:internal/modules/cjs/loader:290:21
+      1  100.0%          Function: ^readPackageScope node:internal/modules/cjs/loader:321:26
+      1  100.0%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1    4.8%        Function: ^processTicksAndRejections node:internal/process/task_queues:68:35
+      1    4.8%        Function: ^createRegex /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:560:25
+      1  100.0%          Function: ^Template /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:509:18
+      1  100.0%            Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:381:35
+      1    4.8%        Function: ^clearBuffer node:internal/streams/writable:529:21
+      1  100.0%          Function: ^Writable.uncork node:internal/streams/writable:341:37
+      1  100.0%            Function: ^end node:_http_outgoing:833:45
+      1    4.8%        Function: ^Module node:internal/modules/cjs/loader:172:16
+      1  100.0%          Function: ^Module._load node:internal/modules/cjs/loader:757:24
+      1  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:997:36
+      1    4.8%        Function: ^<anonymous> node:internal/fs/utils:357:35
+      1  100.0%          Function: ^<anonymous> node:internal/fs/utils:668:38
+      1  100.0%            Function: ^<anonymous> node:internal/fs/utils:680:42
+      2    1.7%      LazyCompile: ~prepareMainThreadExecution node:internal/bootstrap/pre_execution:22:36
+      2  100.0%        Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      2    1.7%      LazyCompile: ~onParseError node:internal/url:551:22
+      2  100.0%        /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      2  100.0%          Function: ^URL node:internal/url:620:14
+      2  100.0%            LazyCompile: ~defaultResolve node:internal/modules/esm/resolve:981:24
+      2    1.7%      LazyCompile: ~nextTick node:internal/process/task_queues:104:18
+      1   50.0%        LazyCompile: ~immediate /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongoose/lib/helpers/immediate.js:14:36
+      1  100.0%          LazyCompile: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongoose/lib/connection.js:574:34
+      1  100.0%            LazyCompile: ~promiseOrCallback /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongoose/lib/helpers/promiseOrCallback.js:8:44
+      1   50.0%        LazyCompile: ~TLSSocket node:_tls_wrap:462:19
+      1  100.0%          LazyCompile: ~connect node:_tls_wrap:1597:35
+      1  100.0%            LazyCompile: ~makeConnection /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/connect.js:256:24
+      2    1.7%      LazyCompile: ~createAppender /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/appenders/index.js:74:24
+      2  100.0%        LazyCompile: ~getAppender /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/appenders/index.js:59:21
+      2  100.0%          LazyCompile: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/log4js/lib/appenders/index.js:139:41
+      2  100.0%            /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      2    1.7%      LazyCompile: ~continueScramConversation /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/auth/scram.js:93:35
+      2  100.0%        LazyCompile: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/auth/scram.js:85:80
+      2  100.0%          LazyCompile: ~onMessage /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/connection.js:156:14
+      2  100.0%            LazyCompile: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/mongodb/lib/cmap/connection.js:60:44
+      2    1.7%      LazyCompile: *normalizeString node:path:66:25
+      1   50.0%        LazyCompile: *realpathSync node:fs:2408:22
+      1  100.0%          LazyCompile: *Module._findPath node:internal/modules/cjs/loader:494:28
+      1  100.0%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:848:35
+      1   50.0%        Function: ^resolve node:path:1091:10
+      1  100.0%          Function: ^lookup /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/view.js:104:40
+      1  100.0%            Function: ^View /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/view.js:52:14
+      2    1.7%      LazyCompile: *compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+      2  100.0%        Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:381:35
+      2  100.0%          Function: ^handleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:210:21
+      2  100.0%            Function: ^tryHandleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:254:24
+      2    1.7%      Function: ^randomBytes node:internal/crypto/random:90:21
+      2  100.0%        Function: ^randomBytesSync /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/random-bytes/index.js:72:25
+      2  100.0%          Function: ^uidSync /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/uid-safe/index.js:75:18
+      2  100.0%            Function: ^generateSessionId /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express-session/index.js:518:27
+     95   24.7%    LazyCompile: *cpus node:os:133:14
+     95  100.0%      Function: ^<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/src/routes/processRoutes.js:7:20
+     95  100.0%        Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/layer.js:86:49
+     95  100.0%          Function: ^next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/route.js:116:16
+     95  100.0%            Function: ^dispatch /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/route.js:98:45
+     13    3.4%    LazyCompile: *compileFunction node:vm:308:25
+     13  100.0%      Function: ^wrapSafe node:internal/modules/cjs/loader:1017:18
+     13  100.0%        Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+     13  100.0%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+     13  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+
+     32    1.2%  RegExp: [ \t]*<%_
+     32  100.0%    /home/uki/.nvm/versions/node/v16.13.2/bin/node
+     32  100.0%      /home/uki/.nvm/versions/node/v16.13.2/bin/node
+     20   62.5%        LazyCompile: *compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+     20  100.0%          Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:381:35
+     20  100.0%            Function: ^handleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:210:21
+     12   37.5%        Function: ^generateSource /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:721:28
+     12  100.0%          Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:571:21
+     12  100.0%            Function: ^compile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:381:35
+
+     30    1.1%  /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+      6   20.0%    LazyCompile: *readFileSync node:fs:450:22
+      6  100.0%      Function: ^fileLoader /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:292:20
+      6  100.0%        Function: ^handleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:210:21
+      4   66.7%          Function: ^includeFile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:309:21
+      4  100.0%            Function: ^include /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:696:30
+      2   33.3%          Function: ^tryHandleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:254:24
+      2  100.0%            Function: ^exports.renderFile /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:441:31
+      6   20.0%    /home/uki/.nvm/versions/node/v16.13.2/bin/node
+      3   50.0%      Function: ^onStreamRead node:internal/stream_base_commons:171:22
+      1   16.7%      LazyCompile: ~rr node:internal/cluster/child:153:12
+      1  100.0%        LazyCompile: ~<anonymous> node:internal/cluster/child:100:17
+      1  100.0%          LazyCompile: ~onInternalMessage node:internal/cluster/utils:34:36
+      1  100.0%            Function: ^emit node:events:340:44
+      1   16.7%      Function: ~<anonymous> /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/@aws-sdk/client-sso-oidc/dist-cjs/models/models_0.js:1:1
+      1  100.0%        Function: ^Module._compile node:internal/modules/cjs/loader:1055:37
+      1  100.0%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1110:37
+      1  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:969:33
+      1   16.7%      Function: ^parse /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/content-type/index.js:106:16
+      1  100.0%        Function: ^setCharset /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/utils.js:248:41
+      1  100.0%          Function: ^send /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/response.js:111:25
+      1  100.0%            Function: ^done /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/response.js:1033:27
+      5   16.7%    LazyCompile: *cpus node:os:133:14
+      5  100.0%      Function: ^<anonymous> file:///home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/src/routes/processRoutes.js:7:20
+      5  100.0%        Function: ^handle /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/layer.js:86:49
+      5  100.0%          Function: ^next /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/route.js:116:16
+      5  100.0%            Function: ^dispatch /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/express/lib/router/route.js:98:45
+      1    3.3%    LazyCompile: *readSync node:fs:684:18
+      1  100.0%      LazyCompile: *readFileSync node:fs:450:22
+      1  100.0%        Function: ^fileLoader /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:292:20
+      1  100.0%          Function: ^handleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:210:21
+      1  100.0%            Function: ^tryHandleCache /home/uki/Documentos/Uki/Codigos/Back-End-Coder/Coder-back-end-codes/Desafio32/node_modules/ejs/lib/ejs.js:254:24
+
