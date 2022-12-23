@@ -31,3 +31,11 @@ Analisis de resultados =>
     146    5.4%   98.6%  JavaScript             222    6.3%   99.6%  JavaScript
     202    7.5%  136.5%  GC                     255    7.2%  114.3%  GC
     2543   94.5%          Shared libraries      3316   93.7%          Shared libraries
+
+    Inspect:
+
+    > node --inspect src/index
+    > artillery quick --count 20 -n 50 "http://localhost:8080/api/info" > inspect_without_console_log.txt
+    > artillery quick --count 20 -n 50 "http://localhost:8080/api/info" > inspect_with_console_log.txt
+
+    Se observa en la funcion consoleCall 268.4ms con console.log y 243.0ms sin console.log

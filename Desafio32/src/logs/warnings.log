@@ -1007,3 +1007,11 @@
 [2022-12-22T22:39:45.625] [WARN] all - Peticon a ruta no encontrada -> url: /api/info%20%3E%20result_console_log.txt | method: GET
 [2022-12-22T22:39:45.627] [WARN] all - Peticon a ruta no encontrada -> url: /api/info%20%3E%20result_console_log.txt | method: GET
 [2022-12-22T22:40:16.211] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-23T00:42:43.418] [WARN] all - Worker Pid: 58716  finalizo.
+[2022-12-23T00:42:43.853] [WARN] all - Worker Pid: 58728  finalizo.
+[2022-12-23T00:42:44.291] [WARN] all - Worker Pid: 58765  finalizo.
+[2022-12-23T00:42:44.721] [WARN] all - Worker Pid: 58777  finalizo.
+[2022-12-23T00:42:45.145] [WARN] all - Worker Pid: 58823  finalizo.
+[2022-12-23T00:42:52.017] [WARN] all - Worker Pid: 58994  finalizo.
+[2022-12-23T00:42:52.436] [WARN] all - Worker Pid: 59006  finalizo.
+[2022-12-23T00:42:52.866] [WARN] all - Worker Pid: 59018  finalizo.
