@@ -3,14 +3,14 @@ import yargs from "yargs"
 import cluster from "cluster"
 import { Server } from "socket.io"
 import { cpus } from "os"
-import logger from "./config/loggers.js"
+import { loggerAll, loggerWarn, loggerError } from "./config/loggers.js"
 import { readChatMsg, writeChatMsg } from "./utils/sockets.js"
 
 const { PORT } = yargs(process.argv.slice(2)).default({PORT: 8080}).argv
 const { mode } = yargs(process.argv.slice(2)).default({mode: 'FORK'}).argv
 
 if(cluster.isPrimary){
-    logger.info(`Father | Process Id: ${process.pid}`)
+    loggerAll.info(`Father | Process Id: ${process.pid}`)
     if(mode === 'CLUSTER'){
         for(let i = 0; i < cpus().length; i++){
             cluster.fork()
@@ -22,13 +22,13 @@ if(cluster.isPrimary){
 
     cluster.on('exit', worker => {
         cluster.fork()
-        logger.warn(`Worker Pid: ${worker.process.pid}  finalizo.`)
-        logger.info(`Nuevo worker creado`)
+        loggerWarn.warn(`Worker Pid: ${worker.process.pid}  finalizo.`)
+        loggerAll.info(`Nuevo worker creado`)
     })
 }
 else {
     const server = app.listen(PORT, () => {
-        logger.info(`Process Id: ${process.pid} - Server up!`)
+        loggerAll.info(`Process Id: ${process.pid} - Server up!`)
     })
     
     let productos = []
@@ -36,7 +36,7 @@ else {
     const io = new Server(server)
     
     io.on('connection', async socket => {
-        logger.info(`Nuevo cliente conectado`)
+        loggerAll.info(`Nuevo cliente conectado`)
         try{
             socket.emit('productos', productos)
     
@@ -44,7 +44,7 @@ else {
             socket.emit('messages', messages)
         }
         catch (e){
-            logger.error(e)
+            loggerError.error(e)
         }
 
         socket.on('newProduct', p => {
@@ -55,21 +55,21 @@ else {
                 io.sockets.emit('productos',productos)
             }
             catch (e){
-                logger.error({error: 'NEW_PROD', msg: e.message})
+                loggerError.error({error: 'NEW_PROD', msg: e.message})
             }
         })
     
         socket.on('newMsg', async m => {
             try{
                 // Descomentar para generar logs de error
-                //throw { message : 'Error falso para probar logs' }
+                throw { message : 'Error falso para probar logs' }
                 const messages = await readChatMsg(msgFilePath)
                 messages.push(m)
                 io.sockets.emit('messages', messages)
                 writeChatMsg(msgFilePath, messages)
             }
             catch (e){
-                logger.error({error: 'NEW_MSG', msg: e.message})
+                loggerError.error({error: 'NEW_MSG', msg: e.message})
             }
         })
     })

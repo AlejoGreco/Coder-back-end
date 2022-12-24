@@ -1,2 +1,1 @@
-[2022-12-21T20:57:25.951] [ERROR] all - { error: -1, msg: 'Error en la creacion de nuevo producto' }
-[2022-12-21T20:58:47.607] [ERROR] all - { error: 'NEW_MSG', msg: 'Error falso para probar logs' }
+[2022-12-23T22:38:13.516] [ERROR] error - { error: 'NEW_MSG', msg: 'Error falso para probar logs' }
