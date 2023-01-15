@@ -1,4 +1,6 @@
 import express from 'express'
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
 import productosRoute from './router/productos.js'
 import carritosRoute from './router/carritos.js'
 import userRoute from './router/users.js'
@@ -8,6 +10,13 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
+app.use(cookieParser())
+app.use(session({
+    key: "user_sid",
+    secret: "elone01",
+    resave: false,
+    saveUninitialized: false
+}))
 
 app.use('/api/productos', productosRoute)
 app.use('/api/carrito', carritosRoute)
