@@ -1,6 +1,7 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
+import mongoose from 'mongoose'
 import MongoStore from 'connect-mongo'
 import productosRoute from './router/productos.js'
 import carritosRoute from './router/carritos.js'
@@ -19,8 +20,8 @@ app.use('/user', userRoute)
 
 app.use(session({
     store: new MongoStore({
-        //client: mongoose.connection.getClient(),
-        mongoUrl: 'mongodb+srv://ukigreco:ukigreco@codercluster.8ewdywk.mongodb.net/?retryWrites=true&w=majority',
+        client: mongoose.connection.getClient(),
+        //mongoUrl: 'mongodb+srv://ukigreco:ukigreco@codercluster.8ewdywk.mongodb.net/?retryWrites=true&w=majority',
         dbName: 'ecommerce-users',
         collectionName: 'sessions',
         ttl: 120

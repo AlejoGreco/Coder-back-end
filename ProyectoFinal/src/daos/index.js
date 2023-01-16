@@ -4,31 +4,34 @@ import ProductFirestoreDao from './products/ProductFirestoreDao.js'
 import CartMongoDao from './carts/CartMongoDao.js'
 import CartFsDao from './carts/CartFsDao.js'
 import CartFirestoreDao from './carts/CartFirestoreDao.js'
+import UserMongoDao from './users/UserMongoDao.js'
 import { PERSISTENCE } from '../config.js'
 
 const daosExports = () => {
     let productDao
     let cartDao
+    let userDao
 
     switch (PERSISTENCE){
         case 'MONGO_DB':
-                productDao = new ProductMongoDao('products', 'ecommerce'),
+                productDao = new ProductMongoDao('products', 'ecommerce')
                 cartDao = new CartMongoDao('carts', 'ecommerce')
+                userDao = new UserMongoDao('users', 'ecommerce-users')
             break;
         case 'FIRESTORE':
-                productDao = new ProductFirestoreDao('products'),
+                productDao = new ProductFirestoreDao('products')
                 cartDao = new CartFirestoreDao('carts')
             break;
         case 'FS':
-                productDao = new ProductFsDao(),
+                productDao = new ProductFsDao()
                 cartDao = new CartFsDao()
             break;
         default:
-                productDao = new ProductFsDao(),
+                productDao = new ProductFsDao()
                 cartDao = new CartFsDao()
             break;
     }
 
-    return { productDao, cartDao }
+    return { productDao, cartDao, userDao }
 }
-export const { productDao, cartDao } = daosExports()
+export const { productDao, cartDao, userDao } = daosExports()
