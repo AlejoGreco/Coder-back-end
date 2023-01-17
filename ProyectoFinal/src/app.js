@@ -3,10 +3,12 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import mongoose from 'mongoose'
 import MongoStore from 'connect-mongo'
+import passport from 'passport'
 import productosRoute from './router/productos.js'
 import carritosRoute from './router/carritos.js'
 import userRoute from './router/users.js'
 import { CONNECTION_STR, PORT } from './config.js'
+
 
 const app = express()
 
@@ -14,14 +16,18 @@ app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 app.use(cookieParser())
 
-app.use('/api/productos', productosRoute)
-app.use('/api/carrito', carritosRoute)
-app.use('/user', userRoute)
+// Sessions config
+mongoose.connect(CONNECTION_STR, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        dbName: 'ecommerce-users'
+    },
+    () => console.log('Conectado a Mongo db')
+)
 
 app.use(session({
     store: new MongoStore({
         client: mongoose.connection.getClient(),
-        //mongoUrl: 'mongodb+srv://ukigreco:ukigreco@codercluster.8ewdywk.mongodb.net/?retryWrites=true&w=majority',
         dbName: 'ecommerce-users',
         collectionName: 'sessions',
         ttl: 120
@@ -32,6 +38,14 @@ app.use(session({
     saveUninitialized: false
 }))
 
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Routes
+app.use('/api/productos', productosRoute)
+app.use('/api/carrito', carritosRoute)
+app.use('/user', userRoute)
+
 app.use((req, res) => {
     res.status(404).send({
         error: -2, 
@@ -39,5 +53,6 @@ app.use((req, res) => {
     })
 })
 
+// Server up
 const server = app.listen(PORT, () => console.log(`Server up! Listening at port ${PORT}`))
 server.on('error', e => console.log(e))
