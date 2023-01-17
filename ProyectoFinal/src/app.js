@@ -8,6 +8,7 @@ import productosRoute from './router/productos.js'
 import carritosRoute from './router/carritos.js'
 import userRoute from './router/users.js'
 import { CONNECTION_STR, PORT } from './config.js'
+import { checkAuth } from './middlewares/auth.js'
 import { loginStrategy, registerStrategy } from './strategies/local.js'
 
 
@@ -46,8 +47,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // Routes
-app.use('/api/productos', productosRoute)
-app.use('/api/carrito', carritosRoute)
+app.use('/api/productos', checkAuth, productosRoute)
+app.use('/api/carrito', checkAuth, carritosRoute)
 app.use('/user', userRoute)
 
 app.use((req, res) => {

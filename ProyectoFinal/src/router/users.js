@@ -1,5 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
+import { checkAuth } from "../middlewares/auth.js";
 
 const route = Router()
 
@@ -28,20 +29,15 @@ route.post('/logout', (req, res) => {
     })
 })
 
-route.get('/info', (req, res) => {
-    if(req.isAuthenticated()){
-        const user = {
-            name: req.user.name,
-            adress: req.user.adress,
-            age: req.user.age,
-            phone: req.user.phone,
-            email: req.user.emil
-        }
-        res.send({resulusert})
+route.get('/info', checkAuth, (req, res) => {
+    const user = {
+        name: req.user.name,
+        adress: req.user.adress,
+        age: req.user.age,
+        phone: req.user.phone,
+        email: req.user.email
     }
-    else{
-        res.status(401).send({message: 'User unknow. You must be logged for this request'})
-    }
+    res.send({user})
 })
 
 export default route
