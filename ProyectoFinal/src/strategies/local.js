@@ -12,7 +12,7 @@ export const registerStrategy = new LocalStrategy({passReqToCallback: true}, asy
         if(user){ return cb(null, false, { message: 'User allready exist' })}
 
         const hash = createHash(password)
-        const newUser = await userModel.create({...req.body, password: hash})
+        const newUser = await userModel.create({...req.body, email: username, password: hash})
 
         return cb(null, newUser)
     } catch (error) {
@@ -22,7 +22,7 @@ export const registerStrategy = new LocalStrategy({passReqToCallback: true}, asy
 
 export const loginStrategy = new LocalStrategy(async (username, password, cb) => {
     try {
-        const user = await userModel.findOne({username})
+        const user = await userModel.findOne({email: username})
         if(!user){ return cb(null, false, { message: 'User does not exist' })}
 
         if(!isValid(user, password)){ return cb(null, false, { message: 'Wrong password' })}

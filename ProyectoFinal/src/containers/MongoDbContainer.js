@@ -1,15 +1,6 @@
-import mongoose from "mongoose"
-import { CONNECTION_STR } from '../config.js'
-
 class MongoDbContainer {
-    constructor(schema, collName, dbName){
-        this.model = mongoose.model(collName, schema)
-        mongoose.connect(CONNECTION_STR, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            dbName: dbName
-        })
-        console.log(`Conectado a Mongo Db uri: ${CONNECTION_STR}`)
+    constructor(schema, collName, db){
+        this.model = db.model(collName, schema)
     }
 
     async create(req, res) {

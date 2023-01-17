@@ -2,8 +2,8 @@ import MongoDbContainer from '../../containers/MongoDbContainer.js'
 import ProductSchema from '../../schemas/productSchema.js'
 
 class ProductMongoDao extends MongoDbContainer {
-    constructor(collectionName, dbName){
-        super(ProductSchema, collectionName, dbName)   
+    constructor(collectionName, db){
+        super(ProductSchema, collectionName, db)   
     }
 }
 
