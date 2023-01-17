@@ -8,6 +8,7 @@ import productosRoute from './router/productos.js'
 import carritosRoute from './router/carritos.js'
 import userRoute from './router/users.js'
 import { CONNECTION_STR, PORT } from './config.js'
+import { loginStrategy, registerStrategy } from './strategies/local.js'
 
 
 const app = express()
@@ -30,13 +31,16 @@ app.use(session({
         client: mongoose.connection.getClient(),
         dbName: 'ecommerce-users',
         collectionName: 'sessions',
-        ttl: 120
+        ttl: 300
     }),
     key: "user_sid",
     secret: "elone01",
     resave: false,
     saveUninitialized: false
 }))
+
+passport.use('register', registerStrategy)
+passport.use('login', loginStrategy)
 
 app.use(passport.initialize())
 app.use(passport.session())
