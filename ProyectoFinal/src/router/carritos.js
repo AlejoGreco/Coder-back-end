@@ -1,5 +1,7 @@
 import { Router }  from 'express'
 import { cartDao } from '../daos/index.js'
+import transporter from '../transports/mailer.js'
+import twilioClient, { twilioNumber } from '../transports/sms.js'
 
 const route = Router()
 
@@ -65,6 +67,27 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
+route.post('/collect', async (req, res) => {
+    const mailBody = `<li>Dummy Product</li>`
+    const clientMsg = {
+        from: twilioNumber,
+        to: req.user.phone,
+        body: 'El pedido ha sido recibido y procesado con exito'
+    }
+
+    const mailOptions = {
+        from: ADMIN_EMAIL,
+        to: ADMIN_EMAIL,
+        subject: `Nuevo Pedido de ${req.user.name} | ${req.user.email}`,
+        html: `<h3>Pedido</h3>
+            <h4>Productos del carrito</h4>
+            <ul>
+                ${mailBody}
+            </ul>`
+    }
+    await transporter.sendMail(mailOptions)
+    await twilioClient.messages.create(clientMsg)
+})
 route.post('/', async (req, res) => await cartDao.create(req, res))
 route.delete('/:id', async (req, res) => await cartDao.destroy(req, res))
 route.get('/:id/productos', async (req, res) => await cartDao.readSubitems(req, res, 'products'))
