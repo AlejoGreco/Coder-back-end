@@ -34,9 +34,12 @@ export const loginStrategy = new LocalStrategy(async (username, password, cb) =>
 })
 
 passport.serializeUser((user, cb) => {
-    cb(null, user._id)
+    cb(null, {
+        id: user._id, 
+        admin: user.admin
+    })
 })
 
-passport.deserializeUser((id, cb) => {
-    userModel.findById(id, cb)
+passport.deserializeUser((user, cb) => {
+    userModel.findById(user.id, cb)
 })

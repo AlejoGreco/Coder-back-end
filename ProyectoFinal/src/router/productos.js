@@ -1,18 +1,8 @@
 import { Router } from 'express'
 import { productDao } from '../daos/index.js'
+import { checkAuthAdmin } from '../middlewares/auth.js'
 
 const route = Router()
-const ADMIN = true
-
-const isAdmin = (req, res, next) => {
-    if(ADMIN)
-    {
-        next()
-    }
-    else{
-        res.send({error: -1, descripcion: `Ruta ${req.baseUrl}${req.url} metodo ${req.method} no autorizada`})
-    }
-}
 
 const idValidate = (req, res, next) => {
     const id = parseInt(req.params.id)
@@ -65,8 +55,8 @@ const pDataValidate = (req, res, next) => {
 
 route.get('/', async (req, res) => await productDao.readAll(req, res))
 route.get('/:id', async (req, res) => await productDao.readById(req,res))
-route.post('/', isAdmin, pDataValidate, async (req, res) => await productDao.create(req, res))
-route.put('/:id', isAdmin, pDataValidate, async (req, res) => await productDao.update(req, res))
-route.delete('/:id', isAdmin, async (req, res) => await productDao.destroy(req, res))
+route.post('/', checkAuthAdmin, pDataValidate, async (req, res) => await productDao.create(req, res))
+route.put('/:id', checkAuthAdmin, pDataValidate, async (req, res) => await productDao.update(req, res))
+route.delete('/:id', checkAuthAdmin, async (req, res) => await productDao.destroy(req, res))
 
 export default route

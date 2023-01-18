@@ -31,6 +31,7 @@ route.post('/logout', (req, res) => {
 
 route.get('/info', checkAuth, (req, res) => {
     const user = {
+        admin: req.user.admin,
         name: req.user.name,
         adress: req.user.adress,
         age: req.user.age,

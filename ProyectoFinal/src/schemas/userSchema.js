@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 
 const userSchema = new mongoose.Schema({
+    admin: {type: Boolean, default: false},
     name: {type: String, required: true},
     adress: {type: String, required: true},
     age: {type: Number, required: true},
