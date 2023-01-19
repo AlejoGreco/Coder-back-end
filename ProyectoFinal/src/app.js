@@ -7,10 +7,9 @@ import passport from 'passport'
 import productosRoute from './router/productos.js'
 import carritosRoute from './router/carritos.js'
 import userRoute from './router/users.js'
-import { CONNECTION_STR, PORT } from './config.js'
+import { registerStrategy, loginStrategy } from './strategies/local.js'
+import { CONNECTION_STR } from './config.js'
 import { checkAuth } from './middlewares/auth.js'
-import { loginStrategy, registerStrategy } from './strategies/local.js'
-
 
 const app = express()
 
@@ -50,7 +49,6 @@ app.use(passport.session())
 app.use('/api/productos', checkAuth, productosRoute)
 app.use('/api/carrito', checkAuth, carritosRoute)
 app.use('/user', userRoute)
-
 app.use((req, res) => {
     res.status(404).send({
         error: -2, 
@@ -58,6 +56,4 @@ app.use((req, res) => {
     })
 })
 
-// Server up
-const server = app.listen(PORT, () => console.log(`Server up! Listening at port ${PORT}`))
-server.on('error', e => console.log(e))
+export default app
