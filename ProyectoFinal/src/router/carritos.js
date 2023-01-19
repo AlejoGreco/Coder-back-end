@@ -2,6 +2,7 @@ import { Router }  from 'express'
 import { cartDao } from '../daos/index.js'
 import transporter from '../transports/mailer.js'
 import twilioClient, { twilioNumber } from '../transports/sms.js'
+import { ADMIN_EMAIL } from '../transports/mailer.js'
 
 const route = Router()
 
@@ -87,6 +88,7 @@ route.post('/collect', async (req, res) => {
     }
     await transporter.sendMail(mailOptions)
     await twilioClient.messages.create(clientMsg)
+    res.send({message: 'Orden generada con exito!'})
 })
 route.post('/', async (req, res) => await cartDao.create(req, res))
 route.delete('/:id', async (req, res) => await cartDao.destroy(req, res))
