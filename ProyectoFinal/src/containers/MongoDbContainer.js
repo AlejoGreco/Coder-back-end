@@ -1,3 +1,5 @@
+import logger from '../logger/index.js'
+
 class MongoDbContainer {
     constructor(schema, collName, db){
         this.model = db.model(collName, schema)
@@ -7,7 +9,7 @@ class MongoDbContainer {
         try {
             const newItem = { timestamp: Date.now(), ...req.body }
             const result = await this.model.create(newItem)
-            console.log(result)
+            logger.info(result)
             return res.status(200).json({ message: 'Item created!', newItem: result })
         }
         catch (e){
@@ -18,7 +20,7 @@ class MongoDbContainer {
     async readAll(req, res) {
         try {
             const items = await this.model.find()
-            console.log(items)
+            logger.info(items)
             return res.status(200).json(items)      
         } 
         catch (e){
@@ -30,7 +32,7 @@ class MongoDbContainer {
         try {
             const { id } = req.params
             const item = await this.model.findById(id)
-            console.log(item)
+            logger.info(item)
             return res.status(200).json(item)
         }
         catch (e){
@@ -42,7 +44,7 @@ class MongoDbContainer {
         try {
             const { id } = req.params
             const result = await this.model.findByIdAndUpdate(id, req.body)
-            console.log(result)
+            logger.info(result)
             return res.status(200).json({ message: 'Item updated!', itemUpdated: result})
         } 
         catch (e){
@@ -54,7 +56,7 @@ class MongoDbContainer {
         try {
             const { id } = req.params
             const itemDeleted = await this.model.findByIdAndDelete(id)
-            console.log(itemDeleted)
+            logger.info(itemDeleted)
             return res.status(200).json({ message: 'Item deleted!', itemDeleted})
         }
         catch (e){
@@ -66,7 +68,7 @@ class MongoDbContainer {
         try {
             const { id } = req.params
             const item = await this.model.findById(id)
-            console.log(item)
+            logger.info(item)
             return res.status(200).json(item[prop])
         }
         catch (e){

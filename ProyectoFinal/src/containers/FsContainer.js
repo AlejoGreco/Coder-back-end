@@ -1,11 +1,12 @@
 import fs from 'fs'
 import mongoose from 'mongoose'
+import logger from '../logger/index.js'
 
 class FsContainer {
     constructor(path, schema, collName){
         this.path = path
         this.model = mongoose.model(collName, schema)
-        console.log(`Persistencia en archivo path: ${path}`)
+        logger.info(`Persistencia en archivo path: ${path}`)
     }
 
     async create(req, res) {

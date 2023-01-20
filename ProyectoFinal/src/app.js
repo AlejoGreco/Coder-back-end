@@ -7,6 +7,7 @@ import passport from 'passport'
 import productosRoute from './router/productos.js'
 import carritosRoute from './router/carritos.js'
 import userRoute from './router/users.js'
+import logger from './logger/index.js'
 import { registerStrategy, loginStrategy } from './strategies/local.js'
 import { CONNECTION_STR } from './config.js'
 import { checkAuth } from './middlewares/auth.js'
@@ -23,7 +24,7 @@ mongoose.connect(CONNECTION_STR, {
         useUnifiedTopology: true,
         dbName: 'ecommerce-users'
     },
-    () => console.log('Conectado a Mongo db')
+    () => logger.info('Conectado a Mongo db')
 )
 
 app.use(session({

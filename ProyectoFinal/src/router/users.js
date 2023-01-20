@@ -34,7 +34,7 @@ route.post('/register', passport.authenticate('register', {failureMessage: true}
 
 route.post('/login', passport.authenticate('login', {failureMessage: true}), 
     (req, res) => {
-        console.log(req.user)
+        logger.info(req.user)
         res.send({status: 'success', message: 'User logged in!'})
     }
 )
@@ -42,10 +42,10 @@ route.post('/login', passport.authenticate('login', {failureMessage: true}),
 route.post('/logout', (req, res) => {
     req.logout(e => {
         if(e) {
-            console.log(e)
+            logger.error(e)
             res.send({error: e})
         }
-        console.log(req.user)
+        logger.info(req.user)
         res.send({status: 'success', message: 'User logged out!'})
     })
 })

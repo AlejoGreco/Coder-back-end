@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import admin from "firebase-admin"
 import fs from 'fs'
+import logger from "../logger/index.js"
 import { CONNECTION_STR } from '../config.js'
 // './src/credentials/firestore-serv-account.json'
 
@@ -16,7 +17,7 @@ class FirestoreContainer {
         }
         
         this.coll = admin.firestore().collection(collName)         
-        console.log(`Conectado a Firestore`)
+        logger.info(`Conectado a Firestore`)
     }
 
     async create(req, res) {
@@ -93,7 +94,7 @@ class FirestoreContainer {
             parent[prop].push(newItem)
             const { _id, ...child } = parent[prop][0].toObject()
             const str_id = _id.toString()
-            console.log(str_id)
+            logger.info(str_id)
             child._id = str_id
 
             const snap = await this.coll.doc(req.params.id).get()

@@ -14,11 +14,11 @@ if(cluster.isPrimary && CLUSTER){
     }
 
     cluster.on('exit', (worker) => {
-        console.log(`Termino el worker ${worker.id}`)
+        logger.warning(`Termino el worker ${worker.id}`)
         cluster.fork()
     })
 }
 else{
-    const server = app.listen(PORT, () => logger.error(`Worker ${process.pid} iniciado. Listening at port ${PORT}`))
-    server.on('error', e => console.log(e))
+    const server = app.listen(PORT, () => logger.info(`Worker ${process.pid} iniciado. Listening at port ${PORT}`))
+    server.on('error', e => logger.error(e))
 }
