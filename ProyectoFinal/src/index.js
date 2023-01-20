@@ -1,13 +1,14 @@
 import cluster from 'cluster'
 import os from 'os'
 import app from './app.js'
+import logger from './logger/index.js'
 import { PORT } from './config.js'
 
 const CLUSTER = false
 const cpuNumbers = os.cpus().length
 
 if(cluster.isPrimary && CLUSTER){
-    console.log(`Iniciando workers. Pid maestro: ${process.pid}`)
+    logger.info(`Iniciando workers. Pid maestro: ${process.pid}`)
     for(let i = 0; i < cpuNumbers; i++){
         cluster.fork()
     }
@@ -18,6 +19,6 @@ if(cluster.isPrimary && CLUSTER){
     })
 }
 else{
-    const server = app.listen(PORT, () => console.log(`Worker ${process.pid} iniciado. Listening at port ${PORT}`))
+    const server = app.listen(PORT, () => logger.error(`Worker ${process.pid} iniciado. Listening at port ${PORT}`))
     server.on('error', e => console.log(e))
 }
