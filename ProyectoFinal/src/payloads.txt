@@ -42,3 +42,25 @@
   "precio": 160.8,
   "stock": 28
 }
+
+------------------------------------------------------------------------
+
+Usuarios
+
+{
+  "username": "trici1@gmail.com",
+  "password": "12345",
+  "name": "trici",
+  "adress": "Cangallo 1298",
+  "phone": "+542216221175",
+  "age": 11
+}
+
+{
+  "username": "gaston@gmail.com",
+  "password": "232323",
+  "name": "vecino",
+  "adress": "Sanjuan 1298",
+  "phone": "+542237621175",
+  "age": 22
+}

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
+import logger from "../logger/index.js";
 import transporter, { ADMIN_EMAIL } from "../transports/mailer.js";
 import { checkAuth } from "../middlewares/auth.js";
 
