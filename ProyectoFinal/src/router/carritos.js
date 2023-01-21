@@ -4,6 +4,7 @@ import transporter from '../transports/mailer.js'
 import twilioClient, { twilioNumber } from '../transports/sms.js'
 import { ADMIN_EMAIL } from '../transports/mailer.js'
 import logger from '../logger/index.js'
+import { emailViewGenerator, emailCartListGen, smsContentGenerator } from '../utils/transportPayloads.js'
 
 const route = Router()
 
@@ -75,29 +76,17 @@ route.post('/:id/collect', async (req, res) => {
     if(result.length === 0){
         return res.status(400).send({error: 'No puede generar orden', code: -10})
     }
-    const mailBody = result.map(item => {
-        return `
-        <li>
-            <h4>${item.nombre} - $${item.precio}</h4>
-            <i>Descripcion: ${item.descripcion}</i>
-        </li>`
-    })
-    const clientMsg = {
-        from: twilioNumber,
-        to: req.user.phone,
-        body: 'El pedido ha sido recibido y procesado con exito'
+
+    const mailContent = {
+        subject: `Nuevo Pedido de ${req.user.name} | ${req.user.email}`,
+        title: `Orden de compra #${req.user.id}`,
+        footer: `Lo estara recibiendo en los proximos dias`,
+        body: `<ul>${emailCartListGen(result)}</ul>`
     }
 
-    const mailOptions = {
-        from: ADMIN_EMAIL,
-        to: ADMIN_EMAIL,
-        subject: `Nuevo Pedido de ${req.user.name} | ${req.user.email}`,
-        html: `<h3>Pedido</h3>
-            <h4>Productos del carrito</h4>
-            <ul>
-                ${mailBody}
-            </ul>`
-    }
+    const mailOptions = emailViewGenerator(ADMIN_EMAIL, ADMIN_EMAIL, mailContent)
+    const clientMsg = smsContentGenerator(twilioNumber, req.user.phone)
+
     await transporter.sendMail(mailOptions)
     await twilioClient.messages.create(clientMsg)
     res.send({message: 'Orden generada con exito!'})
@@ -112,6 +101,7 @@ route.delete('/:id', async (req, res) => {
     const result = await cartDao.destroy(req)
     res.send(result)
 })
+
 route.get('/:id/productos', async (req, res) => {
     let result = await cartDao.readSubitems(req, 'products')
     if(result.error){
@@ -121,10 +111,12 @@ route.get('/:id/productos', async (req, res) => {
     }
     res.send(result)
 })
+
 route.post('/:id/productos', pDataValidate, async (req, res) => {
     const result = await cartDao.addSubItem(req, 'products')
     res.send(result)
 })
+
 route.delete('/:id/productos/:id_prod', async (req, res) => {
     const result = await cartDao.destroySubItem(req, res, 'products')
     res.send(result)

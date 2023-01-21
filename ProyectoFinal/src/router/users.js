@@ -2,28 +2,22 @@ import { Router } from "express";
 import passport from "passport";
 import logger from "../logger/index.js";
 import transporter, { ADMIN_EMAIL } from "../transports/mailer.js";
+import { emailViewGenerator, emailUserRegGen } from "../utils/transportPayloads.js";
 import { checkAuth } from "../middlewares/auth.js";
 
 const route = Router()
 
 route.post('/register', passport.authenticate('register', {failureMessage: true}), 
     async (req, res) => {
-        try{
-            const mailBody = Object.entries(req.user._doc).map(item => {
-                if(item[0] !== '_id' && item[0] !== '__v' && item[0] !== 'password')
-                    return `<li>${item[0]}: ${item[1]}</li>`
-            })
-            
-            const mailOptions = {
-                from: ADMIN_EMAIL,
-                to: ADMIN_EMAIL,
-                subject: 'Nuevo registro',
-                html: `<h3>Usuario registrado</h3>
-                    <h4>Datos de usuario</h4>
-                    <ul>
-                        ${mailBody.join(' ')}
-                    </ul>`
+        try{           
+            const mailContent = {
+                subject: `Nuevo registro de usuario`,
+                title: `Datos de usuario #${req.user.id}`,
+                footer: `Mensaje automatico`,
+                body: `<ul>${emailUserRegGen(req.user._doc)}</ul>`
             }
+        
+            const mailOptions = emailViewGenerator(ADMIN_EMAIL, ADMIN_EMAIL, mailContent)
             await transporter.sendMail(mailOptions)
             res.send({status: 'success', message: 'User created!'})
         }
@@ -52,14 +46,7 @@ route.post('/logout', (req, res) => {
 })
 
 route.get('/info', checkAuth, (req, res) => {
-    const user = {
-        admin: req.user.admin,
-        name: req.user.name,
-        adress: req.user.adress,
-        age: req.user.age,
-        phone: req.user.phone,
-        email: req.user.email
-    }
+    const {_id, __v, password, ...user} = req.user._doc
     res.send({user})
 })
 

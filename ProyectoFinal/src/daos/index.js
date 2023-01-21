@@ -11,14 +11,14 @@ const daosExports = dbName => {
     let productDao
     let cartDao
 
-    const db = mongoose.createConnection(CONNECTION_STR, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        dbName: dbName
-    })
-
     switch (PERSISTENCE){
         case 'MONGO_DB':
+                const db = mongoose.createConnection(CONNECTION_STR, {
+                    useNewUrlParser: true,
+                    useUnifiedTopology: true,
+                    dbName: dbName
+                })
+                
                 productDao = new ProductMongoDao('products', db)
                 cartDao = new CartMongoDao('carts', db)
             break;
