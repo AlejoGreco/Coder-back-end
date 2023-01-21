@@ -5,99 +5,97 @@ class MongoDbContainer {
         this.model = db.model(collName, schema)
     }
 
-    async create(req, res) {
+    async create(req) {
         try {
             const newItem = { timestamp: Date.now(), ...req.body }
             const result = await this.model.create(newItem)
             logger.info(result)
-            return res.status(200).json({ message: 'Item created!', newItem: result })
+            return { message: 'Item created!', newItem: result }
         }
         catch (e){
-            return res.status(404).json({ message: e.message, code: e.code })
+            return { error: e.message, code: e.code }
         }
     }
     
-    async readAll(req, res) {
+    async readAll() {
         try {
             const items = await this.model.find()
-            logger.info(items)
-            return res.status(200).json(items)      
+            return items    
         } 
         catch (e){
-            return res.status(404).json({ message: e.message, code: e.code })
+            return { error: e.message, code: e.code }
         }
     }
 
-    async readById(req, res) {
+    async readById(req) {
         try {
             const { id } = req.params
             const item = await this.model.findById(id)
             logger.info(item)
-            return res.status(200).json(item)
+            return { item }
         }
         catch (e){
-            return res.status(404).json({ message: e.message, code: e.code })
+            return { error: e.message, code: e.code }
         }     
     }
 
-    async update(req, res) {
+    async update(req) {
         try {
             const { id } = req.params
             const result = await this.model.findByIdAndUpdate(id, req.body)
             logger.info(result)
-            return res.status(200).json({ message: 'Item updated!', itemUpdated: result})
+            return { message: 'Item updated!', itemUpdated: result}
         } 
         catch (e){
-            return res.status(404).json({ message: e.message, code: e.code })
+            return { error: e.message, code: e.code }
         }
     }
 
-    async destroy(req, res) {
+    async destroy(req) {
         try {
             const { id } = req.params
             const itemDeleted = await this.model.findByIdAndDelete(id)
             logger.info(itemDeleted)
-            return res.status(200).json({ message: 'Item deleted!', itemDeleted})
+            return { message: 'Item deleted!', itemDeleted}
         }
         catch (e){
-            return res.status(404).json({ message: e.message, code: e.code })
+            return { error: e.message, code: e.code }
         }   
     }
 
-    async readSubitems(req, res, prop) {
+    async readSubitems(req, prop) {
         try {
             const { id } = req.params
             const item = await this.model.findById(id)
-            logger.info(item)
-            return res.status(200).json(item[prop])
+            return item[prop]
         }
         catch (e){
-            return res.status(404).json({ message: e.message, code: e.code })
+            return { error: e.message, code: e.code }
         }  
     }
 
-    async addSubItem(req, res, prop) {
+    async addSubItem(req, prop) {
         try{
             const items = await this.model.findById(req.params.id)
             items[prop].push(req.body)
             const result = await items.save()
-            return res.status(200).json({ message: 'Item added!', result})
+            return { message: 'Item added!', result }
         }
         catch (e){
-            return res.status(404).json({ message: e.message, code: e.code })
+            return { error: e.message, code: e.code }
         }
     }
 
-    async destroySubItem(req, res, prop) {
+    async destroySubItem(req, prop) {
         try {
             const { id, id_prod } = req.params
             const items = await this.model.findById(id)
             items[prop].id(id_prod).remove()
             const result = await items.save()
-            return res.status(200).json({ message: 'Subitem destroy!', result })
+            return { message: 'Subitem destroy!', result }
         }
         catch (e){
-            return res.status(404).json({ message: e.message, code: e.code })
+            return { error: e.message, code: e.code }
         }    
     }
 }

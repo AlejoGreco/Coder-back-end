@@ -53,10 +53,25 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.get('/', async (req, res) => await productDao.readAll(req, res))
-route.get('/:id', async (req, res) => await productDao.readById(req,res))
-route.post('/', checkAuthAdmin, pDataValidate, async (req, res) => await productDao.create(req, res))
-route.put('/:id', checkAuthAdmin, pDataValidate, async (req, res) => await productDao.update(req, res))
-route.delete('/:id', checkAuthAdmin, async (req, res) => await productDao.destroy(req, res))
+route.get('/', async (req, res) => {
+    const result = await productDao.readAll(req)
+    res.send(result)
+})
+route.get('/:id', async (req, res) => {
+    const result = await productDao.readById(req)
+    res.send(result)
+})
+route.post('/', checkAuthAdmin, pDataValidate, async (req, res) => {
+    const result = await productDao.create(req)
+    res.send(result)
+})
+route.put('/:id', checkAuthAdmin, pDataValidate, async (req, res) => {
+    const result = await productDao.update(req)
+    res.send(result)
+})
+route.delete('/:id', checkAuthAdmin, async (req, res) => {
+    const result = await productDao.destroy(req)
+    res.send(result)
+})
 
 export default route

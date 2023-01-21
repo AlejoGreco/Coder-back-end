@@ -3,6 +3,7 @@ import { cartDao } from '../daos/index.js'
 import transporter from '../transports/mailer.js'
 import twilioClient, { twilioNumber } from '../transports/sms.js'
 import { ADMIN_EMAIL } from '../transports/mailer.js'
+import logger from '../logger/index.js'
 
 const route = Router()
 
@@ -68,8 +69,19 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.post('/collect', async (req, res) => {
-    const mailBody = `<li>Dummy Product</li>`
+route.post('/:id/collect', async (req, res) => {
+    const result = await cartDao.readSubitems(req, 'products')
+    logger.info(result)
+    if(result.length === 0){
+        return res.status(400).send({error: 'No puede generar orden', code: -10})
+    }
+    const mailBody = result.map(item => {
+        return `
+        <li>
+            <h4>${item.nombre} - $${item.precio}</h4>
+            <i>Descripcion: ${item.descripcion}</i>
+        </li>`
+    })
     const clientMsg = {
         from: twilioNumber,
         to: req.user.phone,
@@ -90,11 +102,33 @@ route.post('/collect', async (req, res) => {
     await twilioClient.messages.create(clientMsg)
     res.send({message: 'Orden generada con exito!'})
 })
-route.post('/', async (req, res) => await cartDao.create(req, res))
-route.delete('/:id', async (req, res) => await cartDao.destroy(req, res))
-route.get('/:id/productos', async (req, res) => await cartDao.readSubitems(req, res, 'products'))
-route.post('/:id/productos', pDataValidate, async (req, res) => await cartDao.addSubItem(req, res, 'products'))
-route.delete('/:id/productos/:id_prod', async (req, res) => await cartDao.destroySubItem(req, res, 'products'))
+
+route.post('/', async (req, res) => {
+    const result = await cartDao.create(req)
+    res.send(result)
+})
+
+route.delete('/:id', async (req, res) => {
+    const result = await cartDao.destroy(req)
+    res.send(result)
+})
+route.get('/:id/productos', async (req, res) => {
+    let result = await cartDao.readSubitems(req, 'products')
+    if(result.error){
+        logger.info('El usuario no tiene carrito')
+        req.body._id = req.params.id
+        result = await cartDao.create(req)
+    }
+    res.send(result)
+})
+route.post('/:id/productos', pDataValidate, async (req, res) => {
+    const result = await cartDao.addSubItem(req, 'products')
+    res.send(result)
+})
+route.delete('/:id/productos/:id_prod', async (req, res) => {
+    const result = await cartDao.destroySubItem(req, res, 'products')
+    res.send(result)
+})
 
 export default route
 
