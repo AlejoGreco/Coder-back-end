@@ -1,0 +1,4 @@
+1 - POST : register / login de usuario => responde con id de usuario
+2 - GET : getProductosDeCarrito | param = id de usuario logueado => responde con el carrito (Si no existe lo crea vacio con id de usuario)
+3 - POST : newProductoEnCarrito | param = id carrito == id usuario => reponde con el carrito actualizado
+4 - POST : collectCarrito | param = id carrito == id usuario => responde con datos de la compra y envia sms + mail

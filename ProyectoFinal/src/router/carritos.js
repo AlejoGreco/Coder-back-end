@@ -89,7 +89,9 @@ route.post('/:id/collect', async (req, res) => {
 
     await transporter.sendMail(mailOptions)
     await twilioClient.messages.create(clientMsg)
-    res.send({message: 'Orden generada con exito!'})
+    
+    const {_id, __v, password, ...user} = req.user._doc
+    res.send({message: 'Orden generada con exito!', cart: result, user})
 })
 
 route.post('/', async (req, res) => {

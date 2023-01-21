@@ -19,7 +19,7 @@ route.post('/register', passport.authenticate('register', {failureMessage: true}
         
             const mailOptions = emailViewGenerator(ADMIN_EMAIL, ADMIN_EMAIL, mailContent)
             await transporter.sendMail(mailOptions)
-            res.send({status: 'success', message: 'User created!'})
+            res.send({status: 'success', message: 'User created!', userId: req.user.id})
         }
         catch (e){
             res.status(501).send({error: e, message: 'No se pudo enviar email de notificacion'})
@@ -30,7 +30,7 @@ route.post('/register', passport.authenticate('register', {failureMessage: true}
 route.post('/login', passport.authenticate('login', {failureMessage: true}), 
     (req, res) => {
         logger.info(req.user)
-        res.send({status: 'success', message: 'User logged in!'})
+        res.send({status: 'success', message: 'User logged in!', userId: req.user.id})
     }
 )
 
