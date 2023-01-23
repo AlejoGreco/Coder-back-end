@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %> 
+</head>
+<body>
+    <main class="container mt-3">
+        <div class="">
+            <h2>Vista de informacion</h2>
+            <hr class="my-4">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Propiedad</th>
+                    <th scope="col">Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Argumentos de entrada</td>
+                    <td><%= args %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Sistema operativo</td>
+                    <td><%= platform %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Node</td>
+                    <td><%= node %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>Memoria usada</td>
+                    <td><%= memory %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>Ruta ejecutable node</td>
+                    <td><%= path %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>Pid</td>
+                    <td><%= pid %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                    <td>Directorio del proyecto</td>
+                    <td><%= folder %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                    <td>Numero de cpus</td>
+                    <td><%= cpus %></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </main>
+</body>
+</html>

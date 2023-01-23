@@ -1,0 +1,12 @@
+[2022-12-20T20:39:12.565] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-20T20:39:33.166] [WARN] all - Peticon a ruta no encontrada -> url: /api/ | method: GET
+[2022-12-23T22:23:59.118] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-23T22:24:05.394] [WARN] all - Peticon a ruta no encontrada -> url: /api/ | method: GET
+[2022-12-23T22:24:05.459] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-23T22:24:12.441] [WARN] all - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-23T22:34:24.959] [WARN] warning - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-23T22:34:47.488] [WARN] warning - Peticon a ruta no encontrada -> url: /loginasd | method: GET
+[2022-12-23T22:34:47.692] [WARN] warning - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-23T22:36:46.687] [WARN] warning - Peticon a ruta no encontrada -> url: /asdsasd | method: GET
+[2022-12-23T22:36:46.852] [WARN] warning - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2022-12-23T22:38:01.790] [WARN] warning - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
