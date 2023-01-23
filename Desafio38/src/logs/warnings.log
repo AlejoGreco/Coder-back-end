@@ -48,3 +48,6 @@
 [2023-01-23T01:40:36.713] [WARN] warning - Peticon a ruta no encontrada -> url: /api/random | method: GET
 [2023-01-23T01:40:37.003] [WARN] warning - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
 [2023-01-23T01:40:51.135] [WARN] warning - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2023-01-23T01:50:41.649] [WARN] warning - Peticon a ruta no encontrada -> url: /api/rand | method: GET
+[2023-01-23T01:50:41.813] [WARN] warning - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET
+[2023-01-23T01:50:52.231] [WARN] warning - Peticon a ruta no encontrada -> url: /favicon.ico | method: GET

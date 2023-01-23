@@ -1,16 +1,8 @@
 import { Router } from "express"
+import { getDashboardController } from "../controllers/dash.controller.js"
 
 const route = Router()
 
-route.get('/', (req, res) => {
-    if(req.isAuthenticated()){
-        res.render('dashboard', {
-            user: req.user.username
-        })
-    }
-    else{
-        res.redirect('/login')
-    }
-})
+route.get('/', getDashboardController)
 
 export default route
