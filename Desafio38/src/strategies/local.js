@@ -1,6 +1,5 @@
 import LocalStrategy from 'passport-local'
 import passport from 'passport'
-import { userModel } from '../model/users.js'
 import { userDeserialize, userLogin, userRegister } from '../services/user.services.js'
 
 export const registerStrategy = new LocalStrategy(async (username, password, cb) => {
