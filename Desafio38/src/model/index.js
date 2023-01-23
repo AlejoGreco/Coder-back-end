@@ -16,11 +16,15 @@ class MongoContainer {
     }
 
     async getOneByProp(prop){
-        return await this.model.findOne({prop})
+        return await this.model.findOne(prop)
     }
 
     async createOne(item){
         return await this.model.create(item)
+    }
+
+    getOneById(id, cb){
+        return this.model.findById(id, cb)
     }
 }
 
