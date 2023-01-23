@@ -1,24 +1,10 @@
 import { Router } from "express"
-import { cpus } from "os"
-import { random } from "../random.js"
+import { getProcessData, performHeavyProcess } from "../services/process.services.js"
 
 const route = Router()
 
-route.get('/info', (req, res) => {
-    const args = process.argv.slice(2).length === 0 ? " - ": process.argv.slice(2).join(" - ")
-    
-    const processData = {
-        args,
-        platform: process.platform,
-        node: process.version,
-        memory: process.memoryUsage().rss,
-        path: process.execPath,
-        pid: process.pid,
-        folder: process.cwd(),
-        cpus: cpus().length
-    }
-
-    console.log(processData)
+route.get('/info', (req, res) => {    
+    const processData = getProcessData()
 
     res.render('info', {
         ...processData
@@ -27,8 +13,8 @@ route.get('/info', (req, res) => {
 
 route.get('/randoms', async (req, res) => {
     const amount = req.query.amount ? parseInt(req.query.amount) : 100000000
-    const result = await random(amount)
-    console.log(`Process Id: ${process.pid}`)
+    const result = await performHeavyProcess(amount)
+
     res.render('random', {
         result,
         length: 1000
