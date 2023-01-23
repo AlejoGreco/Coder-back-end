@@ -62,7 +62,7 @@ else {
         socket.on('newMsg', async m => {
             try{
                 // Descomentar para generar logs de error
-                throw { message : 'Error falso para probar logs' }
+                //throw { message : 'Error falso para probar logs' }
                 const messages = await readChatMsg(msgFilePath)
                 messages.push(m)
                 io.sockets.emit('messages', messages)

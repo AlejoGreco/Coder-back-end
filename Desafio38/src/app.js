@@ -9,8 +9,7 @@ import { registerStrategy, loginStrategy } from "./strategies/local.js"
 import authRouter from "./routes/authRoutes.js"
 import dashRouter from "./routes/dashRoutes.js"
 import processRouter from "./routes/processRoutes.js"
-import { MONGO_URL } from "./config/cloud.js"
-import { loggerWarn, loggerAll} from "./config/loggers.js"
+import { loggerWarn } from "./config/loggers.js"
 import { logInfo } from "./middlewares/index.js"
 
 const app = express()
@@ -22,14 +21,6 @@ app.use(cookieParser())
 app.use(express.static('./src/public'))
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
-
-mongoose.connect(MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        dbName: 'passport-auth'
-    },
-    () => loggerAll.info('Conectado a Mongo db')
-)
 
 app.use(session({
     store: MongoStore.create({
