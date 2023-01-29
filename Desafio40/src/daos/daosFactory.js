@@ -4,12 +4,11 @@ export default class DaosFactory {
     static getDao = async persistence => {
         switch (persistence) {
             case "ARRAY":
-                //let { default: UsersDaoArray } = await import('./arrayDao.js')
-                // let UsersDaoArray = await import('./userDaoArray.js')
-                //return new UsersDaoArray()
+                const { default: UsersDaoArray } = await import('./arrayDao.js')
+                return new UsersDaoArray(usersSchema, 'user')
             case "MONGO_DB": 
-                let { default: UsersDaoDB } = await import('./mongoDao.js')
-                return new UsersDaoDB(usersSchema, 'passport-auth', 'user')
+                const { default: UsersDaoDB } = await import('./mongoDao.js')
+                return new UsersDaoDB(usersSchema, 'user')
         }
     }
 }
