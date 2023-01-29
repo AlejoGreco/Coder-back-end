@@ -1,7 +1,8 @@
 import { createHash, isValid } from "../utils/bcrypt.js"
 import DaosFactory from "../daos/daosFactory.js"
+import { PERSISTENCE } from "../config/cloud.js"
 
-const userDAO = await DaosFactory.getDao('MONGO_DB')
+const userDAO = await DaosFactory.getDao(PERSISTENCE)
 
 export const userRegister = async (username, password, cb) => {
     try {
