@@ -1,3 +1,6 @@
+import UserDto from "../dtos/userDto.js"
+import AuthDto from "../dtos/authDto.js"
+
 export const getAuthController = (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/login')
@@ -9,12 +12,7 @@ export const getAuthController = (req, res) => {
 
 export const getAuthRegisterController = (req, res) => {
     if (!req.isAuthenticated()) {
-        res.render('authForm', {
-            title: 'Register',
-            action: '/register',
-            href: '/login',
-            linkMsg: 'Go to log in!'
-        })
+        res.render('authForm', new AuthDto('Register'))
     }
     else {
         res.redirect('/dasboard')
@@ -30,12 +28,7 @@ export const postAuthRegisterController = (req, res) => {
 
 export const getAuthLoginController = (req, res) => {
     if (!req.isAuthenticated()) {
-        res.render('authForm', {
-            title: 'Login',
-            action: 'login',
-            href: '/register',
-            linkMsg: 'Go to sign up!'
-        })
+        res.render('authForm', new AuthDto('Login'))
     }
     else {
         res.redirect('/dashboard')
@@ -48,7 +41,7 @@ export const postAuthLoginController = (req, res) => {
 
 export const getAuthLogoutControler = (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('logout', {user: req.user.username})
+        res.render('logout', new UserDto(req.user).getUser())
     } else {
         res.redirect('/login')
     }
