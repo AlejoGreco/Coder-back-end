@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %> 
+</head>
+<body>
+    <main class="container mt-3">
+        <div class="d-flex flex-column align-items-center">
+            <h2>Generacion automatica de numeros</h2>
+            <hr class="my-4 w-100">
+            <table class="table w-75">
+                <thead>
+                  <tr>
+                    <th scope="col">Numero</th>
+                    <th scope="col">Ocurrencias</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for( let index = 0; index < length; index++ ) { %>
+                        <tr>
+                            <td><%= index %> </td>
+                            <td><%= result[index] %></td>
+                          </tr>
+                    <% } %>
+                </tbody>
+              </table>
+        </div>
+    </main>
+</body>
+</html>
