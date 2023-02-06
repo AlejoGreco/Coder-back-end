@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %> 
+</head>
+<body>
+    <main class="container mt-3">
+        <div class="p-3 mt-4 alert-info">
+            <h2 style="margin: 0;">Hasta Luego <%= user %> </h2>
+        </div>
+    </main>
+    <script>
+        setTimeout(() => fetch('/logout',{
+            method: 'DELETE'
+        }).then(location.href = '/'), 2000)
+    </script>
+</body>
+</html>
