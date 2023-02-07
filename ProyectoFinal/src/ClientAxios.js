@@ -2,27 +2,68 @@ import axios from 'axios'
 
 export default class AxiosClient {
     constructor({host, port}){
-        this.url = `${host}:${port}`
+        this.url = `http://${host}:${port}`
+        this.ready = false
+        this.options
     }
 
-    async get(path, param){
-        try {
-            if(param){
-                return await (await axios.get(`${this.url}/${path}/${param}`)).data
+    async init(auth, credentials){
+        try{
+            if(auth !== null && credentials !== null){
+                const result = await axios.post(`${this.url}/${auth}`, credentials)
+                const cookies = result.headers['set-cookie'].toString().split(';')[0].concat(';')
+                this.options = {
+                    headers: {
+                        Cookie: cookies
+                    }
+                }
+                this.ready = true
+                console.log('Logged in!')
+                return result.data
             }
-            return await (await axios.get(`${this.url}/${path}`)).data
         }
         catch (e){
-            return {error: e.messaje}
+            console.log({error: e})
+            return -1
+        }
+    }
+
+    isReady(){
+        return this.ready
+    }
+
+    async get(path){
+        try {
+            return await axios.get(`${this.url}/${path}`, this.options)
+        }
+        catch (e){
+            return {error: e}
         }
     }
 
     async post(path, body){
         try{
-            return await (await axios.post(`${this.url}/${path}`, body)).data
+            return await axios.post(`${this.url}/${path}`, body)
         }
         catch (e){
-            return {error: e.messaje}
+            return {error: e}
+        }
+    }
+
+    async put(path, body){
+        try{
+            return await axios.put(`${this.url}/${path}`, body)
+        }
+        catch (e){
+            return {error: e}
+        }
+    }
+    async delete(path){
+        try{
+            return await axios.delete(`${this.url}/${path}`)
+        }
+        catch (e){
+            return {error: e}
         }
     }
 }

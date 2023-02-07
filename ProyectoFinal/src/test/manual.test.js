@@ -1,29 +1,38 @@
 import AxiosClient from "../ClientAxios.js"
 
-const client = new AxiosClient({host: 'localhost', port: 8080})
+const config = {
+  host: 'localhost', 
+  port: 8080
+}
+
+const auth = {
+  path: 'user/login',
+  credentials: {
+    "username": "trici1@gmail.com",
+    "password": "12345"
+  }
+}
+
+const client = new AxiosClient(config)
 
 console.log('/------ Test Manual de API ------/')
 console.log('/------ ------------------ ------/')
 console.log('')
 
-const init = async () => {
-    console.log('Logueando con usuario de pruebas')
-}
-
-await init()
+console.log(await client.init(auth.path, auth.credentials))
 
 console.log('')
 console.log('/------ Test de Productos ------/')
 console.log('')
 
 console.log('GET: debo obtener un array de productos')
-let result = await client.get('/api/productos')
-let length = result.length
+let { data } = await client.get('api/productos')
+let length = data.length
 
-console.log(`Tipo devuelto: ${typeof result}`)
-console.log({result})
+console.log(`Es array? ${Array.isArray(data)}`)
+console.log(data)
 
-console.log('')
+/*console.log('')
 console.log('POST: debo obtener el producto creado, con los mismos valores')
 const body= {}
 result = await client.post('/api/productos', body)
@@ -60,4 +69,4 @@ result = await client.get('/api/productos')
 console.log(`Longitud previa al borrado de producto: ${length}`)
 console.log(`Longitud posterior al borrado de producto:  ${result.length}`)
 
-
+*/
