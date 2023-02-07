@@ -43,7 +43,7 @@ export default class AxiosClient {
 
     async post(path, body){
         try{
-            return await axios.post(`${this.url}/${path}`, body)
+            return await axios.post(`${this.url}/${path}`, body, this.options)
         }
         catch (e){
             return {error: e}
@@ -52,7 +52,7 @@ export default class AxiosClient {
 
     async put(path, body){
         try{
-            return await axios.put(`${this.url}/${path}`, body)
+            return await axios.put(`${this.url}/${path}`, body, this.options)
         }
         catch (e){
             return {error: e}
@@ -60,7 +60,7 @@ export default class AxiosClient {
     }
     async delete(path){
         try{
-            return await axios.delete(`${this.url}/${path}`)
+            return await axios.delete(`${this.url}/${path}`, this.options)
         }
         catch (e){
             return {error: e}
