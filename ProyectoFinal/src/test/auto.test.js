@@ -66,7 +66,20 @@ describe('Test API - Entidad Productos', () => {
 
     describe('Peticiones DELETE', () => {
         it('Debe quitar el producto especificado del arreglo de productos', async () => {
+            let res = await request.get('/api/productos').set('Cookie', [cookies])
+            const originalLength = res.body.length
+            expect(res.status).to.equal(200)
+            
 
+            const id = res.body[0]._id
+            await request.delete(`/api/productos/${id}`).set('Cookie', [cookies])
+            res = await request.get('/api/productos').set('Cookie', [cookies])
+            
+            // verifico que se achico el arreglo de productos
+            expect(res.body.length).to.equal(originalLength - 1)
+
+            res = await request.get(`/api/productos/${id}`).set('Cookie', [cookies])
+            expect(res.body.item).to.equal(null)
         })
     })
 })
