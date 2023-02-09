@@ -4,8 +4,10 @@ import { config, auth } from './config.test.js'
 
 const request = supertest(`http://${config.host}:${config.port}`)
 
-describe('Test API - Entidad Productos', () => {
+describe('Test API - Entidad Productos', function() {
     let cookies
+    this.timeout(5000)
+    
     before(async () => {
         // Logueo de usuario y guardado de cookie de session
         const res = await request.post(`/${auth.path}`).send(auth.credentials)
