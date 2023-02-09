@@ -12,6 +12,11 @@ describe('Test API - Entidad Productos', () => {
         cookies = res.headers['set-cookie'].toString().split(';')[0].concat(';')
     })
 
+    after(async () => {
+        await request.delete(`/${auth.path}`).set('Cookie', [cookies])
+        console.log('Logged out')
+    })
+
     describe('POST', () => {
 
         it('Se deberia agregar un producto', async () => {
@@ -60,7 +65,20 @@ describe('Test API - Entidad Productos', () => {
 
     describe('PUT', () => {
         it('Debo actualizar un producto existente', async () => {
+            let res = await request.get('/api/productos').set('Cookie', [cookies])
+            expect(res.status).to.equal(200)
+            const {_id, __v, ...oldBody} = res.body[0]
 
+            const newBody = { 
+                ...oldBody,
+                nombre: "Producto test 1 MODIFICADO",
+                descripcion: "Soy producto de prueba manual MODIFICADO",
+                stock: 1 
+            }
+
+            await request.put(`/api/productos/${_id}`).set('Cookie', [cookies]).send(newBody)
+            const { body } = await request.get(`/api/productos/${_id}`).set('Cookie', [cookies])
+            expect({_id, __v, ...newBody}).to.deep.equal(body.item)
         })
     })
 

@@ -71,11 +71,12 @@ console.log('')
 console.log('PUT: con id - debo modificar un producto existente')
 const newBody = { ...body, descripcion: "Soy producto de prueba manual MODIFICADO", stock: 1 }
 console.log(newBody)
-let result4 = await client.put(`api/productos/${id}`, newBody)
+await client.put(`api/productos/${id}`, newBody)
+let result4 = await client.get(`api/productos/${id}`)
 console.log(`Valor previo:`)
 console.log(result3.data.item)
 console.log(`Valor obtenido`)
-console.log(result4.data)
+console.log(result4.data.item)
 
 
 console.log('')
