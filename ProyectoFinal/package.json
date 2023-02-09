@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "mtest": "node src/test/manual.test.js"
+    "mtest": "node src/test/manual.test.js",
+    "test": "mocha src/test/auto.test.js"
   },
   "keywords": [],
   "author": "",
