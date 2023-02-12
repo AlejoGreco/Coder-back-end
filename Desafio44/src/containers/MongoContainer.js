@@ -7,19 +7,20 @@ export default class MongoContainer {
         return await this.model.findById(id)
     }
 
-    async findAll({key, value}){
-        if(key && value)
-            return await this.model.find({[key]: value})
+    async findAll(query){
+        if(query!== null && query !== {}){
+            return await this.model.find(query)
+        }
         else
-            return await this.model.find({})
+            return await this.model.find()
     }
 
     async create(object){
         return await this.model.create(object)
     }
 
-    async update(id, {key, value}){
-        return await this.model.findByIdAndUpdate(id, {[key]: value})
+    async update(id, query){
+        return await this.model.findByIdAndUpdate(id, query)
     }
 
     async delete(id){
