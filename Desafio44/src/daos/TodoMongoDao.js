@@ -11,20 +11,11 @@ class TodoMongoDao extends TodoDao {
         return await this.container.findOne(id)
     }
 
-    async getTodos(done){
-        let query = null
-        if(done !== null && done !== undefined)
-            query = { done }
+    async getTodos(query){
         return await this.container.findAll(query)
     }
 
-    async createTodo(title){
-        const newTodo = {
-            title,
-            date: new Date().toLocaleString(),
-            done: false
-        }
-
+    async createTodo(newTodo){
         return await this.container.create(newTodo)
     }
 
