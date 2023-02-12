@@ -8,10 +8,12 @@ class TodoController {
     }
 
     async getTodos(data){
+        console.log(data)
         return await todoService.getTodos(data.done)
     }
 
     async createTodo(data){
+        console.log(data)
         return await todoService.createTodo(data.title)
     } 
 

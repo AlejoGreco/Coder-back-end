@@ -4,6 +4,7 @@ import todoModel from "../models/todo.js"
 
 class TodoMongoDao extends TodoDao {
     constructor(){
+        super()
         this.container = new MongoContainer(todoModel)
     }
 
@@ -16,6 +17,7 @@ class TodoMongoDao extends TodoDao {
     }
 
     async createTodo(newTodo){
+        console.log(newTodo)
         return await this.container.create(newTodo)
     }
 

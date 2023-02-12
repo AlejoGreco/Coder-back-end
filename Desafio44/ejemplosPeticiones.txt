@@ -1,0 +1,41 @@
+mutation{
+  createTodo(title: "My first todo"){
+    title,
+    date,
+    done
+  }
+}
+
+mutation{
+  deleteTodo(id: "63e9425318e3bb7708516eff"){
+    title,
+    date,
+    done
+  }
+}
+
+mutation{
+  updateTodo(id: "63e9425318e3bb7708516eff"){
+    title,
+    date
+  }
+}
+
+// Con null trae todos los todos - si no es false o true
+query{
+  getTodos(done: null){
+	id,
+    title,
+    date,
+    done
+  }
+}
+
+query{
+  getTodo(id: "63e9425318e3bb7708516eff"){
+	id,
+    title,
+    date,
+    done
+  }
+}

@@ -24,6 +24,6 @@ export default class MongoContainer {
     }
 
     async delete(id){
-        return await this.model.findBiIdAndDelete(id)
+        return await this.model.findByIdAndDelete(id)
     }
 }

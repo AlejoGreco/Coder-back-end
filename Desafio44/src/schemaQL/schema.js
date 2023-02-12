@@ -4,7 +4,7 @@ export default buildSchema(`
     type Todo {
         id: ID!
         title: String,
-        date: TimeStamp,
+        date: String,
         done: Boolean
     }
 

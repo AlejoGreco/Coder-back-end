@@ -1,8 +1,8 @@
-import TodoDao from "../daos/TodoBasicDao"
+import TodoMongoDao from "../daos/TodoMongoDao.js"
 
 class TodoService {
     constructor(){
-        this.dao = new TodoDao()
+        this.dao = new TodoMongoDao()
     }
 
     async getTodo(id){
@@ -11,10 +11,10 @@ class TodoService {
     }
 
     async getTodos(done){
-        let query = null
+        let query = {}
         if(done !== null && done !== undefined)
             query = { done }
-        const todo = await this.dao.getTodos(done)
+        const todo = await this.dao.getTodos(query)
         return todo
     }
 
