@@ -10,7 +10,12 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiCreatedResponse,
+  ApiResponse,
+} from '@nestjs/swagger';
 import { Product } from './entities/product.entity';
 
 @ApiTags('Products')
@@ -19,7 +24,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a product' })
+  @ApiOperation({ summary: 'Create a new product' })
   @ApiCreatedResponse({
     status: 201,
     description: 'Created Succesfully',
@@ -34,6 +39,12 @@ export class ProductsController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all products' })
+  @ApiResponse({
+    status: 200,
+    description: 'Resources found successfully',
+    type: Array<Product>,
+  })
   findAll() {
     const products = this.productsService.findAll();
     return {
@@ -43,6 +54,12 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get product by id' })
+  @ApiResponse({
+    status: 200,
+    description: 'Resource found successfully',
+    type: Product,
+  })
   findOne(@Param('id') id: string) {
     const product = this.productsService.findOne(+id);
     if (product) {
@@ -73,6 +90,12 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete product by id' })
+  @ApiResponse({
+    status: 200,
+    description: 'Resource deleted successfully',
+    type: Product,
+  })
   remove(@Param('id') id: string) {
     const product = this.productsService.remove(+id);
     if (product) {
