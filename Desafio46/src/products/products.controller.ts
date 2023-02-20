@@ -10,7 +10,7 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { Product } from './entities/product.entity';
 
 @ApiTags('Products')
@@ -20,9 +20,9 @@ export class ProductsController {
 
   @Post()
   @ApiOperation({ summary: 'Create a product' })
-  @ApiBody({ type: CreateProductDto })
-  @ApiResponse({
-    status: 200,
+  @ApiCreatedResponse({
+    status: 201,
+    description: 'Created Succesfully',
     type: Product,
   })
   create(@Body() createProductDto: CreateProductDto) {
