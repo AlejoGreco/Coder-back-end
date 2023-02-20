@@ -42,7 +42,11 @@ export class ProductsService {
     return `This action updates a #${id} product`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  remove(id: number): Product {
+    const product = this.products.find((p) => p.id === id);
+    if (product) {
+      this.products = this.products.filter((p) => p.id !== id);
+    }
+    return product;
   }
 }

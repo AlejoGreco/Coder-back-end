@@ -10,7 +10,8 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { Product } from './entities/product.entity';
 
 @ApiTags('Products')
 @Controller('products')
@@ -18,6 +19,12 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Create a product' })
+  @ApiBody({ type: CreateProductDto })
+  @ApiResponse({
+    status: 200,
+    type: Product,
+  })
   create(@Body() createProductDto: CreateProductDto) {
     const newProduct = this.productsService.create(createProductDto);
     return {
@@ -57,6 +64,16 @@ export class ProductsController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.productsService.remove(+id);
+    const product = this.productsService.remove(+id);
+    if (product) {
+      return {
+        message: 'Product removed',
+        product,
+      };
+    }
+    return {
+      message: `Product #${id} not found`,
+      product: null,
+    };
   }
 }
