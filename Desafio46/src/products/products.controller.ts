@@ -19,7 +19,11 @@ export class ProductsController {
 
   @Post()
   create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+    const newProduct = this.productsService.create(createProductDto);
+    return {
+      message: 'Product created',
+      product: newProduct,
+    };
   }
 
   @Get()

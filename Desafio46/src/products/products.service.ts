@@ -12,7 +12,22 @@ export class ProductsService {
   }
 
   create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+    let id: number;
+
+    if (this.products.length === 0) {
+      id = 1;
+    } else {
+      id = this.products.length + 1;
+    }
+
+    const newProduct = {
+      id,
+      ...createProductDto,
+    };
+
+    this.products.push(newProduct);
+
+    return newProduct;
   }
 
   findAll(): Array<Product> {
