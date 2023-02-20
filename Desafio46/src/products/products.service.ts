@@ -39,7 +39,15 @@ export class ProductsService {
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    const index = this.products.findIndex((p) => p.id === id);
+    if (index === -1) return null;
+
+    this.products[index] = {
+      ...this.products[index],
+      ...updateProductDto,
+    };
+
+    return this.products[index];
   }
 
   remove(id: number): Product {

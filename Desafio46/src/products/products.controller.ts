@@ -59,7 +59,17 @@ export class ProductsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(+id, updateProductDto);
+    const product = this.productsService.update(+id, updateProductDto);
+    if (product) {
+      return {
+        message: 'Product updated',
+        product,
+      };
+    }
+    return {
+      message: `Product #${id} not found`,
+      product: null,
+    };
   }
 
   @Delete(':id')
