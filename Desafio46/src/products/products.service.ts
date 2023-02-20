@@ -19,8 +19,8 @@ export class ProductsService {
     return this.products;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  findOne(id: number): Product {
+    return this.products.find((p) => p.id === id);
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {

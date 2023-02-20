@@ -26,14 +26,24 @@ export class ProductsController {
   findAll() {
     const products = this.productsService.findAll();
     return {
-      message: 'Products founded',
+      message: 'Products found',
       products,
     };
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.productsService.findOne(+id);
+    const product = this.productsService.findOne(+id);
+    if (product) {
+      return {
+        message: 'Product found',
+        product,
+      };
+    }
+    return {
+      message: `Product #${id} not found`,
+      product: null,
+    };
   }
 
   @Patch(':id')
