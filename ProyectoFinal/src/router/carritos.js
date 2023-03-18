@@ -1,5 +1,5 @@
 import { Router }  from 'express'
-import { cartDao } from '../daos/index.js'
+import daoFactory from '../daos/index.js'
 import transporter from '../transports/mailer.js'
 import twilioClient, { twilioNumber } from '../transports/sms.js'
 import { ADMIN_EMAIL } from '../transports/mailer.js'
@@ -7,6 +7,7 @@ import logger from '../logger/index.js'
 import { emailViewGenerator, emailCartListGen, smsContentGenerator } from '../utils/transportPayloads.js'
 
 const route = Router()
+const cartDao = daoFactory.getCartDao()
 
 const cartIdValidate = (req, res, next) => {
     const id = parseInt(req.params.id)
@@ -125,49 +126,3 @@ route.delete('/:id/productos/:id_prod', async (req, res) => {
 })
 
 export default route
-
-
-/*route.post('/', async (req, res) => {
-    try{
-        res.send(await cm.createCart())
-    }
-    catch (e){
-        res.send(e)
-    }
-})*/
-
-/*route.delete('/:id', cartIdValidate, async (req, res) => {
-    try{
-        res.send(await cm.deleteCart(req.cartId))
-    }
-    catch (e){
-        res.send(e)
-    }
-})*/
-
-/*route.get('/:id/productos', cartIdValidate, async (req, res) => {
-    try{
-        res.send(await cm.getCartProducts(req.cartId))
-    }
-    catch (e){
-        res.send(e)
-    }
-})*/
-
-/*route.post('/:id/productos', cartIdValidate, pDataValidate, async (req, res) => {
-    try{
-        res.send(await cm.addProductToCart(req.cartId, req.body))
-    }
-    catch (e){
-        res.send(e)
-    }
-})*/
-
-/*route.delete('/:id/productos/:id_prod', cartIdValidate, prodIdValidate, async (req, res) => {
-    try{
-        res.send(await cm.deleteProductFromCart(req.cartId, req.prodId))
-    }
-    catch (e){
-        res.send(e)
-    }
-})*/

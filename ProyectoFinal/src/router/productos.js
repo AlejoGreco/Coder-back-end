@@ -1,8 +1,9 @@
 import { Router } from 'express'
-import { productDao } from '../daos/index.js'
+import daoFactory from '../daos/index.js'
 import { checkAuthAdmin } from '../middlewares/auth.js'
 
 const route = Router()
+const productDao = daoFactory.getProductDao()
 
 const idValidate = (req, res, next) => {
     const id = parseInt(req.params.id)

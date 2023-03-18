@@ -7,35 +7,58 @@ import CartFsDao from './carts/CartFsDao.js'
 import CartFirestoreDao from './carts/CartFirestoreDao.js'
 import { PERSISTENCE, CONNECTION_STR } from '../config.js'
 
-const daosExports = dbName => {
-    let productDao
-    let cartDao
-
-    switch (PERSISTENCE){
-        case 'MONGO_DB':
-                const db = mongoose.createConnection(CONNECTION_STR, {
-                    useNewUrlParser: true,
-                    useUnifiedTopology: true,
-                    dbName: dbName
-                })
-                
-                productDao = new ProductMongoDao('products', db)
-                cartDao = new CartMongoDao('carts', db)
-            break;
-        case 'FIRESTORE':
-                productDao = new ProductFirestoreDao('products')
-                cartDao = new CartFirestoreDao('carts')
-            break;
-        case 'FS':
-                productDao = new ProductFsDao()
-                cartDao = new CartFsDao()
-            break;
-        default:
-                productDao = new ProductFsDao()
-                cartDao = new CartFsDao()
-            break;
+class DaoFactory {
+    constructor(dbName, persistence){
+        this.dbName = dbName
+        this.persistence = persistence
+        this.db
     }
 
-    return { productDao, cartDao }
+    getProductDao(){
+        switch (this.persistence){
+            case 'MONGO_DB':
+                if(!this.db){
+                    this.db = mongoose.createConnection(CONNECTION_STR, {
+                        useNewUrlParser: true,
+                        useUnifiedTopology: true,
+                        dbName: this.dbName
+                    })
+                }
+                return new ProductMongoDao('products', this.db)
+
+            case 'FIRESTORE':
+                return new ProductFirestoreDao('products')
+
+            case 'FS':
+                return new ProductFsDao()
+
+            default:
+                return new ProductFsDao()
+        }
+    }
+
+    getCartDao(){
+        switch (this.persistence){
+            case 'MONGO_DB':
+                if(!this.db){
+                    this.db = mongoose.createConnection(CONNECTION_STR, {
+                        useNewUrlParser: true,
+                        useUnifiedTopology: true,
+                        dbName: this.dbName
+                    })
+                }
+                return new CartMongoDao('carts', this.db)
+
+            case 'FIRESTORE':
+                return new CartFirestoreDao('carts')
+
+            case 'FS':
+                return new CartFsDao()
+
+            default:
+                return new CartFsDao()
+        }
+    }
 }
-export const { productDao, cartDao } = daosExports('ecommerce')
+
+export default new DaoFactory('ecommerce', PERSISTENCE)
