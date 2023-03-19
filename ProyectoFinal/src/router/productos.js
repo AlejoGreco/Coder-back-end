@@ -55,23 +55,23 @@ const pDataValidate = (req, res, next) => {
 }
 
 route.get('/', async (req, res) => {
-    const result = await productDao.readAll(req)
+    const result = await productDao.getAllProducts(req)
     res.send(result)
 })
 route.get('/:id', async (req, res) => {
-    const result = await productDao.readById(req)
+    const result = await productDao.getProduct(req.params.id)
     res.send(result)
 })
 route.post('/', checkAuthAdmin, pDataValidate, async (req, res) => {
-    const result = await productDao.create(req)
+    const result = await productDao.createProduct(req.body)
     res.send(result)
 })
 route.put('/:id', checkAuthAdmin, pDataValidate, async (req, res) => {
-    const result = await productDao.update(req)
+    const result = await productDao.updateProduct(req.params.id, req.body)
     res.send(result)
 })
 route.delete('/:id', checkAuthAdmin, async (req, res) => {
-    const result = await productDao.destroy(req)
+    const result = await productDao.deleteProduct(req.params.id)
     res.send(result)
 })
 

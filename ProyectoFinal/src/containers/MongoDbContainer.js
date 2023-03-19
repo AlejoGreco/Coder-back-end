@@ -1,69 +1,49 @@
-import logger from '../logger/index.js'
-
 class MongoDbContainer {
-    constructor(schema, collName, db){
-        this.model = db.model(collName, schema)
+    constructor(model){
+        this.model = model
     }
 
-    async create(req) {
+    async create(item) {
         try {
-            const newItem = { timestamp: Date.now(), ...req.body }
-            const result = await this.model.create(newItem)
-            logger.info(result)
-            return { message: 'Item created!', newItem: result }
+            return await this.model.create(item)
         }
         catch (e){
             return { error: e.message, code: e.code }
         }
     }
     
-    async readAll() {
+    async read(id) {
         try {
-            const items = await this.model.find()
-            return items    
+            if(!id)
+                return await this.model.find()
+
+            return await this.model.findById(id)
+                 
         } 
         catch (e){
             return { error: e.message, code: e.code }
         }
     }
 
-    async readById(req) {
+    async update(id, newItem) {
         try {
-            const { id } = req.params
-            const item = await this.model.findById(id)
-            logger.info(item)
-            return { item }
-        }
-        catch (e){
-            return { error: e.message, code: e.code }
-        }     
-    }
-
-    async update(req) {
-        try {
-            const { id } = req.params
-            const result = await this.model.findByIdAndUpdate(id, req.body)
-            logger.info(result)
-            return { message: 'Item updated!', itemUpdated: result}
+            return await this.model.findByIdAndUpdate(id, newItem)
         } 
         catch (e){
             return { error: e.message, code: e.code }
         }
     }
 
-    async destroy(req) {
+    async destroy(id) {
         try {
-            const { id } = req.params
-            const itemDeleted = await this.model.findByIdAndDelete(id)
-            logger.info(itemDeleted)
-            return { message: 'Item deleted!', itemDeleted}
+            return await this.model.findByIdAndDelete(id)
         }
         catch (e){
             return { error: e.message, code: e.code }
         }   
     }
 
-    async readSubitems(req, prop) {
+    /*async readSubitems(req, prop) {
         try {
             const { id } = req.params
             const item = await this.model.findById(id)
@@ -97,7 +77,7 @@ class MongoDbContainer {
         catch (e){
             return { error: e.message, code: e.code }
         }    
-    }
+    }*/
 }
 
 export default MongoDbContainer
