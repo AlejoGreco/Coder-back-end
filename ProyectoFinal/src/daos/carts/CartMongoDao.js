@@ -2,6 +2,7 @@ import MongoDbContainer from '../../containers/MongoDbContainer.js'
 import CartSchema from '../../schemas/cartSchema.js'
 import mongoose from 'mongoose'
 import { CONNECTION_STR } from '../../config.js'
+import ErrorDto from '../../dtos/ErrorDto.js'
 
 class CartMongoDao {
     constructor(dbName){
@@ -14,28 +15,95 @@ class CartMongoDao {
     }
 
     async createCart(emptyCart){
-        return this.container.create(emptyCart)
+        try{
+            const result = await this.container.create(emptyCart)
+            if(!result)
+                throw new ErrorDto({params: {emptyCart}}, 'No se pudo crear el carrito', 400, -10)
+
+            return result
+        }
+        catch (e){
+            if(!e.error?.params){
+                return new ErrorDto(e, 'No se pudo crear el carrito | Lanzado por aplicacion', 400, -100)
+            }
+            return e
+        }
     }
 
     async deleteCart(id){
-        return await this.container.destroy(id)
+        try{
+            const result = await this.container.destroy(id)
+            if(!result)
+                throw new ErrorDto({params: {id}}, 'No se pudo eliminar el carrito', 400, -11)
+            
+            return result
+        }
+        catch (e){
+            if(!e.error?.params){
+                return new ErrorDto(e, 'No se pudo eliminar el carrito | Lanzado por aplicacion', 400, -110)
+            }
+            return e
+        }
     }
 
     async getCartProducts(id){
-        const cart = await this.container.read(id)
-        return cart['products']
+        try{
+            const cart = await this.container.read(id)
+            if(!cart)
+                throw new ErrorDto({params: {id}}, 'No se pudo encontrar el carrito - GET', 400, -12)
+            
+            return cart['products']
+        }
+        catch (e){
+            if(!e.error?.params){
+                return new ErrorDto(e, 'No se pudo encontrar el carrito | Lanzado por aplicacion', 400, -120)
+            }
+            return e
+        }
     }
 
     async addProduct2Cart(id, product){
-        const cart = await this.container.read(id)
-        cart['products'].push(product)
-        return await cart.save()
+        try{
+            const cart = await this.container.read(id)
+            if(!cart)
+                throw new ErrorDto({params: {id, product}}, 'No se pudo obtener el carrito - ADD ', 400, -13)
+            
+            cart['products'].push(product)
+            const result = await cart.save()
+
+            if(!result)
+                throw new ErrorDto({params: {id, product}}, 'No se pudo agregar el producto al carrito ', 400, -14)
+            
+            return result
+        }
+        catch (e){
+            if(!e.error?.params){
+                return new ErrorDto(e, 'No se pudo agregar el producto al carrito | Lanzado por aplicacion', 400, -130)
+            }
+            return e
+        }
     }
 
     async deleteProductFromCart(id, id_prod){
-        const cart = await this.container.read(id)
-        cart['products'].id(id_prod).remove()
-        return await cart.save()
+        try{
+            const cart = await this.container.read(id)
+            if(!cart)
+                throw new ErrorDto({params: {id, id_prod}}, 'No se pudo obtener el carrito - DELETE', 400, -15)
+            
+            cart['products'].id(id_prod).remove()
+            const result = await cart.save()
+
+            if(!result)
+                throw new ErrorDto({params: {id, id_prod}}, 'No se pudo eliminar el producto del carrito ', 400, -16)
+            
+            return result
+        }
+        catch (e){
+            if(!e.error?.params){
+                return new ErrorDto(e, 'No se pudo eliminar el producto del carrito | Lanzado por aplicacion', 400, -150)
+            }
+            return e
+        }
     }
 }
 
