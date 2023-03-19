@@ -99,15 +99,7 @@ route.post('/:id/collect', async (req, res) => {
 route.post('/', cartController.createCart)
 route.delete('/:id', cartController.deleteCart)
 
-route.get('/:id/productos', async (req, res) => {
-    let result = await cartDao.readSubitems(req, 'products')
-    if(result.error){
-        logger.info('El usuario no tiene carrito')
-        req.body._id = req.params.id
-        result = await cartDao.create(req)
-    }
-    res.send(result)
-})
+route.get('/:id/productos', cartController.readCartProducts)
 
 route.post('/:id/productos', pDataValidate, async (req, res) => {
     const result = await cartDao.addSubItem(req, 'products')

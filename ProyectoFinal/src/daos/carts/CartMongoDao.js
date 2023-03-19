@@ -17,17 +17,14 @@ class CartMongoDao {
         return this.container.create(emptyCart)
     }
 
-    async getAllProducts(){
-        return await this.container.read()
+    async getCartProducts(id){
+        const cart = await this.container.read(id)
+        return cart['products']
     }
 
-    async getProduct(id){
-        return await this.container.read(id)
-    }
-
-    async updateProduct(id, product){
-        return this.container.update(id, product)
-    }
+    //async updateProduct(id, product){
+    //    return this.container.update(id, product)
+    //}
 
     async deleteCart(id){
         return await this.container.destroy(id)
