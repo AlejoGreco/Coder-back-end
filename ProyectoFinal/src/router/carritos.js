@@ -98,17 +98,8 @@ route.post('/:id/collect', async (req, res) => {
 
 route.post('/', cartController.createCart)
 route.delete('/:id', cartController.deleteCart)
-
 route.get('/:id/productos', cartController.readCartProducts)
-
-route.post('/:id/productos', pDataValidate, async (req, res) => {
-    const result = await cartDao.addSubItem(req, 'products')
-    res.send(result)
-})
-
-route.delete('/:id/productos/:id_prod', async (req, res) => {
-    const result = await cartDao.destroySubItem(req, res, 'products')
-    res.send(result)
-})
+route.post('/:id/productos', pDataValidate, cartController.addProductCart)
+route.delete('/:id/productos/:id_prod', cartController.deleteProductCart)
 
 export default route

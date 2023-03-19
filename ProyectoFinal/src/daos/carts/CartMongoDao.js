@@ -17,17 +17,25 @@ class CartMongoDao {
         return this.container.create(emptyCart)
     }
 
+    async deleteCart(id){
+        return await this.container.destroy(id)
+    }
+
     async getCartProducts(id){
         const cart = await this.container.read(id)
         return cart['products']
     }
 
-    //async updateProduct(id, product){
-    //    return this.container.update(id, product)
-    //}
+    async addProduct2Cart(id, product){
+        const cart = await this.container.read(id)
+        cart['products'].push(product)
+        return await cart.save()
+    }
 
-    async deleteCart(id){
-        return await this.container.destroy(id)
+    async deleteProductFromCart(id, id_prod){
+        const cart = await this.container.read(id)
+        cart['products'].id(id_prod).remove()
+        return await cart.save()
     }
 }
 

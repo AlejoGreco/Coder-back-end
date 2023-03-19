@@ -19,6 +19,16 @@ class CartController {
         const result = await this.service.readCartProducts(req.params.id)
         res.send(result)
     }
+
+    addProductCart = async (req, res) => {
+        const result = await this.service.addProductCart(req.params.id, req.body)
+        res.send(result)
+    }
+
+    deleteProductCart = async (req, res) => {
+        const result = await this.service.deleteProductCart(req.params.id, req.params.id_prod)
+        res.send(result)
+    }
 }
 
 export default new CartController()

@@ -21,6 +21,14 @@ class CartServices {
     async readCartProducts(id){
         return await this.dao.getCartProducts(id)
     }
+
+    async addProductCart(id, product){
+        return await this.dao.addProduct2Cart(id, product)
+    }
+
+    async deleteProductCart(id, id_prod){
+        return await this.dao.deleteProductFromCart(id, id_prod)
+    }
 }
 
 export default new CartServices()
