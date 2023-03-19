@@ -22,7 +22,6 @@ class ProductMongoDao {
     }
 
     async createProduct(product){
-        product = { timestamp: Date.now(), ...product }
         return this.container.create(product)
     }
 

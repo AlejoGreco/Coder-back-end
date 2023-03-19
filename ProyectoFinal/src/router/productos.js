@@ -55,18 +55,8 @@ const pDataValidate = (req, res, next) => {
 
 route.get('/', productController.getProducts)
 route.get('/:id', productController.getProduct)
-
-route.post('/', checkAuthAdmin, pDataValidate, async (req, res) => {
-    //const result = await productDao.createProduct(req.body)
-    res.send(result)
-})
-route.put('/:id', checkAuthAdmin, pDataValidate, async (req, res) => {
-    //const result = await productDao.updateProduct(req.params.id, req.body)
-    res.send(result)
-})
-route.delete('/:id', checkAuthAdmin, async (req, res) => {
-    //const result = await productDao.deleteProduct(req.params.id)
-    res.send(result)
-})
+route.post('/', checkAuthAdmin, pDataValidate, productController.createProduct)
+route.put('/:id', checkAuthAdmin, pDataValidate, productController.updateProduct)
+route.delete('/:id', checkAuthAdmin, productController.deleteProduct)
 
 export default route
