@@ -1,9 +1,8 @@
 import { Router } from 'express'
-import daoFactory from '../daos/index.js'
+import productController from '../controllers/productController.js'
 import { checkAuthAdmin } from '../middlewares/auth.js'
 
 const route = Router()
-const productDao = daoFactory.getProductDao()
 
 const idValidate = (req, res, next) => {
     const id = parseInt(req.params.id)
@@ -54,24 +53,19 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.get('/', async (req, res) => {
-    const result = await productDao.getAllProducts(req)
-    res.send(result)
-})
-route.get('/:id', async (req, res) => {
-    const result = await productDao.getProduct(req.params.id)
-    res.send(result)
-})
+route.get('/', productController.getProducts)
+route.get('/:id', productController.getProduct)
+
 route.post('/', checkAuthAdmin, pDataValidate, async (req, res) => {
-    const result = await productDao.createProduct(req.body)
+    //const result = await productDao.createProduct(req.body)
     res.send(result)
 })
 route.put('/:id', checkAuthAdmin, pDataValidate, async (req, res) => {
-    const result = await productDao.updateProduct(req.params.id, req.body)
+    //const result = await productDao.updateProduct(req.params.id, req.body)
     res.send(result)
 })
 route.delete('/:id', checkAuthAdmin, async (req, res) => {
-    const result = await productDao.deleteProduct(req.params.id)
+    //const result = await productDao.deleteProduct(req.params.id)
     res.send(result)
 })
 
