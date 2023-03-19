@@ -29,6 +29,11 @@ class CartController {
         const result = await this.service.deleteProductCart(req.params.id, req.params.id_prod)
         res.send(result)
     }
+
+    collectCart = async (req, res) => {
+        const result = await this.service.collectCart(req.user)
+        res.send(result)
+    }
 }
 
 export default new CartController()

@@ -1,11 +1,6 @@
 import { Router }  from 'express'
 import daoFactory from '../daos/index.js'
 import cartController from '../controllers/cartController.js'
-import transporter from '../transports/mailer.js'
-import twilioClient, { twilioNumber } from '../transports/sms.js'
-import { ADMIN_EMAIL } from '../transports/mailer.js'
-import logger from '../logger/index.js'
-import { emailViewGenerator, emailCartListGen, smsContentGenerator } from '../utils/transportPayloads.js'
 
 const route = Router()
 const cartDao = daoFactory.getCartDao()
@@ -72,34 +67,11 @@ const pDataValidate = (req, res, next) => {
     next()
 }
 
-route.post('/:id/collect', async (req, res) => {
-    const result = await cartDao.readSubitems(req, 'products')
-    logger.info(result)
-    if(result.length === 0){
-        return res.status(400).send({error: 'No puede generar orden', code: -10})
-    }
-
-    const mailContent = {
-        subject: `Nuevo Pedido de ${req.user.name} | ${req.user.email}`,
-        title: `Orden de compra #${req.user.id}`,
-        footer: `Lo estara recibiendo en los proximos dias`,
-        body: `<ul>${emailCartListGen(result)}</ul>`
-    }
-
-    const mailOptions = emailViewGenerator(ADMIN_EMAIL, ADMIN_EMAIL, mailContent)
-    const clientMsg = smsContentGenerator(twilioNumber, req.user.phone)
-
-    await transporter.sendMail(mailOptions)
-    await twilioClient.messages.create(clientMsg)
-    
-    const {_id, __v, password, ...user} = req.user._doc
-    res.send({message: 'Orden generada con exito!', cart: result, user})
-})
-
 route.post('/', cartController.createCart)
 route.delete('/:id', cartController.deleteCart)
 route.get('/:id/productos', cartController.readCartProducts)
 route.post('/:id/productos', pDataValidate, cartController.addProductCart)
 route.delete('/:id/productos/:id_prod', cartController.deleteProductCart)
+route.post('/:id/collect', cartController.collectCart)
 
 export default route
