@@ -1,4 +1,6 @@
 import daosFactory from "../daos/index.js"
+import validationDtos from "../validations/validationDtos.js"
+import ErrorDto from "../dtos/ErrorDto.js"
 
 class ProductServices {
     constructor(){
@@ -14,13 +16,39 @@ class ProductServices {
     }
 
     async createProduct(product){
-        product = { timestamp: Date.now(), ...product }
-        return await this.dao.createProduct(product)
+        try{
+            await validationDtos.validateProductDto(product)
+            product = { timestamp: Date.now(), ...product }
+            return await this.dao.createProduct(product)
+        }
+        catch (e){
+            if(!e.error?.params){
+                console.log(e)
+                return new ErrorDto({ 
+                        params: { [e.path]: e.params.value ?  e.params.value : 'undefined'}
+                    }, 
+                    e.message, 400, -300)
+            }
+            return e
+        }
     }
 
     async updateProduct(id, product){
-        const newProduct = { timestamp: Date.now(), ...product }
-        return await this.dao.updateProduct(id, newProduct)
+        try{
+            await validationDtos.validateProductDto(product)
+            const newProduct = { timestamp: Date.now(), ...product }
+            return await this.dao.updateProduct(id, newProduct)
+        }
+        catch (e){
+            if(!e.error?.params){
+                console.log(e)
+                return new ErrorDto({ 
+                        params: { [e.path]: e.params.value ?  e.params.value : 'undefined'}
+                    }, 
+                    e.message, 400, -300)
+            }
+            return e
+        }
     }
 
     async deleteProduct(id){
