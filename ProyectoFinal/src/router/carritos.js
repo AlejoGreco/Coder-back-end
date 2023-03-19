@@ -97,11 +97,7 @@ route.post('/:id/collect', async (req, res) => {
 })
 
 route.post('/', cartController.createCart)
-
-route.delete('/:id', async (req, res) => {
-    const result = await cartDao.destroy(req)
-    res.send(result)
-})
+route.delete('/:id', cartController.deleteCart)
 
 route.get('/:id/productos', async (req, res) => {
     let result = await cartDao.readSubitems(req, 'products')

@@ -13,6 +13,10 @@ class CartServices {
         }
         return this.dao.createCart(cart)
     }
+
+    async deleteCart(id){
+        return this.dao.deleteCart(id)
+    }
 }
 
 export default new CartServices()

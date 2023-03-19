@@ -29,7 +29,7 @@ class CartMongoDao {
         return this.container.update(id, product)
     }
 
-    async deleteProduct(id){
+    async deleteCart(id){
         return await this.container.destroy(id)
     }
 }
