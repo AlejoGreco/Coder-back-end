@@ -4,6 +4,7 @@ import { emailViewGenerator, emailCartListGen, smsContentGenerator } from '../ut
 import transporter from '../transports/mailer.js'
 import twilioClient, { twilioNumber } from '../transports/sms.js'
 import { ADMIN_EMAIL } from '../transports/mailer.js'
+import ErrorDto from "../dtos/ErrorDto.js"
 
 class CartServices {
     constructor(){
@@ -28,8 +29,28 @@ class CartServices {
         return await this.dao.getCartProducts(id)
     }
 
-    async addProductCart(id, product){
-        return await this.dao.addProduct2Cart(id, product)
+    async addProductCart(id, prodAddReq){
+        try{
+            const {id_prod, amount} = prodAddReq
+            const product = await this.auxDao.getProduct(id_prod)
+            
+            if(!product)
+                throw new ErrorDto({params: {id_prod}}, 'No se pudo obtener el producto - ADD to CART', 404, 40)
+            
+            if(product.stock <  amount)
+                throw new ErrorDto({params: {id_prod, stock: product.stock, amount}}, 'No hay stock del producto - ADD to CART', 401, 41)
+
+            product.stock -= amount
+            await this.auxDao.updateProduct(id_prod, product)
+
+            return await this.dao.addProduct2Cart(id, product)
+        }
+        catch (e){
+            if(!e.error?.params){
+                return new ErrorDto(e, 'No se pudo agregar producto al carrito | Lanzado por aplicacion', 400, -400)
+            }
+            return e
+        }
     }
 
     async deleteProductCart(id, id_prod){
