@@ -8,6 +8,7 @@ import { ADMIN_EMAIL } from '../transports/mailer.js'
 class CartServices {
     constructor(){
         this.dao = daosFactory.getCartDao()
+        this.auxDao = daosFactory.getProductDao()
     }
 
     async createCart({id}){

@@ -32,6 +32,7 @@ class ProductMongoDao {
 
     async getProduct(id){
         try{
+            console.log(id)
             const product = await this.container.read(id)
             if(!product)
                 throw new ErrorDto({params: {id}},'No se pudo obtener producto', 400, -21)

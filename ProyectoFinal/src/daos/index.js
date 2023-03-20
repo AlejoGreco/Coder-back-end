@@ -10,37 +10,55 @@ class DaoFactory {
     constructor(dbName, persistence){
         this.dbName = dbName
         this.persistence = persistence
+        this.productDao = null
+        this.cartDao = null
     }
 
     getProductDao(){
+        if(this.productDao)
+            return this.productDao
+
+        console.log('Creando instancia de PRODUCT DAO')
         switch (this.persistence){
             case 'MONGO_DB':
-                return new ProductMongoDao(this.dbName)
+                this.productDao = new ProductMongoDao(this.dbName)
+                return this.productDao
 
             case 'FIRESTORE':
-                return new ProductFirestoreDao('products')
+                this.productDao = new ProductFirestoreDao('products')
+                return this.productDao
 
             case 'FS':
-                return new ProductFsDao()
+                this.productDao = new ProductFsDao()
+                return this.productDao
 
             default:
-                return new ProductFsDao()
+                this.productDao = new ProductFsDao()
+                return this.productDao
         }
     }
 
     getCartDao(){
+        if(this.cartDao)
+            return this.cartDao
+
+        console.log('Creando instancia de CART DAO')
         switch (this.persistence){
             case 'MONGO_DB':
-                return new CartMongoDao(this.dbName)
+                this.cartDao = new CartMongoDao(this.dbName)
+                return this.cartDao
 
             case 'FIRESTORE':
-                return new CartFirestoreDao('carts')
+                this.cartDao = new CartFirestoreDao('carts')
+                return this.cartDao
 
             case 'FS':
-                return new CartFsDao()
+                this.cartDao =  new CartFsDao()
+                return this.cartDao
 
             default:
-                return new CartFsDao()
+                this.cartDao = new CartFsDao()
+                return this.cartDao
         }
     }
 }
