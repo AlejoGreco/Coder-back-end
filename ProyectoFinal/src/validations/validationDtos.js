@@ -10,7 +10,8 @@ const getValidationMsg = (name, type, ...rest) => {
         INT: `El ${name} es debe ser un numero entero`,
         POS: `El ${name} es debe ser un numero positivo`,
         MATCH: `El ${name} no tiene el formato correcto`,
-        INT: `El ${name} debe ser un numero`
+        INT: `El ${name} debe ser un numero`,
+        OBJ_ID: `El ${name} debe ser un string formato objId`
     }
     return messages[type]
 }
@@ -44,10 +45,25 @@ class ValidationDtos {
                 .positive(getValidationMsg('precio', 'POS'))
                 .required(getValidationMsg('precio', 'REQUIRED'))
           })
+
+        this.productCartSchema = yup.object().shape({
+            id_prod: yup.string(getValidationMsg('id_prod', 'OBJ_ID'))
+                .required(getValidationMsg('id_prod', 'REQUIRED')),
+
+            amount: yup.number(getValidationMsg('amount', 'NUM'))
+                .positive(getValidationMsg('amount', 'POS'))
+                .integer(getValidationMsg('amount', 'INT'))
+                .required(getValidationMsg('amount', 'REQUIRED')),
+        })
     }
 
     async validateProductDto(product){
         const result = await this.productSchema.validate(product)
+        return result
+    }
+
+    async validateCartProductDto(prodData){
+        const result = await this.productCartSchema.validate(prodData)
         return result
     }
 }

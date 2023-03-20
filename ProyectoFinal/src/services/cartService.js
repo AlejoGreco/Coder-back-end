@@ -5,6 +5,7 @@ import transporter from '../transports/mailer.js'
 import twilioClient, { twilioNumber } from '../transports/sms.js'
 import { ADMIN_EMAIL } from '../transports/mailer.js'
 import ErrorDto from "../dtos/ErrorDto.js"
+import validationDtos from "../validations/validationDtos.js"
 
 class CartServices {
     constructor(){
@@ -31,7 +32,8 @@ class CartServices {
 
     async addProductCart(id, prodAddReq){
         try{
-            const {id_prod, amount} = prodAddReq
+            await validationDtos.validateCartProductDto(prodAddReq)
+            const { id_prod, amount } = prodAddReq
             const product = await this.auxDao.getProduct(id_prod)
             
             if(!product)
@@ -47,7 +49,10 @@ class CartServices {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo agregar producto al carrito | Lanzado por aplicacion', 400, -400)
+                return new ErrorDto({ 
+                    params: { [e.path]: e.params.value ?  e.params.value : 'undefined'}
+                }, 
+                e.message, 400, -420)
             }
             return e
         }
@@ -62,7 +67,7 @@ class CartServices {
         //logger.info(result)
         
         if(result.length === 0){
-            return res.status(400).send({error: 'No puede generar orden', code: -10})
+            return new ErrorDto({params: {cartLength: 0}}, 'No puede generar orden. No hay productos en el carrito', 400, -42)
         }
 
         const mailContent = {
