@@ -3,8 +3,8 @@ import yup from 'yup'
 const getValidationMsg = (name, type, ...rest) => {
     const messages = {
         STRING: `El ${name} debe ser una cadena de caracteres`,
-        MIN: `El ${name} debe tener al menos ${rest.length} caracteres de longitud`,
-        MAX: `El ${name} no debe tener mas de ${rest.length} caracteres de longitud`,
+        MIN: `El ${name} debe tener al menos ${rest[0]} caracteres de longitud`,
+        MAX: `El ${name} no debe tener mas de ${rest[0]} caracteres de longitud`,
         REQUIRED: `El ${name} es un campo requerido`,
         URL: `El ${name} es debe ser una url valida`,
         INT: `El ${name} es debe ser un numero entero`,
@@ -19,12 +19,12 @@ class ValidationDtos {
     constructor(){
         this.productSchema = yup.object().shape({
             nombre: yup.string(getValidationMsg('nombre', 'STRING'))
-                .min(4, getValidationMsg('nombre', 'MIN', {length: 4}))
-                .max(24, getValidationMsg('nombre', 'MAX', {length: 24}))
+                .min(4, getValidationMsg('nombre', 'MIN', 4))
+                .max(24, getValidationMsg('nombre', 'MAX', 24))
                 .required(getValidationMsg('nombre', 'REQUIRED')),
 
             descripcion: yup.string(getValidationMsg('descripcion', 'STRING'))
-                .max(48, getValidationMsg('descripcion', 'MAX', {length: 48}))
+                .max(48, getValidationMsg('descripcion', 'MAX', 48))
                 .required(getValidationMsg('descripcion', 'REQUIRED')),
 
             url: yup.string(getValidationMsg('url', 'STRING'))
@@ -48,7 +48,6 @@ class ValidationDtos {
 
     async validateProductDto(product){
         const result = await this.productSchema.validate(product)
-        console.log(result)
         return result
     }
 }
