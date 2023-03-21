@@ -4,6 +4,7 @@ import ProductFirestoreDao from './products/ProductFirestoreDao.js'
 import CartMongoDao from './carts/CartMongoDao.js'
 import CartFsDao from './carts/CartFsDao.js'
 import CartFirestoreDao from './carts/CartFirestoreDao.js'
+import UserMongoDao from './users/UserMongoDao.js'
 import { PERSISTENCE } from '../config.js'
 
 class DaoFactory {
@@ -12,6 +13,7 @@ class DaoFactory {
         this.persistence = persistence
         this.productDao = null
         this.cartDao = null
+        this.userDao = null
     }
 
     getProductDao(){
@@ -59,6 +61,21 @@ class DaoFactory {
             default:
                 this.cartDao = new CartFsDao()
                 return this.cartDao
+        }
+    }
+
+    getUserDao(){
+        if(this.userDao)
+            return this.userDao
+
+        console.log('Creando instancia de USER DAO')
+        switch (this.persistence){
+            case 'MONGO_DB':
+            case 'FIRESTORE':
+            case 'FS':
+            default:
+                this.userDao = new UserMongoDao('ecommerce-users')
+                return this.userDao
         }
     }
 }

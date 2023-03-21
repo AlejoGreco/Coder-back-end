@@ -14,6 +14,10 @@ class MongoDbContainer {
         return await this.model.findById(id)
     }
 
+    async readOne(query) {
+        return await this.model.findOne({[Object.keys(query)[0]]: Object.values(query)[0]})
+    }
+
     async update(id, newItem) {
         return await this.model.findByIdAndUpdate(id, newItem)
     }

@@ -1,18 +1,17 @@
-import mongoose from 'mongoose'
 import passport from 'passport'
 import LocalStrategy from 'passport-local'
-import UserSchema from '../schemas/userSchema.js'
+import daosFactory from '../daos/index.js'
 import { createHash, isValid } from '../utils/bcrypt.js'
 
-const userModel = new mongoose.model('user', UserSchema)
+const userDao = daosFactory.getUserDao()
 
 export const registerStrategy = new LocalStrategy({passReqToCallback: true}, async (req, username, password, cb) => {
     try {
-        const user = await userModel.findOne({username})
+        const user = await userDao.getUser({email: username})
         if(user){ return cb(null, false, { message: 'User allready exist' })}
 
         const hash = createHash(password)
-        const newUser = await userModel.create({...req.body, email: username, password: hash})
+        const newUser = await userDao.createUser({...req.body, email: username, password: hash})
 
         return cb(null, newUser)
     } catch (error) {
@@ -22,7 +21,7 @@ export const registerStrategy = new LocalStrategy({passReqToCallback: true}, asy
 
 export const loginStrategy = new LocalStrategy(async (username, password, cb) => {
     try {
-        const user = await userModel.findOne({email: username})
+        const user = await userDao.getUser({email: username})
         if(!user){ return cb(null, false, { message: 'User does not exist' })}
 
         if(!isValid(user, password)){ return cb(null, false, { message: 'Wrong password' })}
@@ -40,6 +39,7 @@ passport.serializeUser((user, cb) => {
     })
 })
 
-passport.deserializeUser((user, cb) => {
-    userModel.findById(user.id, cb)
+passport.deserializeUser(async (user, cb) => {
+    const completeUser = await userDao.getUser({id: user.id})
+    cb(null, completeUser)
 })

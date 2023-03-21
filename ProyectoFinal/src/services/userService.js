@@ -4,9 +4,7 @@ import ErrorDto from "../dtos/ErrorDto.js";
 
 
 class userService {
-    constructor(){
-
-    }
+    constructor(){}
 
     async registerUser(user){
         try{
@@ -14,7 +12,7 @@ class userService {
                 subject: `Nuevo registro de usuario`,
                 title: `Datos de usuario #${user.id}`,
                 footer: `Mensaje automatico`,
-                body: `<ul>${emailUserRegGen(req.user._doc)}</ul>`
+                body: `<ul>${emailUserRegGen(user._doc)}</ul>`
             }
         
             const mailOptions = emailViewGenerator(ADMIN_EMAIL, ADMIN_EMAIL, mailContent)
