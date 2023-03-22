@@ -49,12 +49,12 @@ class CartServices {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto({ 
+                throw new ErrorDto({ 
                     params: { [e.path]: e.params.value ?  e.params.value : 'undefined'}
                 }, 
                 e.message, 400, -420)
             }
-            return e
+            throw e
         }
     }
 
@@ -67,7 +67,7 @@ class CartServices {
         //logger.info(result)
         
         if(result.length === 0){
-            return new ErrorDto({params: {cartLength: 0}}, 'No puede generar orden. No hay productos en el carrito', 400, -42)
+            throw new ErrorDto({params: {cartLength: 0}}, 'No puede generar orden. No hay productos en el carrito', 400, -42)
         }
 
         const mailContent = {

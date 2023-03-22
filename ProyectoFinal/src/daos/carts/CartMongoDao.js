@@ -24,9 +24,9 @@ class CartMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo crear el carrito | Lanzado por aplicacion', 400, -100)
+                throw new ErrorDto({params: {emptyCart}, app: e}, 'No se pudo crear el carrito | Lanzado por aplicacion', 400, -100)
             }
-            return e
+            throw e
         }
     }
 
@@ -40,9 +40,9 @@ class CartMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo eliminar el carrito | Lanzado por aplicacion', 400, -110)
+                throw new ErrorDto({params: {id}, app: e}, 'No se pudo eliminar el carrito | Lanzado por aplicacion', 400, -110)
             }
-            return e
+            throw e
         }
     }
 
@@ -56,9 +56,9 @@ class CartMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo encontrar el carrito | Lanzado por aplicacion', 400, -120)
+                throw new ErrorDto({params: {id}, app: e}, 'No se pudo encontrar el carrito | Lanzado por aplicacion', 400, -120)
             }
-            return e
+            throw e
         }
     }
 
@@ -78,9 +78,9 @@ class CartMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo agregar el producto al carrito | Lanzado por aplicacion', 400, -130)
+                throw new ErrorDto({params: {id, product}, app: e}, 'No se pudo agregar el producto al carrito | Lanzado por aplicacion', 400, -130)
             }
-            return e
+            throw e
         }
     }
 
@@ -100,9 +100,9 @@ class CartMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo eliminar el producto del carrito | Lanzado por aplicacion', 400, -150)
+                throw new ErrorDto({params: {id, id_prod}, app: e}, 'No se pudo eliminar el producto del carrito | Lanzado por aplicacion', 400, -150)
             }
-            return e
+            throw e
         }
     }
 }

@@ -76,7 +76,7 @@ class ProductController {
                 const {status, ...rest} = e
                 return res.status(status).send(rest)
             }
-            const {status, ...rest} = new ErrorDto({params: {id: req.params.id}}, `Method: ${req.method} - Endpoint: ${req.path} | Controller: deleteProduct`, 400, 740)
+            const {status, ...rest} = new ErrorDto({params: {id: req.params.id}, app: e}, `Method: ${req.method} - Endpoint: ${req.path} | Controller: deleteProduct`, 400, 740)
             return res.status(status).send(rest)
         }
     }
