@@ -23,12 +23,12 @@ class ProductServices {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto({ 
+                throw new ErrorDto({ 
                         params: { [e.path]: e.params.value ?  e.params.value : 'undefined'}
                     }, 
                     e.message, 400, -300)
             }
-            return e
+            throw e
         }
     }
 
@@ -40,12 +40,12 @@ class ProductServices {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto({ 
+                throw new ErrorDto({ 
                         params: { [e.path]: e.params.value ?  e.params.value : 'undefined'}
                     }, 
                     e.message, 400, -310)
             }
-            return e
+            throw e
         }
     }
 

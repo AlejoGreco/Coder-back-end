@@ -24,9 +24,9 @@ class ProductMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo obtener productos | Lanzado por aplicacion', 400, -200)
+                throw new ErrorDto({params: {}, app: e}, 'No se pudo obtener productos | Lanzado por aplicacion', 400, -200)
             }
-            return e
+            throw e
         }
     }
 
@@ -40,9 +40,9 @@ class ProductMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo obtener producto | Lanzado por aplicacion', 400, -210)
+                throw new ErrorDto({params: {id}, app: e}, 'No se pudo obtener producto | Lanzado por aplicacion', 400, -210)
             }
-            return e
+            throw e
         }
     }
 
@@ -56,9 +56,9 @@ class ProductMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo crear producto | Lanzado por aplicacion', 400, -220)
+                throw new ErrorDto({params: {product}, app: e}, 'No se pudo crear producto | Lanzado por aplicacion', 400, -220)
             }
-            return e
+            throw e
         }
     }
 
@@ -72,9 +72,9 @@ class ProductMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo actualizar producto | Lanzado por aplicacion', 400, -230)
+                throw new ErrorDto({params: {id, product}, app: e}, 'No se pudo actualizar producto | Lanzado por aplicacion', 400, -230)
             }
-            return e
+            throw e
         }
     }
 
@@ -88,9 +88,9 @@ class ProductMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                return new ErrorDto(e, 'No se pudo eliminar producto | Lanzado por aplicacion', 400, -240)
+                throw new ErrorDto({params: {id}, app: e}, 'No se pudo eliminar producto | Lanzado por aplicacion', 400, -240)
             }
-            return e
+            throw e
         }
     }
 }
