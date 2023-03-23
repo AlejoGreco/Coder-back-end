@@ -1,6 +1,7 @@
 import userService from '../services/userService.js'
 import ErrorDto from '../dtos/ErrorDto.js';
 import logger from "../logger/index.js";
+import UserDto from '../dtos/UserDto.js';
 
 class UserController {
     constructor(){
@@ -60,8 +61,7 @@ class UserController {
 
     infoUser = async (req, res) => {
         try{
-            // User dto igual que abajo
-            const {_id, __v, password, ...user} = req.user._doc
+            const user = new UserDto(req.user._doc)
             res.send({user})
         }
         catch (e){
