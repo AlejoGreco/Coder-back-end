@@ -19,7 +19,7 @@ class userService {
             await transporter.sendMail(mailOptions)
         }
         catch (e){
-            return new ErrorDto(e, 'No se pudo generar correo automatico | Lanzado por aplicacion', 400, -500)
+            throw new ErrorDto({params: {}, app: e}, 'No se pudo generar correo automatico | Lanzado por aplicacion', 400, -500)
         }
     }
 }

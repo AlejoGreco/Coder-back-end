@@ -83,6 +83,7 @@ class CartServices {
         await transporter.sendMail(mailOptions)
         await twilioClient.messages.create(clientMsg)
         
+        // collect DTO (cart dejo solo el array de productos y fecha del colect, user dejo igual que abajo)
         const {_id, __v, password, ...userInfo} = user._doc
         return ({message: 'Orden generada con exito!', cart: result, user: userInfo})
     }

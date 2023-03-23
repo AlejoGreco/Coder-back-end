@@ -20,7 +20,7 @@ class UserMongoDao {
             return product
         }
         catch (e){
-            throw new ErrorDto(e, 'No se pudo obtener el usuario | Lanzado por aplicacion', 400, -600)
+            throw new ErrorDto({params: {query}, app: e}, 'No se pudo obtener el usuario | Lanzado por aplicacion', 400, -600)
         }
     }
 
@@ -34,7 +34,7 @@ class UserMongoDao {
         }
         catch (e){
             if(!e.error?.params){
-                throw new ErrorDto(e, 'No se pudo crear usuario | Lanzado por aplicacion', 400, -610)
+                throw new ErrorDto({params: {user}, app: e}, 'No se pudo crear usuario | Lanzado por aplicacion', 400, -610)
             }
             throw e
         }
