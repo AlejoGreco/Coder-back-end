@@ -6,6 +6,7 @@ import twilioClient, { twilioNumber } from '../transports/sms.js'
 import { ADMIN_EMAIL } from '../transports/mailer.js'
 import ErrorDto from "../dtos/ErrorDto.js"
 import validationDtos from "../validations/validationDtos.js"
+import CollectDto from "../dtos/CollectDto.js"
 
 class CartServices {
     constructor(){
@@ -83,9 +84,9 @@ class CartServices {
         await transporter.sendMail(mailOptions)
         await twilioClient.messages.create(clientMsg)
         
-        // collect DTO (cart dejo solo el array de productos y fecha del colect, user dejo igual que abajo)
-        const {_id, __v, password, ...userInfo} = user._doc
-        return ({message: 'Orden generada con exito!', cart: result, user: userInfo})
+        await this.dao.deleteCart(user.id)
+        
+        return new CollectDto(user._doc, result)
     }
 }
 
