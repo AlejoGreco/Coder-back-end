@@ -1,17 +1,22 @@
 import passport from 'passport'
 import LocalStrategy from 'passport-local'
 import daosFactory from '../daos/index.js'
+import validationDtos from '../validations/validationDtos.js'
+import ErrorDto from '../dtos/ErrorDto.js'
 import { createHash, isValid } from '../utils/bcrypt.js'
 
 const userDao = daosFactory.getUserDao()
 
 export const registerStrategy = new LocalStrategy({passReqToCallback: true}, async (req, username, password, cb) => {
     try {
+        const userValidateData = await validationDtos.validateUserDto({...req.body, email: username, password})
+        
         const user = await userDao.getUser({email: username})
         if(user){ return cb(null, false, { message: 'User allready exist' })}
 
         const hash = createHash(password)
-        const newUser = await userDao.createUser({...req.body, email: username, password: hash})
+        const newUser = await userDao.createUser({...userValidateData, password: hash})
+        // newUser = await userDao.createUser({...req.body, email: username, password: hash})
 
         return cb(null, newUser)
     } catch (error) {
