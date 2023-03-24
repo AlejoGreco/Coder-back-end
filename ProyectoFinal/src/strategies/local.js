@@ -45,6 +45,6 @@ passport.serializeUser((user, cb) => {
 })
 
 passport.deserializeUser(async (user, cb) => {
-    const completeUser = await userDao.getUser({id: user.id})
+    const completeUser = await userDao.getUser({_id: user.id})
     cb(null, completeUser)
 })
