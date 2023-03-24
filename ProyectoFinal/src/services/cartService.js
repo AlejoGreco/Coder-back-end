@@ -2,8 +2,8 @@ import daosFactory from "../daos/index.js"
 // SACAR DE ACA
 import { emailViewGenerator, emailCartListGen, smsContentGenerator } from '../utils/transportPayloads.js'
 import transporter from '../transports/mailer.js'
-import twilioClient, { twilioNumber } from '../transports/sms.js'
-import { ADMIN_EMAIL } from '../transports/mailer.js'
+import twilioClient from '../transports/sms.js'
+import { ADMIN_EMAIL, TWILIO_NUMBER } from '../config.js'
 import ErrorDto from "../dtos/ErrorDto.js"
 import validationDtos from "../validations/validationDtos.js"
 import CollectDto from "../dtos/CollectDto.js"
@@ -65,7 +65,7 @@ class CartServices {
 
     async collectCart(user){
         const result = await this.dao.getCartProducts(user.id)
-        //logger.info(result)
+        console.info(result)
         
         if(result.length === 0){
             throw new ErrorDto({params: {cartLength: 0}}, 'No puede generar orden. No hay productos en el carrito', 400, -42)
@@ -79,7 +79,7 @@ class CartServices {
         }
 
         const mailOptions = emailViewGenerator(ADMIN_EMAIL, ADMIN_EMAIL, mailContent)
-        const clientMsg = smsContentGenerator(twilioNumber, user.phone)
+        const clientMsg = smsContentGenerator(TWILIO_NUMBER, user.phone)
 
         await transporter.sendMail(mailOptions)
         await twilioClient.messages.create(clientMsg)

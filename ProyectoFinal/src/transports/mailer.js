@@ -1,7 +1,6 @@
 import { createTransport } from "nodemailer";
-import { EMAIL_PASS } from "../config.js";
+import { EMAIL_PASS, ADMIN_EMAIL } from "../config.js";
 
-export const ADMIN_EMAIL = 'uki.greco@gmail.com'
 
 const transporter = createTransport({
     service: 'gmail',

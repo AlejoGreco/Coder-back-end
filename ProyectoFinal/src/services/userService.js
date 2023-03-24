@@ -1,4 +1,5 @@
-import transporter, { ADMIN_EMAIL } from "../transports/mailer.js";
+import transporter from "../transports/mailer.js";
+import { ADMIN_EMAIL } from "../config.js";
 import { emailViewGenerator, emailUserRegGen } from "../utils/transportPayloads.js";
 import ErrorDto from "../dtos/ErrorDto.js";
 

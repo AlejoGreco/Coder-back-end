@@ -2,7 +2,6 @@ import passport from 'passport'
 import LocalStrategy from 'passport-local'
 import daosFactory from '../daos/index.js'
 import validationDtos from '../validations/validationDtos.js'
-import ErrorDto from '../dtos/ErrorDto.js'
 import { createHash, isValid } from '../utils/bcrypt.js'
 
 const userDao = daosFactory.getUserDao()
@@ -16,7 +15,6 @@ export const registerStrategy = new LocalStrategy({passReqToCallback: true}, asy
 
         const hash = createHash(password)
         const newUser = await userDao.createUser({...userValidateData, password: hash})
-        // newUser = await userDao.createUser({...req.body, email: username, password: hash})
 
         return cb(null, newUser)
     } catch (error) {
@@ -31,6 +29,7 @@ export const loginStrategy = new LocalStrategy(async (username, password, cb) =>
 
         if(!isValid(user, password)){ return cb(null, false, { message: 'Wrong password' })}
         
+        console.log(user)
         return cb(null, user)
     } catch (error) {
         return cb(error)
